@@ -17,6 +17,7 @@
   <ItemGroup>
     <Folder Include="BLL\Services\Interfaces\" />
     <Folder Include="DAL\Repositories\Interfaces\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
 
 </Project>
