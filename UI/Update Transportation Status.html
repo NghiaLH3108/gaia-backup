@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fff8f6;
+            margin: 0;
+            padding: 0;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .step-active {
+            color: #0d631b;
+            font-weight: 700;
+        }
+        .step-completed {
+            color: #2e7d32;
+        }
+        .progress-line {
+            background: linear-gradient(90deg, #2e7d32 50%, #bfcaba 50%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline-variant": "#bfcaba",
+                      "glass-fill": "rgba(255, 255, 255, 0.7)",
+                      "inverse-primary": "#88d982",
+                      "secondary": "#006e1c",
+                      "surface-bright": "#fff8f6",
+                      "secondary-fixed-dim": "#78dc77",
+                      "on-primary": "#ffffff",
+                      "secondary-fixed": "#94f990",
+                      "on-tertiary-container": "#e9f2ff",
+                      "on-secondary-fixed-variant": "#005313",
+                      "primary-container": "#2e7d32",
+                      "on-tertiary": "#ffffff",
+                      "primary-fixed-dim": "#88d982",
+                      "background": "#fff8f6",
+                      "surface-container-low": "#fff1ec",
+                      "on-secondary-container": "#00731e",
+                      "tertiary-fixed-dim": "#99cbff",
+                      "on-tertiary-fixed-variant": "#004a78",
+                      "tertiary": "#00598f",
+                      "error": "#ba1a1a",
+                      "surface-accent": "#C8E6C9",
+                      "surface-tint": "#1b6d24",
+                      "surface-light": "#FFFFFF",
+                      "on-primary-container": "#cbffc2",
+                      "on-primary-fixed-variant": "#005312",
+                      "surface-dim": "#f8d2c4",
+                      "primary-fixed": "#a3f69c",
+                      "secondary-container": "#91f78e",
+                      "on-primary-fixed": "#002204",
+                      "surface-container-highest": "#ffdbce",
+                      "inverse-on-surface": "#ffede7",
+                      "on-error": "#ffffff",
+                      "inverse-surface": "#422b22",
+                      "on-surface": "#2b160f",
+                      "outline": "#707a6c",
+                      "tertiary-fixed": "#cfe5ff",
+                      "primary": "#0d631b",
+                      "surface-variant": "#ffdbce",
+                      "tertiary-container": "#0072b6",
+                      "on-secondary-fixed": "#002204",
+                      "on-tertiary-fixed": "#001d34",
+                      "on-secondary": "#ffffff",
+                      "glass-stroke": "rgba(255, 255, 255, 0.3)",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-high": "#ffe2d9",
+                      "surface-container": "#ffe9e2",
+                      "warning-orange": "#FF9800",
+                      "surface": "#fff8f6",
+                      "error-container": "#ffdad6",
+                      "on-surface-variant": "#40493d",
+                      "on-error-container": "#93000a",
+                      "on-background": "#2b160f"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "24px",
+                      "card-gap": "16px",
+                      "section-margin": "80px",
+                      "base": "8px",
+                      "container-padding-desktop": "64px",
+                      "container-padding-mobile": "20px"
+              },
+              "fontFamily": {
+                      "headline-md": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "mono-data": ["Inter"],
+                      "display-hero": ["Inter"],
+                      "body-md": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "display-hero-mobile": ["Inter"],
+                      "body-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "mono-data": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+                      "display-hero": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-sm": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                      "display-hero-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-gutter h-16 bg-glass-fill backdrop-blur-md border-b border-glass-stroke shadow-sm">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold text-primary">GAIA</span>
+<div class="hidden md:flex gap-6 items-center ml-8">
+<a class="text-on-surface-variant font-body-md text-body-md hover:text-primary transition-colors" href="#">Tổng quan</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-body-md text-body-md" href="#">Vận chuyển</a>
+<a class="text-on-surface-variant font-body-md text-body-md hover:text-primary transition-colors" href="#">Báo cáo</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<input class="bg-surface-accent/20 border-none rounded-full px-4 py-1.5 text-sm focus:ring-2 focus:ring-primary w-64" placeholder="Tìm kiếm lô hàng..." type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-1.5 text-outline text-lg">search</span>
+</div>
+<button class="material-symbols-outlined text-primary p-2 hover:bg-surface-accent/10 rounded-full transition-transform active:scale-90">notifications</button>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container overflow-hidden border border-primary/20">
+<img class="w-full h-full object-cover" data-alt="A professional close-up headshot of a logistics manager in a high-tech office environment. The person has a warm, confident expression. The lighting is soft and natural, reflecting the sustainable brand identity of GAIA. The background shows a blurry digital map of global trade routes in subtle greens and whites." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRvMCsqQwhU5qBkFe7olDKhPlpTO_l0Z3MqsyEB4AYHawOLkV_AsBoh2_3vwky7PhdwCUikgZaCgN1ZpTVMzNpRq7R2C8nIyUWTKWrXpPOw3R5-tsXS4ndOc5JL65pLuaIfM8dNx5hW4mpZxVvyXqz8U1n111GTSw92YaO4pKvNdlWD4UIb7DinwYpSzh95LR5pRzDUTSHuVqE1H6WlZ-NMW1-CDwgaczxOgEbb4G2fUMuQV5u1aq2"/>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-12 px-gutter max-w-7xl mx-auto">
+<div class="flex flex-col gap-8">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-primary">Cập Nhật Trạng Thái Vận Chuyển</h1>
+<p class="text-on-surface-variant font-body-md text-body-md">Mã vận đơn: <span class="font-bold text-secondary">SD-2024-8842</span></p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-secondary text-secondary font-label-sm text-label-sm hover:bg-secondary/5 transition-all">
+<span class="material-symbols-outlined text-sm">print</span>
+                        In phiếu
+                    </button>
+<button class="flex items-center gap-2 px-6 py-2 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm shadow-md hover:brightness-110 transition-all">
+                        Lưu thay đổi
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Content -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-card-gap">
+<!-- Shipment Info Card -->
+<div class="lg:col-span-4 bg-surface-light rounded-xl p-6 shadow-sm border border-outline-variant/30 flex flex-col gap-4">
+<h3 class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Thông tin lô hàng</h3>
+<div class="flex flex-col gap-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary-container/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<div>
+<p class="text-outline font-label-sm text-label-sm">Vật liệu</p>
+<p class="font-headline-md text-headline-md text-on-surface">Vỏ sầu riêng</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary-container/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">weight</span>
+</div>
+<div>
+<p class="text-outline font-label-sm text-label-sm">Khối lượng</p>
+<p class="font-headline-md text-headline-md text-on-surface">4.2 Tấn</p>
+</div>
+</div>
+<div class="p-4 bg-surface-container rounded-lg border-l-4 border-primary">
+<p class="text-xs font-bold text-primary mb-1">GHI CHÚ HÀNG HÓA</p>
+<p class="text-sm text-on-surface-variant italic">"Cần xử lý nhanh trong vòng 24h để đảm bảo chất lượng vi sinh."</p>
+</div>
+</div>
+</div>
+<!-- Progress Tracker Card -->
+<div class="lg:col-span-8 bg-surface-light rounded-xl p-6 shadow-sm border border-outline-variant/30">
+<h3 class="font-label-sm text-label-sm text-outline uppercase tracking-wider mb-8">Tiến trình vận chuyển</h3>
+<div class="relative px-4">
+<!-- Horizontal Progress Line -->
+<div class="absolute top-5 left-8 right-8 h-1 bg-outline-variant rounded-full">
+<div class="h-full bg-primary rounded-full w-[60%] transition-all duration-1000"></div>
+</div>
+<!-- Steps -->
+<div class="flex justify-between relative">
+<div class="flex flex-col items-center gap-3 w-20">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-xl">inventory_2</span>
+</div>
+<p class="text-xs font-bold text-center text-primary">Đã thu gom</p>
+</div>
+<div class="flex flex-col items-center gap-3 w-20">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-xl">local_shipping</span>
+</div>
+<p class="text-xs font-bold text-center text-primary">Đã lên xe</p>
+</div>
+<div class="flex flex-col items-center gap-3 w-20">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center z-10 border-4 border-white">
+<span class="material-symbols-outlined text-xl">route</span>
+</div>
+<p class="text-xs font-bold text-center text-primary">Đang đi</p>
+</div>
+<div class="flex flex-col items-center gap-3 w-20">
+<div class="w-10 h-10 rounded-full bg-outline-variant text-white flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-xl">factory</span>
+</div>
+<p class="text-xs font-medium text-center text-outline">Đến nhà máy</p>
+</div>
+<div class="flex flex-col items-center gap-3 w-20">
+<div class="w-10 h-10 rounded-full bg-outline-variant text-white flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-xl">verified</span>
+</div>
+<p class="text-xs font-medium text-center text-outline">Xác thực</p>
+</div>
+</div>
+</div>
+<div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-4">
+<label class="block text-sm font-bold text-on-surface">Cập nhật trạng thái</label>
+<select class="w-full bg-surface-accent/20 border-outline-variant rounded-lg p-3 text-on-surface focus:ring-primary focus:border-primary">
+<option>Đang trên đường (Transporting)</option>
+<option>Đã đến nhà máy (Factory Arrival)</option>
+<option>Đang chờ dỡ hàng</option>
+</select>
+<label class="block text-sm font-bold text-on-surface mt-4">Vị trí &amp; Thời gian</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-3 text-outline text-lg">location_on</span>
+<input class="w-full pl-10 bg-surface-accent/20 border-outline-variant rounded-lg p-3 text-on-surface focus:ring-primary focus:border-primary" type="text" value="Bình Dương, Việt Nam - 14:30 22/10/2024"/>
+</div>
+</div>
+<div class="space-y-4">
+<label class="block text-sm font-bold text-on-surface">Minh chứng vận chuyển</label>
+<div class="border-2 border-dashed border-primary rounded-xl p-6 flex flex-col items-center justify-center gap-2 bg-primary/5 cursor-pointer hover:bg-primary/10 transition-all h-32">
+<span class="material-symbols-outlined text-primary text-3xl">add_a_photo</span>
+<p class="text-sm font-medium text-primary">Tải ảnh lên hoặc chụp mới</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Mini Map Card -->
+<div class="lg:col-span-8 bg-surface-light rounded-xl shadow-sm border border-outline-variant/30 overflow-hidden relative min-h-[300px]">
+<div class="absolute top-4 left-4 z-10 bg-white/90 backdrop-blur p-3 rounded-lg shadow-md border border-outline-variant/30 max-w-[240px]">
+<p class="text-xs font-bold text-primary flex items-center gap-1 uppercase">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                            Vị trí trực tuyến
+                        </p>
+<p class="text-sm text-on-surface mt-1 font-medium">Xe vận chuyển: 51C-123.45</p>
+<p class="text-xs text-outline italic">Cập nhật 2 phút trước</p>
+</div>
+<div class="w-full h-full min-h-[400px] bg-surface-dim flex items-center justify-center" data-location="Binh Duong, Vietnam" style="">
+<img class="w-full h-full object-cover" data-alt="A highly detailed satellite and terrain map view of a modern industrial zone in Vietnam, showing clean roads and logistics centers. The map features a professional emerald-green-themed UI overlay with a highlighted navigation route. A glowing green truck icon is positioned on a highway, indicating real-time movement. The aesthetic is clean, technological, and premium." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1A5g6hVisCH52_99kKWriKCB5YFB18pX8EOF_o853QYhEmu6fVfxsa8PoVJOXQ6xpa3_O72Z-jzvtY3j0DrnnAvlOx4xpF-YQzE0aWLczxPckpSwCdhApB5Gz5CmiLbjf-ncrttH0VpT98aBnKxqaxqUZuHoAgbjdk6gUM5KlDELCsawebs6ecsHCnydbmY09PCA2QPkIjuU_Da0YNmEuiyK1Sz7cehbP6NB-gkhnPtbibPugU83e"/>
+</div>
+</div>
+<!-- Driver & Log Info -->
+<div class="lg:col-span-4 flex flex-col gap-card-gap">
+<!-- Driver Detail -->
+<div class="bg-surface-light rounded-xl p-6 shadow-sm border border-outline-variant/30">
+<h3 class="font-label-sm text-label-sm text-outline uppercase tracking-wider mb-4">Thông tin tài xế</h3>
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-full overflow-hidden border-2 border-primary/20">
+<img class="w-full h-full object-cover" data-alt="A friendly, professional middle-aged Vietnamese driver wearing a GAIA branded polo shirt. He is smiling warmly. The photo is high resolution with natural lighting, showing him in a clean environment. The style is consistent with a modern corporate sustainable portal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBy0Gcb4igQ2oTSThGq6-jl9sgH2LFzdSLG2-bu9plZWC74frZPTdjfrGUo8v0SedtE3TwFbjVNKBY_AdLjHFQsZNVlK0-NwisbUz_kLCQspCf_XSJy5lkLUjvVLQFWqtiE_a7UbkJvCk2_jPJidW5Pdz1zrgp7e1ARXBJ-IPU0e39RAk11cLPE_zezpknDZcp-cKdN2ELOyuc8qwjg4l_lLbEN9d3O7VHAHMj-zxbbO-aRxRbDXRP3"/>
+</div>
+<div>
+<p class="font-bold text-on-surface">Nguyễn Văn An</p>
+<p class="text-sm text-on-surface-variant">ID: DR-9921 • Bằng C</p>
+<div class="flex gap-1 mt-1">
+<span class="material-symbols-outlined text-warning-orange text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-warning-orange text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-warning-orange text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-warning-orange text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-warning-orange text-sm" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+</div>
+</div>
+<button class="w-full mt-4 flex items-center justify-center gap-2 py-2 rounded-lg bg-surface-accent/30 text-secondary font-label-sm hover:bg-surface-accent/50 transition-all">
+<span class="material-symbols-outlined text-base">call</span>
+                            Liên hệ tài xế
+                        </button>
+</div>
+<!-- Recent Activity Log -->
+<div class="bg-surface-light rounded-xl p-6 shadow-sm border border-outline-variant/30 flex-grow">
+<h3 class="font-label-sm text-label-sm text-outline uppercase tracking-wider mb-4">Nhật ký hoạt động</h3>
+<div class="space-y-4">
+<div class="flex gap-3 relative">
+<div class="absolute left-[9px] top-5 bottom-0 w-0.5 bg-outline-variant/30"></div>
+<div class="w-5 h-5 rounded-full bg-primary flex items-center justify-center z-10 shrink-0 mt-0.5">
+<div class="w-2 h-2 rounded-full bg-white"></div>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Rời trạm thu gom</p>
+<p class="text-xs text-outline">14:05 • Tiền Giang</p>
+</div>
+</div>
+<div class="flex gap-3 relative">
+<div class="absolute left-[9px] top-5 bottom-0 w-0.5 bg-outline-variant/30"></div>
+<div class="w-5 h-5 rounded-full bg-primary flex items-center justify-center z-10 shrink-0 mt-0.5">
+<div class="w-2 h-2 rounded-full bg-white"></div>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Đã bốc hàng lên xe</p>
+<p class="text-xs text-outline">13:40 • Tiền Giang</p>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="w-5 h-5 rounded-full bg-primary flex items-center justify-center z-10 shrink-0 mt-0.5">
+<div class="w-2 h-2 rounded-full bg-white"></div>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Kiểm tra chất lượng xong</p>
+<p class="text-xs text-outline">13:15 • Điểm thu gom A</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-8 px-container-padding-desktop flex flex-col md:flex-row justify-between items-center bg-surface-container-lowest border-t border-outline-variant">
+<div class="flex flex-col items-center md:items-start gap-2">
+<span class="font-headline-md text-headline-md text-primary">GAIA</span>
+<p class="text-on-surface-variant font-label-sm text-label-sm">© 2024 GAIA Sustainable Systems. All rights reserved.</p>
+</div>
+<div class="flex gap-6 mt-4 md:mt-0">
+<a class="text-on-surface-variant font-label-sm text-label-sm hover:text-secondary transition-colors" href="#">Chính sách bảo mật</a>
+<a class="text-on-surface-variant font-label-sm text-label-sm hover:text-secondary transition-colors" href="#">Điều khoản dịch vụ</a>
+<a class="text-on-surface-variant font-label-sm text-label-sm hover:text-secondary transition-colors" href="#">Báo cáo bền vững</a>
+</div>
+</footer>
+<script>
+        // Micro-interactions and simple state handling
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mouseenter', () => {
+                btn.style.transform = 'translateY(-1px)';
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body></html>

@@ -17,6 +17,8 @@ builder.Services.AddDbContext<GaiaDbContext>(options => options.UseSqlServer(
 // Register Repositories and Services
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IMaterialBatchRepository, MaterialBatchRepository>();
+builder.Services.AddScoped<IMaterialBatchService, MaterialBatchService>();
 
 // Add distributed memory cache and session support
 builder.Services.AddDistributedMemoryCache();
