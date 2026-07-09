@@ -1,0 +1,693 @@
+@page
+@model GaiaWeb.Pages.Story.IndexModel
+@{
+    Layout = null;
+    var product = Model.ProductInfo;
+    if (product == null) return;
+    
+    var batch = product.Batch;
+    var image = batch?.MaterialImages?.FirstOrDefault();
+    
+    // Get timelines by index safely
+    var timelines = product.ProductTimelines?.ToList() ?? new List<GaiaWeb.DAL.Models.ProductTimeline>();
+    var timeline1 = timelines.ElementAtOrDefault(0);
+    var timeline2 = timelines.ElementAtOrDefault(1);
+    var timeline3 = timelines.ElementAtOrDefault(2);
+    
+    // Get stories
+    var stories = product.Stories?.ToList() ?? new List<GaiaWeb.DAL.Models.Story>();
+    var story1 = stories.ElementAtOrDefault(0);
+    var storyEnv = stories.FirstOrDefault(s => s.DisplayOrder == 4) ?? stories.ElementAtOrDefault(3);
+    var storyCompost = stories.FirstOrDefault(s => s.DisplayOrder == 5) ?? stories.ElementAtOrDefault(4);
+    
+    var mapLatitude = batch != null ? batch.Latitude.ToString("F6", System.Globalization.CultureInfo.InvariantCulture) : "";
+    var mapLongitude = batch != null ? batch.Longitude.ToString("F6", System.Globalization.CultureInfo.InvariantCulture) : "";
+    var googleMapsEmbedUrl = !string.IsNullOrWhiteSpace(mapLatitude) && !string.IsNullOrWhiteSpace(mapLongitude)
+        ? $"https://www.google.com/maps?q={mapLatitude},{mapLongitude}&z=9&output=embed&hl=vi"
+        : "https://www.google.com/maps?q=Vi%E1%BB%87t%20Nam&z=5&output=embed&hl=vi";
+}
+<!DOCTYPE html><html class="light" lang="vi"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>GAIA | @product.ProductName</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<style>
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #0d631b 0%, #00598f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .timeline-track {
+            background: repeating-linear-gradient(to right, transparent, transparent 10px, #bfcaba 10px, #bfcaba 12px);
+        }
+        .hero-scrim {
+            background: linear-gradient(
+                180deg,
+                rgba(255, 248, 246, 0.18) 0%,
+                rgba(255, 248, 246, 0.78) 52%,
+                rgba(255, 248, 246, 0.96) 100%
+            );
+        }
+        .hero-title {
+            color: #075514;
+            text-shadow: 0 2px 12px rgba(255, 248, 246, 0.95), 0 1px 2px rgba(0, 0, 0, 0.18);
+        }
+        .hero-description {
+            color: #2b160f;
+            font-weight: 600;
+            text-shadow: 0 1px 10px rgba(255, 248, 246, 0.96), 0 1px 2px rgba(255, 255, 255, 0.85);
+        }
+        .timeline-marker {
+            top: 2rem !important;
+            right: 2rem;
+            left: auto !important;
+            transform: none !important;
+            width: 4rem;
+            height: 4rem;
+            opacity: 0.16;
+            pointer-events: none;
+            z-index: 20;
+        }
+        .timeline-card {
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.82);
+        }
+        .origin-card {
+            text-align: left;
+            width: 100%;
+        }
+        .origin-card:focus-visible {
+            outline: 3px solid rgba(13, 99, 27, 0.35);
+            outline-offset: 4px;
+        }
+        .origin-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+        .origin-visuals {
+            min-width: 0;
+        }
+        @@media (min-width: 768px) {
+            .origin-layout {
+                grid-template-columns: minmax(0, 1fr) minmax(320px, 440px);
+            }
+        }
+        @@media (min-width: 1024px) {
+            .origin-layout {
+                gap: 4rem;
+            }
+        }
+        .origin-map {
+            height: 360px;
+            min-height: 0;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .origin-map-frame {
+            display: block;
+            border: 0;
+            background: #eef4ee;
+        }
+        .origin-map.leaflet-container,
+        .origin-map .leaflet-map-pane,
+        .origin-map .leaflet-tile,
+        .origin-map .leaflet-pane,
+        .origin-map .leaflet-tile-container,
+        .origin-map .leaflet-overlay-pane,
+        .origin-map .leaflet-marker-pane,
+        .origin-map .leaflet-shadow-pane {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .origin-map.leaflet-container {
+            position: relative;
+            overflow: hidden;
+        }
+        .origin-map .leaflet-pane,
+        .origin-map .leaflet-map-pane {
+            z-index: 1;
+        }
+        .origin-map .leaflet-tile-pane {
+            z-index: 200;
+        }
+        .origin-map .leaflet-overlay-pane {
+            z-index: 400;
+        }
+        .origin-map .leaflet-marker-pane {
+            z-index: 600;
+        }
+        .origin-map .leaflet-tile {
+            width: 256px;
+            height: 256px;
+            border: 0;
+            visibility: inherit;
+            user-select: none;
+        }
+        .origin-map .leaflet-control-container .leaflet-control {
+            position: relative;
+            z-index: 800;
+            pointer-events: auto;
+        }
+        .origin-map .leaflet-bottom,
+        .origin-map .leaflet-top {
+            position: absolute;
+            z-index: 1000;
+            pointer-events: none;
+        }
+        .origin-map .leaflet-top {
+            top: 0;
+        }
+        .origin-map .leaflet-bottom {
+            bottom: 0;
+        }
+        .origin-map .leaflet-right {
+            right: 0;
+        }
+        .origin-map .leaflet-left {
+            left: 0;
+        }
+        .origin-map .leaflet-control-attribution {
+            margin: 0;
+            padding: 2px 6px;
+            background: rgba(255, 255, 255, 0.82);
+            color: #40493d;
+            font-size: 11px;
+            line-height: 1.4;
+        }
+        .origin-map .leaflet-control-attribution a {
+            color: #0d631b;
+            text-decoration: none;
+        }
+        .origin-dot {
+            width: 18px;
+            height: 18px;
+            background: #d71920;
+            border: 3px solid #ffffff;
+            border-radius: 9999px;
+            box-shadow: 0 0 0 8px rgba(215, 25, 32, 0.18), 0 8px 20px rgba(43, 22, 15, 0.25);
+        }
+        .origin-dot-marker {
+            background: transparent;
+            border: 0;
+        }
+        .leaflet-container {
+            font-family: 'Inter', sans-serif;
+        }
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "error": "#ba1a1a",
+                      "glass-stroke": "rgba(255, 255, 255, 0.3)",
+                      "surface-light": "#FFFFFF",
+                      "surface": "#fff8f6",
+                      "inverse-on-surface": "#ffede7",
+                      "tertiary-fixed-dim": "#99cbff",
+                      "surface-accent": "#C8E6C9",
+                      "on-primary-fixed": "#002204",
+                      "on-tertiary-fixed-variant": "#004a78",
+                      "glass-fill": "rgba(255, 255, 255, 0.7)",
+                      "surface-container-low": "#fff1ec",
+                      "error-container": "#ffdad6",
+                      "on-primary-container": "#cbffc2",
+                      "inverse-primary": "#88d982",
+                      "inverse-surface": "#422b22",
+                      "on-error": "#ffffff",
+                      "surface-dim": "#f8d2c4",
+                      "on-secondary-container": "#00731e",
+                      "on-surface-variant": "#40493d",
+                      "on-primary": "#ffffff",
+                      "surface-container-high": "#ffe2d9",
+                      "warning-orange": "#FF9800",
+                      "surface-container": "#ffe9e2",
+                      "secondary-container": "#91f78e",
+                      "on-surface": "#2b160f",
+                      "outline-variant": "#bfcaba",
+                      "tertiary-fixed": "#cfe5ff",
+                      "primary-fixed-dim": "#88d982",
+                      "background": "#fff8f6",
+                      "surface-variant": "#ffdbce",
+                      "outline": "#707a6c",
+                      "tertiary": "#00598f",
+                      "secondary-fixed-dim": "#78dc77",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-fixed": "#002204",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary-container": "#0072b6",
+                      "on-error-container": "#93000a",
+                      "surface-tint": "#1b6d24",
+                      "on-primary-fixed-variant": "#005312",
+                      "primary-container": "#2e7d32",
+                      "surface-container-highest": "#ffdbce",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary-container": "#e9f2ff",
+                      "secondary": "#006e1c",
+                      "primary-fixed": "#a3f69c",
+                      "on-tertiary-fixed": "#001d34",
+                      "on-secondary-fixed-variant": "#005313",
+                      "on-background": "#2b160f",
+                      "surface-bright": "#fff8f6",
+                      "secondary-fixed": "#94f990",
+                      "primary": "#0d631b"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-padding-desktop": "64px",
+                      "section-margin": "80px",
+                      "container-padding-mobile": "20px",
+                      "gutter": "24px",
+                      "base": "8px",
+                      "card-gap": "16px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "display-hero": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "body-md": ["Inter"],
+                      "mono-data": ["Inter"],
+                      "display-hero-mobile": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "label-sm": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                      "display-hero": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "mono-data": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+                      "display-hero-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "label-sm": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background">
+<!-- TopNavBar Implementation -->
+<header class="bg-glass-fill dark:bg-surface-container-high/70 backdrop-blur-md border-b border-glass-stroke shadow-sm docked full-width top-0 sticky flex justify-between items-center w-full px-container-padding-mobile md:px-container-padding-desktop py-4 z-50">
+<div class="text-headline-md font-headline-md font-extrabold text-primary dark:text-primary-fixed">GAIA</div>
+<nav class="hidden md:flex gap-gutter">
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Trang chủ</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Sản phẩm</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Sứ mệnh</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Liên hệ</a>
+</nav>
+</header>
+<!-- Hero Section -->
+<section class="relative h-screen flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0 parallax-bg" data-alt="A cinematic, low-angle photograph of a lush tropical forest canopy with sunlight filtering through dense green leaves and durian trees." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCMq8aJ1XajM1jEoCWyjYSmlEh8NwrD-0Mz5JSBd6HxME2FTu96bLMRvbWnwziWb6t0NZIiBbk9sLH-IP17Bq3bbnEU85sOZ0KJmjSyqNk97aeoAKulLPXIRgNBwZnWhU13XnNfxtHWsn3Hh6ZgaCuHmKZRrJj98ZWD29kS-LQKJaMpEKPBWYBloFUA6ZRqoZpaoe1PWK79_F8ikjlKvcKaFgQ7T9-1uhV9n5IRO-cUcOuIVG8RI0pv9-7qwto-7WiFoV5zs6F-0Uw');"></div>
+<div class="absolute inset-0 hero-scrim z-1"></div>
+<div class="relative z-10 text-center max-w-4xl px-container-padding-mobile">
+<h1 class="font-display-hero text-display-hero-mobile md:text-display-hero hero-title mb-6">@product.ProductName</h1>
+<p class="font-body-lg text-body-lg hero-description mb-10 max-w-2xl mx-auto">@product.Description</p>
+<div class="flex flex-col md:flex-row gap-4 justify-center">
+<a href="#product-origin" class="bg-primary-container text-on-primary-container px-8 py-4 rounded-xl font-headline-md text-headline-md shadow-lg hover:shadow-primary/20 transition-all active:scale-95">Khám phá nguồn gốc</a>
+@if (timeline1 != null && !string.IsNullOrEmpty(timeline1.VideoUrl)) {
+<button class="border-2 border-primary text-primary px-8 py-4 rounded-xl font-headline-md text-headline-md hover:bg-primary/5 transition-all">Xem phim</button>
+}
+</div>
+</div>
+<div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+<span class="material-symbols-outlined text-primary text-4xl">keyboard_arrow_down</span>
+</div>
+</section>
+<!-- Narrative Section: My Previous Life -->
+<section id="product-origin" class="py-section-margin px-container-padding-mobile md:px-container-padding-desktop max-w-7xl mx-auto scroll-mt-24">
+<div class="origin-layout">
+<div class="origin-visuals scroll-reveal active">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-6">@(story1 != null ? story1.Title : "Cuộc đời trước đây")</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8">@(story1 != null ? story1.Content : "Trước khi trở thành món đồ bạn đang cầm trên tay, tôi là một phụ phẩm bị lãng quên từ vụ thu hoạch sầu riêng.")</p>
+<button type="button" id="show-origin-map" class="origin-card glass-card p-6 rounded-2xl mb-8 flex items-start gap-4 hover:-translate-y-1 hover:shadow-xl transition-all">
+<span class="material-symbols-outlined text-secondary text-3xl">location_on</span>
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-1">Nguồn gốc thu gom</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">@(batch?.CollectionAddress ?? "Không có dữ liệu địa chỉ")</p>
+<span class="font-label-sm text-label-sm text-primary mt-3 inline-flex items-center gap-1">
+<span>Xem trên bản đồ</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</span>
+</div>
+</button>
+<div class="flex gap-4 items-center">
+<div class="h-px flex-1 bg-outline-variant"></div>
+<span class="font-mono-data text-mono-data text-outline">VĨ ĐỘ: @(batch?.Latitude.ToString("F4") ?? "N/A")° | KINH ĐỘ: @(batch?.Longitude.ToString("F4") ?? "N/A")°</span>
+</div>
+</div>
+<div class="scroll-reveal active">
+<div id="origin-gallery" class="grid grid-cols-2 gap-4">
+<div class="space-y-4 pt-12">
+<div class="aspect-[3/4] rounded-3xl overflow-hidden shadow-xl transform -rotate-3 hover:rotate-0 transition-transform duration-500">
+<img alt="Vỏ sầu riêng" class="w-full h-full object-cover" src="@(image?.ImageUrl ?? "https://lh3.googleusercontent.com/aida-public/AB6AXuCxaar6UC4EnLT6To0P4FtflUikSziuTv4Nstf7vXfCfU6eCXJc1z0EycHcMbODNKnX2QhgaY8ModnEUel4jSayq04RdVW37sPHzsRcUooQsieNZfpOUfGr6N_l18lYENXb4U90Yf-crH0AjI-By9OfDnu6krqIFa42upNEbyp2QAFVny7MBq9j9PTy-rlXQrA2Q_V0h54fFDvuUa7i9LoXHYKB6irA4f1rGDt2OIz7QS7jlIZKPwbYRrnoVyuipu8FbTHlORU4Sb0")">
+</div>
+<div class="bg-secondary-container p-6 rounded-3xl aspect-square flex flex-col justify-end">
+<span class="font-display-hero text-display-hero-mobile text-on-secondary-container">100%</span>
+<p class="font-label-sm text-label-sm text-on-secondary-container">Nguồn gốc minh bạch</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="bg-tertiary-container p-6 rounded-3xl aspect-square flex flex-col justify-end">
+<span class="material-symbols-outlined text-4xl text-on-tertiary-container mb-2">recycling</span>
+<p class="font-label-sm text-label-sm text-on-tertiary-container">Rác thải được chuyển hướng</p>
+</div>
+<div class="aspect-[3/4] rounded-3xl overflow-hidden shadow-xl transform rotate-3 hover:rotate-0 transition-transform duration-500">
+<img alt="Địa điểm thu gom" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjYCyVDD7edpP-z9JksltfP5p1CSOqZsLQRPhyYyKspragToZ0_QmkPvoW_bz-1jjCrprrAoD1lF2Xi-W28iE0gBFIsvGdbNRzjiRbjtsCaYVcCmOkAjFypj4nGLg47kVLwZkfgZ3APO7-c_Qx7f0dzQURMssn2LqhZAEnceuLKxrQhBAVDdeD_pCDMHlgEqUZiH7gnWX6UZ9jqK_aom44IohSgcU3zbEmVK4FoVw7NLQVtLkH4BIWBWpXpduUya2fpRMW8opQLPw">
+</div>
+</div>
+</div>
+<div id="origin-map-panel" class="hidden glass-card rounded-3xl overflow-hidden shadow-2xl">
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-5 border-b border-glass-stroke bg-white/80">
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest">Bản đồ nguồn gốc</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mt-1">Vị trí thu gom</h3>
+</div>
+<button type="button" id="show-origin-gallery" class="inline-flex items-center justify-center gap-2 rounded-lg border border-outline-variant px-4 py-2 font-label-sm text-label-sm text-on-surface-variant hover:border-primary hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">photo_library</span>
+<span>Quay lại hình ảnh</span>
+</button>
+</div>
+<iframe id="origin-map-frame" class="origin-map origin-map-frame" data-src="@googleMapsEmbedUrl" title="Bản đồ vị trí thu gom" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+<div id="origin-map-empty" class="hidden p-5 bg-white/90 text-on-surface-variant font-body-md text-body-md">
+Chưa có tọa độ thu gom hợp lệ để hiển thị marker trên bản đồ.
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Journey Timeline -->
+<section class="bg-surface-container-low py-section-margin overflow-hidden">
+<div class="max-w-7xl mx-auto px-container-padding-mobile md:px-container-padding-desktop">
+<div class="text-center mb-16">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest">Sự biến đổi</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mt-4">Hành trình tuần hoàn</h2>
+</div>
+<div class="relative">
+<!-- Timeline Track -->
+<div class="absolute top-1/2 left-0 w-full h-1 timeline-track -translate-y-1/2 hidden md:block"></div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter relative">
+<!-- Milestone 1 -->
+@if (timeline1 != null) {
+<div class="group relative pt-12 md:pt-0">
+<div class="timeline-marker hidden md:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-surface border-4 border-primary rounded-full z-[1] items-center justify-center transition-transform group-hover:scale-125">
+<span class="material-symbols-outlined text-primary text-xl">park</span>
+</div>
+<div class="timeline-card glass-card p-8 rounded-3xl transition-all hover:-translate-y-2 border-t-4 border-primary">
+<div class="md:hidden mb-4 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">park</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">@timeline1.Title</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">@timeline1.Description</p>
+<div class="mt-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-sm">verified</span>
+<span class="font-label-sm text-label-sm text-secondary">Nguồn lực cộng đồng</span>
+</div>
+</div>
+</div>
+}
+<!-- Milestone 2 -->
+@if (timeline2 != null) {
+<div class="group relative pt-12 md:pt-0">
+<div class="timeline-marker hidden md:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-surface border-4 border-tertiary rounded-full z-[1] items-center justify-center transition-transform group-hover:scale-125">
+<span class="material-symbols-outlined text-tertiary text-xl">science</span>
+</div>
+<div class="timeline-card glass-card p-8 rounded-3xl transition-all hover:-translate-y-2 border-t-4 border-tertiary">
+<div class="md:hidden mb-4 w-12 h-12 bg-tertiary/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">science</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">@timeline2.Title</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">@timeline2.Description</p>
+<div class="mt-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-sm">energy_savings_leaf</span>
+<span class="font-label-sm text-label-sm text-tertiary">Năng lượng mặt trời</span>
+</div>
+</div>
+</div>
+}
+<!-- Milestone 3 -->
+@if (timeline3 != null) {
+<div class="group relative pt-12 md:pt-0">
+<div class="timeline-marker hidden md:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-surface border-4 border-secondary rounded-full z-[1] items-center justify-center transition-transform group-hover:scale-125">
+<span class="material-symbols-outlined text-secondary text-xl">handyman</span>
+</div>
+<div class="timeline-card glass-card p-8 rounded-3xl transition-all hover:-translate-y-2 border-t-4 border-secondary">
+<div class="md:hidden mb-4 w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">handyman</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">@timeline3.Title</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">@timeline3.Description</p>
+<div class="mt-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-sm">brush</span>
+<span class="font-label-sm text-label-sm text-secondary">Hoàn thiện thủ công</span>
+</div>
+</div>
+</div>
+}
+</div>
+</div>
+</div>
+</section>
+
+<!-- Environmental & Compost Guide Section -->
+@if (storyEnv != null || storyCompost != null) {
+<section class="py-section-margin px-container-padding-mobile md:px-container-padding-desktop max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+        @if (storyEnv != null) {
+        <div class="glass-card p-10 rounded-3xl scroll-reveal active">
+            <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-4xl text-primary">eco</span>
+            </div>
+            <h2 class="font-headline-lg text-headline-lg text-primary mb-4">@storyEnv.Title</h2>
+            <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">@storyEnv.Content</p>
+        </div>
+        }
+        
+        @if (storyCompost != null) {
+        <div class="glass-card p-10 rounded-3xl scroll-reveal active border-t-4 border-tertiary">
+            <div class="w-16 h-16 bg-tertiary/10 rounded-2xl flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-4xl text-tertiary">compost</span>
+            </div>
+            <h2 class="font-headline-lg text-headline-lg text-tertiary mb-4">@storyCompost.Title</h2>
+            <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">@storyCompost.Content</p>
+        </div>
+        }
+    </div>
+</section>
+}
+<!-- Map/Location Visualization -->
+<section class="py-section-margin relative overflow-hidden h-[600px] flex items-center">
+<div class="absolute inset-0 z-0">
+<img alt="Bản đồ chuỗi cung ứng" class="w-full h-full object-cover grayscale opacity-40" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxJRs8Pp5fv18znL4Qs-C-fkniPXC4J1fNQbglASg3lR-NGNJIgX2scPSj-T1OIrMef49UTsA771CyJZta2K-rnK-1v8GvrpESaTxfAxRyIEm4w0o_kITrgFAsmytz4oY1uVNbYNP0COFSYJX0E9sEpvx98UI7OMLVEP8rDcpRRZSnOuRCCa0Q20CCCMyeT3uP3nAa5BLb-e94h7pF8kAPW9qP9Zkl64YyE2bIP60jbBSeYsdyMDtPAiblhM1kYg0RPRHP7QE9FKc">
+<div class="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background"></div>
+</div>
+<div class="relative z-10 max-w-7xl mx-auto px-container-padding-mobile md:px-container-padding-desktop w-full">
+<div class="max-w-md glass-card p-10 rounded-3xl shadow-2xl scroll-reveal active">
+<span class="font-label-sm text-label-sm text-primary mb-2 block">Tác động môi trường</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">Nguồn gốc @(batch?.BatchCode ?? "")</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Mỗi sản phẩm đều đi kèm với hộ chiếu kỹ thuật số. Xem trang trại cụ thể và tác động cộng đồng từ việc mua hàng của bạn.</p>
+<div class="flex items-center gap-6 p-4 bg-white/50 rounded-2xl border border-glass-stroke">
+<div class="w-20 h-20 bg-primary/10 rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-primary">qr_code_2</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Trạng thái lô hàng</p>
+<p class="font-headline-md text-headline-md text-secondary">Đã xác minh</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-inverse-surface py-section-margin border-t border-outline-variant">
+<div class="max-w-7xl mx-auto px-container-padding-mobile md:px-container-padding-desktop grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div>
+<div class="font-headline-md text-headline-md text-on-surface mb-4">GAIA</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 max-w-sm">Kết nối khoảng cách giữa rác thải nông nghiệp và các sản phẩm bền vững cao cấp thông qua công nghệ và sự minh bạch.</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">© 2024 GAIA. Kết nối Công nghệ & Sự bền vững.</p>
+</div>
+<div class="flex flex-col md:items-end gap-8">
+<div class="flex flex-wrap gap-x-8 gap-y-4">
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant hover:text-primary underline decoration-primary underline-offset-4" href="#">Bản đồ truy xuất</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant hover:text-primary underline decoration-primary underline-offset-4" href="#">Báo cáo tác động</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant hover:text-primary underline decoration-primary underline-offset-4" href="#">Chính sách bảo mật</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant hover:text-primary underline decoration-primary underline-offset-4" href="#">Liên hệ</a>
+</div>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-on-surface/5 flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="#"><span class="material-symbols-outlined text-xl">share</span></a>
+<a class="w-10 h-10 rounded-full bg-on-surface/5 flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="#"><span class="material-symbols-outlined text-xl">camera</span></a>
+<a class="w-10 h-10 rounded-full bg-on-surface/5 flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="#"><span class="material-symbols-outlined text-xl">mail</span></a>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Intersection Observer for scroll reveal animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        const originMapButton = document.getElementById('show-origin-map');
+        const originGalleryButton = document.getElementById('show-origin-gallery');
+        const originGallery = document.getElementById('origin-gallery');
+        const originMapPanel = document.getElementById('origin-map-panel');
+        const originMapFrame = document.getElementById('origin-map-frame');
+        const originMapEmpty = document.getElementById('origin-map-empty');
+        const originLocation = {
+            latitude: Number('@mapLatitude'),
+            longitude: Number('@mapLongitude'),
+            address: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(batch?.CollectionAddress ?? "Khong co du lieu dia chi")),
+            batchCode: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(batch?.BatchCode ?? ""))
+        };
+        let originMap;
+
+        function hasValidOriginCoordinates() {
+            return Number.isFinite(originLocation.latitude)
+                && Number.isFinite(originLocation.longitude)
+                && Math.abs(originLocation.latitude) <= 90
+                && Math.abs(originLocation.longitude) <= 180
+                && !(originLocation.latitude === 0 && originLocation.longitude === 0);
+        }
+
+        function initializeOriginMap() {
+            if (originMap) {
+                return;
+            }
+
+            if (typeof L === 'undefined') {
+                if (originMapEmpty) {
+                    originMapEmpty.textContent = 'Không tải được bản đồ OpenStreetMap. Vui lòng kiểm tra kết nối mạng.';
+                    originMapEmpty.classList.remove('hidden');
+                }
+                return;
+            }
+
+            const vietnamCenter = [16.0471, 108.2068];
+            const vietnamBounds = [[8.18, 102.14], [23.39, 109.46]];
+            const hasCoordinates = hasValidOriginCoordinates();
+            const markerCenter = [originLocation.latitude, originLocation.longitude];
+
+            originMap = L.map('origin-map', {
+                zoomControl: false,
+                scrollWheelZoom: false,
+                doubleClickZoom: false,
+                boxZoom: false,
+                maxBounds: vietnamBounds,
+                maxBoundsViscosity: 0.4
+            });
+
+            const originTiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 10,
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(originMap);
+
+            originTiles.on('tileerror', () => {
+                if (originMapEmpty) {
+                    originMapEmpty.textContent = 'Không tải được nền bản đồ OpenStreetMap. Vui lòng kiểm tra kết nối mạng hoặc thử tải lại trang.';
+                    originMapEmpty.classList.remove('hidden');
+                }
+            });
+
+            originMap.fitBounds(vietnamBounds, {
+                padding: [20, 20],
+                animate: false
+            });
+
+            if (hasCoordinates) {
+                const popupLines = [
+                    '<strong>Nguồn gốc thu gom</strong>',
+                    originLocation.address,
+                    originLocation.batchCode ? `Mã lô: ${originLocation.batchCode}` : '',
+                    `Vĩ độ: ${originLocation.latitude.toFixed(4)} | Kinh độ: ${originLocation.longitude.toFixed(4)}`
+                ].filter(Boolean).join('<br>');
+
+                L.circleMarker(markerCenter, {
+                    radius: 8,
+                    color: '#ffffff',
+                    weight: 3,
+                    fillColor: '#d71920',
+                    fillOpacity: 1,
+                    interactive: false
+                }).addTo(originMap);
+            } else if (originMapEmpty) {
+                originMapEmpty.classList.remove('hidden');
+            }
+        }
+
+        function showOriginMap() {
+            originGallery?.classList.add('hidden');
+            originMapPanel?.classList.remove('hidden');
+            if (originMapFrame && !originMapFrame.src) {
+                originMapFrame.src = originMapFrame.dataset.src;
+            }
+        }
+
+        function showOriginGallery() {
+            originMapPanel?.classList.add('hidden');
+            originGallery?.classList.remove('hidden');
+        }
+
+        originMapButton?.addEventListener('click', showOriginMap);
+        originGalleryButton?.addEventListener('click', showOriginGallery);
+
+        // Simple parallax effect for hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroBg = document.querySelector('.parallax-bg');
+            if (heroBg) {
+                heroBg.style.transform = `translateY(${scrolled * 0.4}px)`;
+            }
+        });
+    </script>
+</body></html>
