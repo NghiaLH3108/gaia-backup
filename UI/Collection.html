@@ -1,0 +1,382 @@
+<!DOCTYPE html><html class="light" lang="vi"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Phiếu thu gom mới | CircuDurian Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "glass-stroke": "rgba(255, 255, 255, 0.3)",
+                        "surface-light": "#FFFFFF",
+                        "surface": "#fff8f6",
+                        "inverse-on-surface": "#ffede7",
+                        "tertiary-fixed-dim": "#99cbff",
+                        "surface-accent": "#C8E6C9",
+                        "on-primary-fixed": "#002204",
+                        "on-tertiary-fixed-variant": "#004a78",
+                        "glass-fill": "rgba(255, 255, 255, 0.7)",
+                        "surface-container-low": "#fff1ec",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#cbffc2",
+                        "inverse-primary": "#88d982",
+                        "inverse-surface": "#422b22",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#f8d2c4",
+                        "on-secondary-container": "#00731e",
+                        "on-surface-variant": "#40493d",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#ffe2d9",
+                        "warning-orange": "#FF9800",
+                        "surface-container": "#ffe9e2",
+                        "secondary-container": "#91f78e",
+                        "on-surface": "#2b160f",
+                        "outline-variant": "#bfcaba",
+                        "tertiary-fixed": "#cfe5ff",
+                        "primary-fixed-dim": "#88d982",
+                        "background": "#fff8f6",
+                        "surface-variant": "#ffdbce",
+                        "outline": "#707a6c",
+                        "tertiary": "#00598f",
+                        "secondary-fixed-dim": "#78dc77",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#002204",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#0072b6",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#1b6d24",
+                        "on-primary-fixed-variant": "#005312",
+                        "primary-container": "#2e7d32",
+                        "surface-container-highest": "#ffdbce",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#e9f2ff",
+                        "secondary": "#006e1c",
+                        "primary-fixed": "#a3f69c",
+                        "on-tertiary-fixed": "#001d34",
+                        "on-secondary-fixed-variant": "#005313",
+                        "on-background": "#2b160f",
+                        "surface-bright": "#fff8f6",
+                        "secondary-fixed": "#94f990",
+                        "primary": "#0d631b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-padding-desktop": "64px",
+                        "section-margin": "80px",
+                        "container-padding-mobile": "20px",
+                        "gutter": "24px",
+                        "base": "8px",
+                        "card-gap": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface">
+<div class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 hidden md:flex flex-col border-r border-outline-variant bg-surface-container-low dark:bg-surface-container-lowest py-base">
+<div class="px-6 py-8">
+<h1 class="font-headline-md text-headline-md text-primary">GAIA</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant opacity-70">Cổng Thông Tin Nhà Cung Cấp</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center text-on-surface-variant hover:bg-surface-variant/30 rounded-xl mx-2 px-4 py-3 transition-all hover:translate-x-1" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-label-sm">Tổng quan</span>
+</a>
+<a class="flex items-center bg-secondary-container text-on-secondary-container rounded-xl mx-2 px-4 py-3 font-semibold" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="recycling">recycling</span>
+<span class="font-label-sm text-label-sm">Thu gom</span>
+</a>
+<a class="flex items-center text-on-surface-variant hover:bg-surface-variant/30 rounded-xl mx-2 px-4 py-3 transition-all hover:translate-x-1" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="local_shipping">local_shipping</span>
+<span class="font-label-sm text-label-sm">Vận chuyển</span>
+</a>
+<a class="flex items-center text-on-surface-variant hover:bg-surface-variant/30 rounded-xl mx-2 px-4 py-3 transition-all hover:translate-x-1" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="verified">verified</span>
+<span class="font-label-sm text-label-sm">Chứng nhận</span>
+</a>
+<a class="flex items-center text-on-surface-variant hover:bg-surface-variant/30 rounded-xl mx-2 px-4 py-3 transition-all hover:translate-x-1" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="help">help</span>
+<span class="font-label-sm text-label-sm">Hỗ trợ</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-outline-variant pt-4 pb-6">
+<div class="flex items-center px-6 mb-6">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center overflow-hidden">
+<img alt="Supplier Profile" data-alt="A professional headshot of a smiling agricultural business owner in a modern, sunlit farm office. The lighting is warm and natural, emphasizing a trustworthy and sustainable leadership persona. The background is softly blurred, showing hints of lush green durian trees through a large glass window, maintaining a professional yet organic atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiOrcp4fFA-SmL3udFM5CLk2XW9mNb6T9xPSRHofmHWsAnL9CzgjebXsLwdOpYwdnP3gOBLcooH7EkN4xztAa7qSreSsmhIx5NXXy6ruJzdKHD_8qTeH-jncQ_vzcoMIixwIWsuxmYXs1R7JAVQb-UZF_iRYRA9O9r5B5ZdN_2XpZtxeZAD34jfPZkiGPFqBCDwV-fcsl4HFrGeg8fUAn0Lu84ZL7MGu46EXWwFfTMrwH6zqsnjQjqGLSvrRPhdjMVs90ZoPDRNjE">
+</div>
+<div class="ml-3">
+<p class="font-label-sm text-label-sm font-bold">GreenSource Vietnam</p>
+<p class="text-xs text-on-surface-variant">Nhà cung cấp đã xác minh</p>
+</div>
+</div>
+<a class="flex items-center text-on-surface-variant hover:bg-surface-variant/30 rounded-xl mx-2 px-4 py-3 transition-all" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm">Cài đặt</span>
+</a>
+<a class="flex items-center text-on-surface-variant hover:bg-surface-variant/30 rounded-xl mx-2 px-4 py-3 transition-all" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="logout">logout</span>
+<span class="font-label-sm text-label-sm">Đăng xuất</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-screen overflow-hidden">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center w-full px-container-padding-mobile md:px-container-padding-desktop py-4 z-50 bg-glass-fill backdrop-blur-md border-b border-glass-stroke shadow-sm sticky top-0">
+<div class="flex items-center space-x-4">
+<button class="md:hidden p-2 rounded-lg hover:bg-surface-variant/20">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h2 class="font-headline-md text-headline-md font-extrabold text-primary">Phiếu thu gom mới</h2>
+</div>
+<div class="flex items-center space-x-6">
+<div class="hidden md:flex space-x-8">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm" href="#">Bảng điều khiển</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-sm text-label-sm" href="#">Vận chuyển</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm" href="#">Lịch sử</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm" href="#">Phân tích</a>
+</div>
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined p-2 hover:bg-surface-variant/20 rounded-lg cursor-pointer" data-icon="language">language</span>
+<span class="material-symbols-outlined p-2 hover:bg-surface-variant/20 rounded-lg cursor-pointer" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined p-2 hover:bg-surface-variant/20 rounded-lg cursor-pointer" data-icon="account_circle">account_circle</span>
+</div>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto p-4 md:p-8 bg-surface">
+<div class="max-w-4xl mx-auto space-y-8 pb-12">
+<!-- Form Header Progress -->
+<div class="flex justify-between items-center mb-8">
+<div class="flex items-center space-x-4">
+<div class="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white font-bold">1</div>
+<div class="h-1 w-12 bg-primary rounded-full"></div>
+<div class="flex items-center justify-center w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container font-bold">2</div>
+<div class="h-1 w-12 bg-outline-variant rounded-full"></div>
+<div class="flex items-center justify-center w-10 h-10 rounded-full border-2 border-outline-variant text-outline font-bold">3</div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Đang thực hiện: Nhập liệu</span>
+</div>
+<!-- Step 1: Supplier & Metadata (Grouped) -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="md:col-span-2 space-y-6">
+<!-- Supplier Info Card -->
+<div class="glass-card rounded-xl p-6 shadow-sm">
+<div class="flex items-center mb-6">
+<span class="material-symbols-outlined text-primary mr-3" data-icon="person">person</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Thông tin nhà cung cấp</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant ml-1">Tên người liên hệ</label>
+<input class="w-full rounded-xl border-none bg-surface-accent/20 px-4 py-3 focus:ring-2 focus:ring-primary transition-all font-body-md text-body-md" placeholder="Nhập tên người liên hệ" type="text" value="Nguyen Van An">
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant ml-1">Số điện thoại</label>
+<input class="w-full rounded-xl border-none bg-surface-accent/20 px-4 py-3 focus:ring-2 focus:ring-primary transition-all font-body-md text-body-md" placeholder="Nhập số điện thoại" type="tel" value="+84 901 234 567">
+</div>
+<div class="md:col-span-2 space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant ml-1">Tên cơ sở thu gom</label>
+<input class="w-full rounded-xl border-none bg-surface-accent/20 px-4 py-3 focus:ring-2 focus:ring-primary transition-all font-body-md text-body-md" placeholder="Nhập tên cơ sở" type="text" value="Trạm phân loại Đắk Lắk #4">
+</div>
+<div class="md:col-span-2 space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant ml-1">Địa chỉ</label>
+<textarea class="w-full rounded-xl border-none bg-surface-accent/20 px-4 py-3 focus:ring-2 focus:ring-primary transition-all font-body-md text-body-md h-24" placeholder="Nhập địa chỉ chi tiết">Km 12, QL26, Hòa Đông, Krông Pắc, Đắk Lắk, Việt Nam</textarea>
+</div>
+</div>
+</div>
+</div>
+<!-- Metadata Sidebar Card -->
+<div class="md:col-span-1">
+<div class="glass-card rounded-xl p-6 shadow-sm border-l-4 border-primary">
+<div class="flex items-center mb-6">
+<span class="material-symbols-outlined text-primary mr-3" data-icon="info">info</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Metadata tự động</h3>
+</div>
+<div class="space-y-4">
+<div class="bg-surface-container-low p-4 rounded-lg">
+<p class="font-label-sm text-label-sm text-on-surface-variant flex items-center">
+<span class="material-symbols-outlined text-xs mr-2" data-icon="calendar_today">calendar_today</span> Dấu thời gian
+                                        </p>
+<p class="font-mono-data text-mono-data font-bold mt-1">2024-10-24 | 14:32:05</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg">
+<p class="font-label-sm text-label-sm text-on-surface-variant flex items-center">
+<span class="material-symbols-outlined text-xs mr-2" data-icon="location_on">location_on</span> Vĩ độ/Kinh độ
+                                        </p>
+<p class="font-mono-data text-mono-data font-bold mt-1">12.6681° N, 108.0514° E</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg">
+<p class="font-label-sm text-label-sm text-on-surface-variant flex items-center">
+<span class="material-symbols-outlined text-xs mr-2" data-icon="qr_code">qr_code</span> Mã thu gom
+                                        </p>
+<p class="font-mono-data text-mono-data font-bold mt-1">CD-COL-VN-88492</p>
+</div>
+<div class="flex items-center text-primary text-xs font-bold pt-2">
+<span class="material-symbols-outlined text-sm mr-2" data-icon="lock">lock</span>
+                                        XÁC THỰC THỜI GIAN BẢO MẬT
+                                    </div>
+</div>
+</div>
+</div>
+</section>
+<!-- Step 2: Material Info -->
+<section class="glass-card rounded-xl p-6 shadow-sm">
+<div class="flex items-center mb-6">
+<span class="material-symbols-outlined text-primary mr-3" data-icon="eco">eco</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Chi tiết nguyên liệu</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-6">
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant ml-1">Loại nguyên liệu</label>
+<div class="relative">
+<select class="w-full appearance-none rounded-xl border-none bg-surface-accent/20 px-4 py-3 focus:ring-2 focus:ring-primary transition-all font-body-md text-body-md">
+<option>Vỏ sầu riêng</option>
+<option>Sợi sầu riêng (Tinh chế)</option>
+<option>Phế phẩm sinh học công nghiệp</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-3 pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant ml-1">Tổng trọng lượng (kg)</label>
+<div class="relative">
+<input class="w-full rounded-xl border-none bg-surface-accent/20 px-4 py-3 focus:ring-2 focus:ring-primary transition-all font-body-md text-body-md pr-16" placeholder="0.00" step="0.01" type="number">
+<span class="absolute right-4 top-3 text-on-surface-variant font-bold">KG</span>
+</div>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant ml-1">Ghi chú thêm</label>
+<textarea class="w-full rounded-xl border-none bg-surface-accent/20 px-4 py-3 focus:ring-2 focus:ring-primary transition-all font-body-md text-body-md h-32" placeholder="Ghi chú về độ ẩm, giống sầu riêng hoặc hướng dẫn xử lý đặc biệt..."></textarea>
+</div>
+</div>
+<!-- Media Upload -->
+<div class="flex flex-col">
+<label class="font-label-sm text-label-sm text-on-surface-variant mb-2 ml-1">Ảnh xác minh</label>
+<div class="flex-1 border-2 border-dashed border-primary/40 rounded-2xl bg-primary/5 flex flex-col items-center justify-center p-8 text-center group hover:bg-primary/10 transition-all cursor-pointer">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="cloud_upload">cloud_upload</span>
+</div>
+<p class="font-body-md text-body-md font-bold text-on-surface">Kéo &amp; Thả ảnh vào đây</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">hoặc nhấp để chọn từ thiết bị</p>
+<p class="text-[10px] text-outline mt-4 uppercase tracking-widest">PNG, JPG tối đa 10MB (Tối đa 5 ảnh)</p>
+</div>
+<div class="mt-4 grid grid-cols-4 gap-2">
+<div class="aspect-square rounded-lg bg-surface-variant overflow-hidden relative group">
+<img alt="Material preview" class="w-full h-full object-cover" data-alt="A close-up, high-resolution photograph of dried durian shells piled in a modern industrial crate. The texture of the sharp husks is clearly visible under professional neutral lighting, showcasing the raw organic material ready for processing. The color palette is earthy and natural, fitting the sustainable brand aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfifq75ibD3VP2onHNqu4yvmWzfVZOcROdG-9et2qKn3TtwlRHF7_v5EaHel8lrCngrEPVjm88LsllDVYqSFFRlIxd0TxkbMyir9Fsz9BYAlWqyUOB7kMrgHOuLSWbIU1SnQFqXJM0qZrvFgg3Ja2yKsi9mH6paKOan_gsLaqXRskxIDQBxJU1Tb17gpzvOJZHNcVHIQwQo8yzYgn-oOhQKNWSxyLWlTDBgHPwy3pCAVzJNSQBJYTBazp_s3ankby7bzDjfDP1NtY">
+<div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+<span class="material-symbols-outlined text-white" data-icon="delete">delete</span>
+</div>
+</div>
+<div class="aspect-square rounded-lg border-2 border-dashed border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-outline-variant" data-icon="add">add</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Form Actions -->
+<div class="flex flex-col md:flex-row justify-end items-center gap-4 pt-4">
+<button class="w-full md:w-auto px-8 py-4 border-2 border-primary text-primary font-bold rounded-xl hover:bg-primary/5 transition-all active:scale-95">
+                            Lưu bản nháp
+                        </button>
+<button class="w-full md:w-auto px-12 py-4 bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/20 hover:bg-primary-container hover:text-on-primary-container transition-all active:scale-95 flex items-center justify-center">
+<span class="material-symbols-outlined mr-2" data-icon="send">send</span>
+                            Gửi phiếu thu gom
+                        </button>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-inverse-surface border-t border-outline-variant">
+<div class="max-w-7xl mx-auto px-container-padding-mobile md:px-container-padding-desktop py-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="text-center md:text-left">
+<h4 class="font-headline-md text-headline-md text-on-surface">GAIA</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant opacity-70">© 2024 GAIA. Kết nối Công nghệ &amp; Sự bền vững.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-all" href="#">Bản đồ truy xuất</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-all" href="#">Báo cáo tác động</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-all" href="#">Chính sách bảo mật</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-all" href="#">Liên hệ</a>
+</div>
+</div>
+</footer>
+</main>
+</div>
+<!-- Mobile Bottom NavBar (Suppressed on large screens) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-glass-fill backdrop-blur-md border-t border-glass-stroke grid grid-cols-4 py-3 z-[100]">
+<button class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[10px] font-bold mt-1">Trang chủ</span>
+</button>
+<button class="flex flex-col items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="recycling" style="font-variation-settings: 'FILL' 1;">recycling</span>
+<span class="text-[10px] font-bold mt-1">Nhật ký</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+<span class="text-[10px] font-bold mt-1">Vận đơn</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="text-[10px] font-bold mt-1">Hồ sơ</span>
+</button>
+</nav>
+<script>
+        // Simple Interaction logic
+        document.querySelector('[data-icon="cloud_upload"]').parentElement.parentElement.addEventListener('click', function() {
+            // Trigger visual feedback for upload interaction
+            this.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+                console.log('File browser triggered');
+            }, 100);
+        });
+
+        // Add leaf hover animation effect logic
+        const primaryButtons = document.querySelectorAll('.bg-primary');
+        primaryButtons.forEach(btn => {
+            btn.addEventListener('mousedown', () => btn.classList.add('scale-95'));
+            btn.addEventListener('mouseup', () => btn.classList.remove('scale-95'));
+        });
+    </script>
+</body></html>

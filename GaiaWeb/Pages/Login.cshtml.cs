@@ -75,6 +75,7 @@ public class LoginModel : PageModel
             if (user.Supplier != null)
             {
                 HttpContext.Session.SetInt32("SupplierId", user.Supplier.SupplierId);
+                HttpContext.Session.SetString("WarehouseName", user.Supplier.WarehouseName);
             }
             return RedirectToPage("/Supplier/Index");
         }

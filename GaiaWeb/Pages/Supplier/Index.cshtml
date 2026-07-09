@@ -49,13 +49,22 @@
             <p class="text-gray-600 mb-6">Bạn đã đăng nhập thành công vào vai trò Nhà cung cấp (Supplier) trong hệ thống GAIA.</p>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="border border-gray-100 p-6 rounded-xl bg-gray-50 flex items-start gap-4">
-                    <span class="material-symbols-outlined text-primary text-[32px]">inventory_2</span>
+                <a href="/Supplier/Collection" class="border border-green-100 p-6 rounded-xl bg-green-50 flex items-start gap-4 hover:bg-green-100 hover:shadow-md transition-all group">
+                    <span class="material-symbols-outlined text-primary text-[32px] group-hover:scale-110 transition-transform">add_circle</span>
+                    <div>
+                        <h3 class="font-bold text-gray-800">Tạo phiếu thu gom mới</h3>
+                        <p class="text-sm text-gray-600 mt-1">Nhập thông tin thu gom, upload ảnh xác minh và gửi lô nguyên liệu mới (UC 10, UC 11, UC 12).</p>
+                        <span class="inline-block mt-2 text-primary text-sm font-semibold group-hover:underline">Bắt đầu ngay →</span>
+                    </div>
+                </a>
+                <a href="/Supplier/Batches" class="border border-blue-100 p-6 rounded-xl bg-blue-50 flex items-start gap-4 hover:bg-blue-100 hover:shadow-md transition-all group">
+                    <span class="material-symbols-outlined text-primary text-[32px] group-hover:scale-110 transition-transform">inventory_2</span>
                     <div>
                         <h3 class="font-bold text-gray-800">Quản lý lô nguyên liệu</h3>
-                        <p class="text-sm text-gray-600 mt-1">Xem, chỉnh sửa hoặc tạo mới các lô nguyên liệu xơ vỏ sầu riêng bền vững.</p>
+                        <p class="text-sm text-gray-600 mt-1">Xem, chỉnh sửa hoặc theo dõi trạng thái các lô nguyên liệu đã gửi (UC 14, UC 15).</p>
+                        <span class="inline-block mt-2 text-primary text-sm font-semibold group-hover:underline">Xem danh sách →</span>
                     </div>
-                </div>
+                </a>
                 <div class="border border-gray-100 p-6 rounded-xl bg-gray-50 flex items-start gap-4">
                     <span class="material-symbols-outlined text-primary text-[32px]">local_shipping</span>
                     <div>
