@@ -4,6 +4,10 @@ using GaiaWeb.DAL.Repositories;
 using GaiaWeb.BLL.Services.Interfaces;
 using GaiaWeb.BLL.Services;
 using Microsoft.EntityFrameworkCore;
+using GaiaWeb.DAL.Repositories.Interfaces;
+using GaiaWeb.DAL.Repositories;
+using GaiaWeb.BLL.Services.Interfaces;
+using GaiaWeb.BLL.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +31,8 @@ builder.Services.AddSession(options =>
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 var app = builder.Build();
 
