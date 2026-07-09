@@ -1,0 +1,215 @@
+<!DOCTYPE html><html class="light" lang="vi"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Đăng nhập | GAIA Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "glass-stroke": "rgba(255, 255, 255, 0.3)",
+                        "surface-light": "#FFFFFF",
+                        "surface": "#fff8f6",
+                        "inverse-on-surface": "#ffede7",
+                        "tertiary-fixed-dim": "#99cbff",
+                        "surface-accent": "#C8E6C9",
+                        "on-primary-fixed": "#002204",
+                        "on-tertiary-fixed-variant": "#004a78",
+                        "glass-fill": "rgba(255, 255, 255, 0.7)",
+                        "surface-container-low": "#fff1ec",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#cbffc2",
+                        "inverse-primary": "#88d982",
+                        "inverse-surface": "#422b22",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#f8d2c4",
+                        "on-secondary-container": "#00731e",
+                        "on-surface-variant": "#40493d",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#ffe2d9",
+                        "warning-orange": "#FF9800",
+                        "surface-container": "#ffe9e2",
+                        "secondary-container": "#91f78e",
+                        "on-surface": "#2b160f",
+                        "outline-variant": "#bfcaba",
+                        "tertiary-fixed": "#cfe5ff",
+                        "primary-fixed-dim": "#88d982",
+                        "background": "#fff8f6",
+                        "surface-variant": "#ffdbce",
+                        "outline": "#707a6c",
+                        "tertiary": "#00598f",
+                        "secondary-fixed-dim": "#78dc77",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#002204",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#0072b6",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#1b6d24",
+                        "on-primary-fixed-variant": "#005312",
+                        "primary-container": "#2e7d32",
+                        "surface-container-highest": "#ffdbce",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#e9f2ff",
+                        "secondary": "#006e1c",
+                        "primary-fixed": "#a3f69c",
+                        "on-tertiary-fixed": "#001d34",
+                        "on-secondary-fixed-variant": "#005313",
+                        "on-background": "#2b160f",
+                        "surface-bright": "#fff8f6",
+                        "secondary-fixed": "#94f990",
+                        "primary": "#0d631b"
+                    },
+                    "spacing": {
+                        "container-padding-desktop": "64px",
+                        "section-margin": "80px",
+                        "container-padding-mobile": "20px",
+                        "gutter": "24px",
+                        "base": "8px",
+                        "card-gap": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .input-focus-ring:focus-within {
+            box-shadow: 0 0 0 2px rgba(27, 109, 36, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background min-h-screen flex items-center justify-center p-container-padding-mobile overflow-hidden relative">
+<!-- Hero Background Image with Overlay -->
+<div class="absolute inset-0 z-0">
+<img alt="Sustainable Farming Background" class="w-full h-full object-cover" data-alt="A cinematic, high-resolution wide shot of a sustainable durian orchard in Southeast Asia at sunrise. The soft morning light filters through lush green leaves, creating a warm, golden glow across the landscape. In the background, rolling hills covered in mist emphasize the natural and organic origin of the fruit. The overall atmosphere is peaceful, premium, and reflects the brand's commitment to environmental stewardship and transparency." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA14OktnBd1q1aCyAl-Bq5xpmQhxJgYZMo18b1Uz9ZCrZG6c7kzRpx7cBRGYrJ-UcnsDvnNwBBsJli4jB-6G6DW5bJC8SsFxNSvMvbNkQTmo2WsrJ42UFVMtjNGBfnP6wYCRC3xbOSLkgRq4nNHMZJ5ffKJYJit65nRGqUDTwPc242mI3mcXjV98t0-BBcgQONYDaG2PhtuqnCEo05gvhoAbV2MAKsC7gY95f89MrRGb4OeIIZWC10VD2QfECcTgELyBjhcZYqYiFM">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/30 to-on-surface/40 mix-blend-multiply"></div>
+</div>
+<!-- Login Container -->
+<main class="relative z-10 w-full max-w-[480px]">
+<!-- Language Switcher (Top Right Corner of Viewport) -->
+<div class="absolute -top-16 right-0 flex items-center gap-4">
+<button class="flex items-center gap-2 text-white/90 font-label-sm text-label-sm hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="language">language</span>
+<span class="">Tiếng Việt</span>
+<span class="material-symbols-outlined text-[16px]" data-icon="expand_more">expand_more</span>
+</button>
+</div>
+<div class="glass-panel rounded-[24px] p-10 shadow-2xl animate-in fade-in zoom-in duration-500">
+<!-- Branding Header -->
+<header class="flex flex-col items-center text-center mb-10">
+<div class="mb-6 flex items-center gap-3">
+<div class="w-12 h-12 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-white text-[28px]" data-icon="recycling" style="font-variation-settings: 'FILL' 1">recycling</span>
+</div>
+<span class="font-headline-md text-headline-md text-primary tracking-tight">GAIA</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Chào mừng trở lại</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Đăng nhập để quản lý chuỗi cung ứng bền vững của bạn</p>
+</header>
+<!-- Login Form -->
+<form class="space-y-6" onsubmit="event.preventDefault();">
+<!-- Email Field -->
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant block px-1" for="email">Địa chỉ Email</label>
+<div class="relative flex items-center group">
+<span class="absolute left-4 material-symbols-outlined text-outline group-focus-within:text-primary transition-colors" data-icon="mail">mail</span>
+<input class="w-full pl-12 pr-4 py-4 bg-white/50 border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-body-md text-body-md text-on-surface outline-none" id="email" placeholder="ten@congty.com" required="" type="email">
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-2">
+<div class="flex justify-between items-center px-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="password">Mật khẩu</label>
+<a class="font-label-sm text-label-sm text-primary hover:underline underline-offset-4" href="#">Quên mật khẩu?</a>
+</div>
+<div class="relative flex items-center group">
+<span class="absolute left-4 material-symbols-outlined text-outline group-focus-within:text-primary transition-colors" data-icon="lock">lock</span>
+<input class="w-full pl-12 pr-12 py-4 bg-white/50 border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-body-md text-body-md text-on-surface outline-none" id="password" placeholder="••••••••" required="" type="password">
+<button class="absolute right-4 text-outline hover:text-on-surface-variant transition-colors" type="button">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+</div>
+</div>
+<!-- Remember Me -->
+<div class="flex items-center gap-3 px-1">
+<div class="relative flex items-center">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20 cursor-pointer transition-all" id="remember" type="checkbox">
+</div>
+<label class="font-body-md text-body-md text-on-surface-variant cursor-pointer select-none" for="remember">Ghi nhớ thiết bị</label>
+</div>
+<!-- CTA Button -->
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-label-sm text-label-sm py-4 rounded-xl shadow-lg shadow-primary/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2" type="submit">
+                    Đăng nhập vào hệ thống
+                    <span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</form>
+<!-- Secondary Actions -->
+<footer class="mt-8 pt-8 border-t border-white/30 text-center">
+<p class="font-body-md text-body-md text-on-surface-variant">
+                    Chưa có tài khoản nhà cung cấp? 
+                    <a class="text-primary font-semibold hover:underline underline-offset-4" href="#">Liên hệ hỗ trợ</a>
+</p>
+</footer>
+</div>
+<!-- System Status Mini-Card (Bottom Floating) -->
+<div class="mt-6 flex justify-center animate-bounce-slow">
+<div class="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 rounded-full">
+<div class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(0,110,28,0.5)]"></div>
+<span class="font-label-sm text-label-sm text-white/80">Trạng thái hệ thống: Tất cả các nút có thể truy xuất</span>
+</div>
+</div>
+</main>
+<style>
+        @keyframes bounce-slow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        .animate-bounce-slow {
+            animation: bounce-slow 4s ease-in-out infinite;
+        }
+    </style>
+<script>
+        // Micro-interaction for the password visibility toggle
+        document.querySelector('button[type="button"]')?.addEventListener('click', function() {
+            const pwdInput = document.getElementById('password');
+            const icon = this.querySelector('.material-symbols-outlined');
+            if (pwdInput.type === 'password') {
+                pwdInput.type = 'text';
+                icon.textContent = 'visibility_off';
+            } else {
+                pwdInput.type = 'password';
+                icon.textContent = 'visibility';
+            }
+        });
+
+        // Add visual weight to the page on load
+        window.addEventListener('load', () => {
+            console.log('Supplier Portal Login Ready');
+        });
+    </script>
+</body></html>

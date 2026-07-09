@@ -1,0 +1,70 @@
+@page
+@model GaiaWeb.Pages.Supplier.IndexModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html class="light" lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Supplier Portal | GAIA</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#0d631b",
+                        "on-surface": "#2b160f",
+                        background: "#fff8f6",
+                        surface: "#ffffff"
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background min-h-screen font-[Inter]">
+    <nav class="bg-white shadow-sm border-b border-gray-100 py-4 px-8 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
+                <span class="material-symbols-outlined text-white text-[24px]">recycling</span>
+            </div>
+            <span class="font-bold text-xl text-primary tracking-tight">GAIA Supplier Portal</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <span class="text-sm text-gray-600">Xin chào, <strong>@Model.UserName</strong> (ID: @Model.SupplierId)</span>
+            <a class="flex items-center gap-1 bg-red-50 hover:bg-red-100 text-red-600 px-4 py-2 rounded-lg text-sm font-semibold transition-colors" href="/Logout">
+                <span class="material-symbols-outlined text-[18px]">logout</span>
+                Đăng xuất
+            </a>
+        </div>
+    </nav>
+    <main class="max-w-4xl mx-auto mt-12 px-6">
+        <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+            <h1 class="text-2xl font-bold text-gray-800 mb-2">Supplier Dashboard (UC 8 Login Success)</h1>
+            <p class="text-gray-600 mb-6">Bạn đã đăng nhập thành công vào vai trò Nhà cung cấp (Supplier) trong hệ thống GAIA.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="border border-gray-100 p-6 rounded-xl bg-gray-50 flex items-start gap-4">
+                    <span class="material-symbols-outlined text-primary text-[32px]">inventory_2</span>
+                    <div>
+                        <h3 class="font-bold text-gray-800">Quản lý lô nguyên liệu</h3>
+                        <p class="text-sm text-gray-600 mt-1">Xem, chỉnh sửa hoặc tạo mới các lô nguyên liệu xơ vỏ sầu riêng bền vững.</p>
+                    </div>
+                </div>
+                <div class="border border-gray-100 p-6 rounded-xl bg-gray-50 flex items-start gap-4">
+                    <span class="material-symbols-outlined text-primary text-[32px]">local_shipping</span>
+                    <div>
+                        <h3 class="font-bold text-gray-800">Lịch sử vận chuyển</h3>
+                        <p class="text-sm text-gray-600 mt-1">Cập nhật và theo dõi các cột mốc vận chuyển của lô hàng về nhà máy GAIA.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

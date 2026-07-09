@@ -1,10 +1,27 @@
 using GaiaWeb.DAL.Data;
+using GaiaWeb.DAL.Repositories.Interfaces;
+using GaiaWeb.DAL.Repositories;
+using GaiaWeb.BLL.Services.Interfaces;
+using GaiaWeb.BLL.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<GaiaDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Register Repositories and Services
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
+
+// Add distributed memory cache and session support
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -23,6 +40,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+// Use session middleware (must be before UseAuthorization)
+app.UseSession();
 
 app.UseAuthorization();
 
