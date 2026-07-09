@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chỉnh sửa lô hàng - GAIA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#bfcaba",
+                        "glass-fill": "rgba(255, 255, 255, 0.7)",
+                        "inverse-primary": "#88d982",
+                        "secondary": "#006e1c",
+                        "surface-bright": "#fff8f6",
+                        "secondary-fixed-dim": "#78dc77",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#94f990",
+                        "on-tertiary-container": "#e9f2ff",
+                        "on-secondary-fixed-variant": "#005313",
+                        "primary-container": "#2e7d32",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#88d982",
+                        "background": "#fff8f6",
+                        "surface-container-low": "#fff1ec",
+                        "on-secondary-container": "#00731e",
+                        "tertiary-fixed-dim": "#99cbff",
+                        "on-tertiary-fixed-variant": "#004a78",
+                        "tertiary": "#00598f",
+                        "error": "#ba1a1a",
+                        "surface-accent": "#C8E6C9",
+                        "surface-tint": "#1b6d24",
+                        "surface-light": "#FFFFFF",
+                        "on-primary-container": "#cbffc2",
+                        "on-primary-fixed-variant": "#005312",
+                        "surface-dim": "#f8d2c4",
+                        "primary-fixed": "#a3f69c",
+                        "secondary-container": "#91f78e",
+                        "on-primary-fixed": "#002204",
+                        "surface-container-highest": "#ffdbce",
+                        "inverse-on-surface": "#ffede7",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#422b22",
+                        "on-surface": "#2b160f",
+                        "outline": "#707a6c",
+                        "tertiary-fixed": "#cfe5ff",
+                        "primary": "#0d631b",
+                        "surface-variant": "#ffdbce",
+                        "tertiary-container": "#0072b6",
+                        "on-secondary-fixed": "#002204",
+                        "on-tertiary-fixed": "#001d34",
+                        "on-secondary": "#ffffff",
+                        "glass-stroke": "rgba(255, 255, 255, 0.3)",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#ffe2d9",
+                        "surface-container": "#ffe9e2",
+                        "warning-orange": "#FF9800",
+                        "surface": "#fff8f6",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#40493d",
+                        "on-error-container": "#93000a",
+                        "on-background": "#2b160f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "card-gap": "16px",
+                        "section-margin": "80px",
+                        "base": "8px",
+                        "container-padding-desktop": "64px",
+                        "container-padding-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "mono-data": ["Inter"],
+                        "display-hero": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "display-hero-mobile": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "mono-data": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+                        "display-hero": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "display-hero-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="bg-glass-fill backdrop-blur-md border-b border-glass-stroke shadow-sm fixed top-0 w-full z-50 flex justify-between items-center px-gutter h-16">
+<div class="flex items-center gap-4">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">GAIA</h1>
+<nav class="hidden md:flex gap-6 ml-8">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm" href="#">Tổng quan</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-sm text-label-sm" href="#">Lô hàng</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm" href="#">Chứng chỉ</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-surface-accent/20 transition-transform active:scale-90">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold overflow-hidden border border-outline">
+<img class="w-full h-full object-cover" data-alt="A clean, professional portrait of a Vietnamese agricultural supply manager in a modern warehouse environment, soft natural lighting, high-end photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWPw0c6T4hsvvWrJD_zm4WhmKS5xzG4yz8Eq2E_MIo4U2ijcnarGjhz2ZlPEYkwuR8rgH_J3sVl3TLq6-YCtxXh8-K7O4axVeg1xXkuMGSrdJVyrLG32_ELSlczPXzkD3MnUqErq1oEQWh4DlLrpC7YwTR9pRK-djSz1N_sbq01nXGxzhh0XG5BcDwyUnVJeKTYl-pKnsHCs5Hz79TtnIO9n2Q44NLXsGoD6-zutL0wKENpDm3nApC"/>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-16 px-gutter md:px-container-padding-desktop max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column: Main Form -->
+<div class="lg:col-span-8 space-y-6">
+<!-- Warning Banner -->
+<div class="bg-warning-orange/10 border border-warning-orange/30 rounded-xl p-4 flex items-center gap-4 animate-pulse">
+<span class="material-symbols-outlined text-warning-orange">warning</span>
+<p class="text-on-surface font-label-sm text-label-sm">
+                    Thông tin chỉ có thể được chỉnh sửa trước khi Quản trị viên phê duyệt.
+                </p>
+</div>
+<!-- Header Section -->
+<div class="flex flex-col gap-1">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Chỉnh sửa Lô hàng #B-2024-089</h2>
+<p class="text-on-surface-variant font-body-md text-body-md">Cập nhật chi tiết vật liệu và thông tin nguồn gốc cho quy trình truy xuất nguồn gốc.</p>
+</div>
+<!-- Form Card -->
+<section class="bg-surface-container-lowest rounded-xl p-8 shadow-sm border border-outline-variant/30 space-y-8">
+<!-- Supplier Info Section -->
+<div class="space-y-4">
+<div class="flex items-center gap-2 border-l-4 border-primary pl-3">
+<h3 class="font-headline-md text-headline-md text-primary">Thông tin Nhà cung cấp</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Tên Nhà cung cấp</label>
+<input class="w-full bg-surface-accent/10 border-none rounded-lg p-3 font-body-md focus:ring-2 focus:ring-primary outline-none" readonly="" type="text" value="Hợp tác xã Nông nghiệp Xanh"/>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Mã số thuế / ID</label>
+<input class="w-full bg-surface-accent/10 border-none rounded-lg p-3 font-body-md focus:ring-2 focus:ring-primary outline-none" readonly="" type="text" value="VN-SUP-8829"/>
+</div>
+</div>
+</div>
+<!-- Material Details Section -->
+<div class="space-y-4">
+<div class="flex items-center gap-2 border-l-4 border-secondary pl-3">
+<h3 class="font-headline-md text-headline-md text-secondary">Chi tiết Vật liệu</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Loại vật liệu</label>
+<select class="w-full bg-surface-accent/20 border-none rounded-lg p-3 font-body-md focus:ring-2 focus:ring-secondary outline-none">
+<option>Nhựa PET tái chế</option>
+<option selected="">Sợi bông hữu cơ</option>
+<option>Cao su tự nhiên</option>
+<option>Phế phẩm nông nghiệp</option>
+</select>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Khối lượng (kg)</label>
+<input class="w-full bg-surface-accent/20 border-none rounded-lg p-3 font-body-md focus:ring-2 focus:ring-secondary outline-none" type="number" value="1250.50"/>
+</div>
+<div class="space-y-1 md:col-span-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Địa điểm thu gom</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">location_on</span>
+<input class="w-full bg-surface-accent/20 border-none rounded-lg p-3 pl-10 font-body-md focus:ring-2 focus:ring-secondary outline-none" type="text" value="Thị trấn Di Linh, Lâm Đồng"/>
+</div>
+</div>
+<div class="space-y-1 md:col-span-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Ghi chú bổ sung</label>
+<textarea class="w-full bg-surface-accent/20 border-none rounded-lg p-3 font-body-md focus:ring-2 focus:ring-secondary outline-none" rows="3">Lô hàng được thu hoạch và phân loại thủ công để đảm bảo độ tinh khiết cao nhất.</textarea>
+</div>
+</div>
+</div>
+<!-- Photo Management Section -->
+<div class="space-y-4">
+<div class="flex items-center justify-between border-l-4 border-tertiary-container pl-3">
+<h3 class="font-headline-md text-headline-md text-tertiary-container">Hình ảnh bộ sưu tập</h3>
+<button class="flex items-center gap-2 text-primary font-label-sm text-label-sm hover:underline">
+<span class="material-symbols-outlined">add_a_photo</span> Thêm ảnh mới
+                        </button>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="group relative aspect-square rounded-xl overflow-hidden border-2 border-outline-variant hover:border-primary transition-all">
+<img class="w-full h-full object-cover" data-alt="Close-up shot of high-quality organic cotton fibers being sorted in a bright, modern sustainable processing facility, bright eco-green tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLhozEooSNzkcuC93X-8aw0CNprELFJsDkBX2Lh8gseFaTJYRYj1PrIYaj5fyWOmnvIKrO7bHQTQ1XhRs6w__5ROuECDgdAiLawMxqSiz_ZAAyJH7bcNEUyK2Am_BNuHpa7fUtKshUvzKkIRUNh3U3l0PLvadEIlvIqt5TDMykNy1uNmmBo_WiZnmdtAt4mWzu7_jzyvCTL3jtF2SdXZFbov53rbdBsS_AliD1wdA1_Uxfm6P5AHrq"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+<button class="p-2 bg-error text-white rounded-full hover:scale-110 transition-transform"><span class="material-symbols-outlined">delete</span></button>
+</div>
+</div>
+<div class="group relative aspect-square rounded-xl overflow-hidden border-2 border-outline-variant hover:border-primary transition-all">
+<img class="w-full h-full object-cover" data-alt="Sacks of raw agricultural material stacked neatly on eco-friendly wooden pallets in a clean, sunlit warehouse, warm organic aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0PQBNFjdqduymll525DW6pSHcWPYaXlDqU_3otIsOMif8DgMk6Ll2UtfNgVUBdMUPz_-1FPtt-cY4QECwkv8nYCF60lg7GIhlO_s5iybx5uooz18sqAwg6TM5bSiyKHF3LKANh9h5XS-QzfGcX6un1YgxwkCGljT9_mFTOCkPbd7X9J7xmjKSNjdC5XqbvgzYVWHhTV6YRUAl_OLS0jxL6rN_T7WHGKHBD_egc520L2sMBPuV_GNM"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+<button class="p-2 bg-error text-white rounded-full hover:scale-110 transition-transform"><span class="material-symbols-outlined">delete</span></button>
+</div>
+</div>
+<div class="aspect-square rounded-xl border-2 border-dashed border-primary/40 bg-primary/5 flex flex-col items-center justify-center gap-2 hover:bg-primary/10 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-primary text-3xl group-hover:scale-110 transition-transform">upload_file</span>
+<span class="font-label-sm text-label-sm text-primary">Tải lên</span>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex flex-col md:flex-row items-center justify-end gap-4 pt-6 border-t border-outline-variant/30">
+<button class="w-full md:w-auto px-8 py-3 border-2 border-secondary text-secondary font-label-sm text-label-sm rounded-lg hover:bg-secondary/5 transition-colors">
+                        Hủy bỏ
+                    </button>
+<button class="w-full md:w-auto px-10 py-3 bg-primary text-white font-label-sm text-label-sm rounded-lg hover:bg-primary/90 shadow-md shadow-primary/20 transition-all flex items-center justify-center gap-2">
+                        Lưu thay đổi <span class="material-symbols-outlined">check_circle</span>
+</button>
+</div>
+</section>
+</div>
+<!-- Right Column: Sidebar -->
+<aside class="lg:col-span-4 space-y-6">
+<!-- History of Changes Card -->
+<section class="bg-surface-container-low rounded-xl p-6 border border-outline-variant/30 space-y-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">history</span>
+<h3 class="font-headline-md text-headline-md">Lịch sử thay đổi</h3>
+</div>
+<div class="space-y-6 relative">
+<!-- Vertical Timeline Line -->
+<div class="absolute left-4 top-2 bottom-2 w-0.5 bg-outline-variant/50"></div>
+<!-- Timeline Items -->
+<div class="relative pl-10">
+<div class="absolute left-2.5 top-1.5 w-3 h-3 rounded-full bg-secondary ring-4 ring-secondary/20"></div>
+<div class="space-y-1">
+<p class="font-label-sm text-label-sm text-on-surface">Cập nhật khối lượng</p>
+<p class="text-xs text-on-surface-variant">Hôm nay, 14:20 • Bởi Nhà cung cấp</p>
+<div class="mt-2 p-2 bg-surface-container rounded-lg text-xs font-mono-data">
+<span class="text-error line-through">1200.00 kg</span> → <span class="text-primary">1250.50 kg</span>
+</div>
+</div>
+</div>
+<div class="relative pl-10">
+<div class="absolute left-2.5 top-1.5 w-3 h-3 rounded-full bg-outline"></div>
+<div class="space-y-1">
+<p class="font-label-sm text-label-sm text-on-surface">Thay đổi loại vật liệu</p>
+<p class="text-xs text-on-surface-variant">Hôm qua, 09:15 • Bởi Nhà cung cấp</p>
+<div class="mt-2 p-2 bg-surface-container rounded-lg text-xs font-mono-data">
+<span class="text-on-surface-variant">Nhựa PET</span> → <span class="text-primary">Sợi bông hữu cơ</span>
+</div>
+</div>
+</div>
+<div class="relative pl-10">
+<div class="absolute left-2.5 top-1.5 w-3 h-3 rounded-full bg-outline"></div>
+<div class="space-y-1">
+<p class="font-label-sm text-label-sm text-on-surface">Đã nộp lô hàng</p>
+<p class="text-xs text-on-surface-variant">15 Th08, 2024 • Khởi tạo</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Status Card -->
+<section class="glass-card rounded-xl p-6 space-y-4">
+<h4 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Trạng thái hiện tại</h4>
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-warning-orange animate-pulse"></div>
+<span class="font-headline-md text-headline-md text-warning-orange">Đang chờ phê duyệt</span>
+</div>
+<div class="p-4 bg-surface-accent/20 rounded-lg flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-sm">info</span>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+                        Lô hàng này đang được Admin kiểm tra thông tin sơ bộ. Bạn có thể cập nhật cho đến khi trạng thái chuyển sang 'Đã phê duyệt' hoặc 'Từ chối'.
+                    </p>
+</div>
+</section>
+</aside>
+</main>
+<!-- Footer -->
+<footer class="w-full py-8 px-container-padding-desktop flex flex-col md:flex-row justify-between items-center bg-surface-container-lowest border-t border-outline-variant">
+<div class="flex flex-col items-center md:items-start gap-2">
+<h2 class="font-headline-md text-headline-md text-primary">GAIA</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">© 2024 GAIA Sustainable Systems. All rights reserved.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-6 mt-6 md:mt-0">
+<a class="text-on-surface-variant hover:text-secondary transition-colors font-label-sm text-label-sm" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors font-label-sm text-label-sm" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors font-label-sm text-label-sm" href="#">Sustainability Report</a>
+</div>
+</footer>
+<!-- Simple Interactivity -->
+<script>
+        // Micro-interaction for the primary button
+        const saveBtn = document.querySelector('button.bg-primary');
+        saveBtn.addEventListener('click', () => {
+            saveBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Đang lưu...';
+            saveBtn.classList.add('opacity-80');
+            setTimeout(() => {
+                saveBtn.innerHTML = 'Đã lưu thành công <span class="material-symbols-outlined">check_circle</span>';
+                saveBtn.classList.remove('bg-primary');
+                saveBtn.classList.add('bg-secondary');
+            }, 1500);
+        });
+
+        // Add hover effects for card elevations
+        const cards = document.querySelectorAll('section');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.boxShadow = '0 10px 25px -5px rgba(46, 125, 50, 0.1)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.boxShadow = 'none';
+            });
+        });
+    </script>
+</body></html>
