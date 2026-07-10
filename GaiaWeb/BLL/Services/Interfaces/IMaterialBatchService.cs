@@ -36,4 +36,13 @@ public interface IMaterialBatchService
         int supplierId,
         string status,
         string description);
+
+    // UC18 – Admin: get all batches
+    Task<List<MaterialBatch>> GetAllBatchesAsync();
+
+    // UC18 – Approve a pending batch
+    Task<(bool Success, string Message)> ApproveBatchAsync(int batchId);
+
+    // UC19 – Reject a pending batch
+    Task<(bool Success, string Message)> RejectBatchAsync(int batchId);
 }

@@ -1,0 +1,114 @@
+@page
+@model GaiaWeb.Pages.Admin.Products.EditModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Sửa Sản phẩm | GAIA Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <style>body { font-family: 'Inter', sans-serif; }</style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+<div class="flex min-h-screen">
+    <aside class="w-64 bg-white border-r border-gray-200 flex flex-col shadow-sm fixed h-full z-30">
+        <div class="p-6 border-b border-gray-100">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-green-700 rounded-xl flex items-center justify-center shadow-lg">
+                    <span class="material-symbols-outlined text-white text-2xl">shield</span>
+                </div>
+                <div>
+                    <div class="font-bold text-green-700 text-lg leading-tight">GAIA Admin</div>
+                    <div class="text-xs text-gray-400">Quản trị hệ thống</div>
+                </div>
+            </div>
+        </div>
+        <nav class="flex-1 p-4 space-y-1">
+            <a href="/Admin/Index" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 font-medium text-sm">
+                <span class="material-symbols-outlined text-xl">dashboard</span> Dashboard
+            </a>
+            <a href="/Admin/Suppliers/Index" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 font-medium text-sm">
+                <span class="material-symbols-outlined text-xl">group</span> Nhà cung cấp
+            </a>
+            <a href="/Admin/Batches/Index" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 font-medium text-sm">
+                <span class="material-symbols-outlined text-xl">inventory_2</span> Lô nguyên liệu
+            </a>
+            <a href="/Admin/Products/Index" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-green-50 text-green-700 font-semibold text-sm">
+                <span class="material-symbols-outlined text-xl">category</span> Sản phẩm
+            </a>
+        </nav>
+        <div class="p-4 border-t border-gray-100">
+            <a href="/Logout" class="flex items-center gap-2 px-4 py-2 rounded-lg text-red-500 hover:bg-red-50 text-sm font-medium w-full">
+                <span class="material-symbols-outlined text-base">logout</span> Đăng xuất
+            </a>
+        </div>
+    </aside>
+
+    <main class="flex-1 ml-64 p-8">
+        <div class="flex items-center gap-3 mb-6">
+            <a href="/Admin/Products/Index" class="text-gray-400 hover:text-gray-600">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </a>
+            <div>
+                <h1 class="text-2xl font-bold text-gray-800">Sửa Sản phẩm</h1>
+                <p class="text-gray-500 text-sm">Cập nhật thông tin sản phẩm</p>
+            </div>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+        {
+            <div class="mb-4 px-4 py-3 rounded-xl text-sm font-medium bg-red-50 text-red-700 border border-red-200">
+                @Model.ErrorMessage
+            </div>
+        }
+
+        <!-- QR Token readonly info -->
+        <div class="mb-4 flex items-center gap-3 px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm max-w-2xl">
+            <span class="material-symbols-outlined text-gray-400">qr_code_2</span>
+            <div>
+                <span class="text-gray-500 text-xs">QR Token (không thể thay đổi)</span>
+                <div class="font-mono text-xs text-gray-700">@Model.QrToken</div>
+            </div>
+        </div>
+
+        <form method="post" class="max-w-2xl">
+            <input type="hidden" asp-for="ProductId" />
+
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-5">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Tên sản phẩm <span class="text-red-500">*</span></label>
+                    <input asp-for="ProductName" type="text" required
+                           class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Mô tả</label>
+                    <textarea asp-for="Description" rows="3"
+                              class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 resize-none"></textarea>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Trạng thái</label>
+                    <select asp-for="CurrentStatus"
+                            class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500">
+                        <option value="Available">Available — Sẵn sàng</option>
+                        <option value="Reserved">Reserved — Đã đặt trước</option>
+                        <option value="Sold">Sold — Đã bán</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-3 mt-6">
+                <a href="/Admin/Products/Index" class="px-6 py-2.5 rounded-xl border border-gray-200 text-gray-600 text-sm font-medium hover:bg-gray-50">Hủy</a>
+                <button type="submit" class="px-6 py-2.5 rounded-xl bg-green-700 text-white text-sm font-semibold hover:bg-green-800 transition-colors shadow-sm">
+                    Lưu thay đổi
+                </button>
+            </div>
+        </form>
+    </main>
+</div>
+</body>
+</html>

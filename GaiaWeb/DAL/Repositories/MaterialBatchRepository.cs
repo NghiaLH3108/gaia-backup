@@ -91,4 +91,28 @@ public class MaterialBatchRepository : IMaterialBatchRepository
             await _context.SaveChangesAsync();
         }
     }
+
+    // UC18/UC19 – Admin: get all batches
+    public async Task<List<MaterialBatch>> GetAllAsync()
+    {
+
+        return await _context.MaterialBatches
+            .Include(b => b.Supplier)
+                .ThenInclude(s => s.User)
+            .Include(b => b.MaterialImages)
+            .OrderByDescending(b => b.CreatedDate)
+            .ToListAsync();
+    }
+
+    public async Task<List<MaterialBatch>> GetAllPendingAsync()
+    {
+        return await _context.MaterialBatches
+            .Where(b => b.Status == "Pending")
+            .Include(b => b.Supplier)
+                .ThenInclude(s => s.User)
+            .Include(b => b.MaterialImages)
+            .OrderByDescending(b => b.CreatedDate)
+            .ToListAsync();
+    }
 }
+
