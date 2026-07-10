@@ -19,4 +19,9 @@ public interface IMaterialBatchRepository
     // UC13 – Transportation
     Task AddTransportationHistoryAsync(TransportationHistory history);
     Task UpdateBatchStatusAsync(int batchId, string status);
+
+    // UC18/UC19 – Admin: get all batches
+    Task<List<MaterialBatch>> GetAllAsync();
+    Task<List<MaterialBatch>> GetAllPendingAsync();
 }
+

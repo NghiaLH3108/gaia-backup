@@ -1,0 +1,137 @@
+@page
+@model GaiaWeb.Pages.Admin.Products.IndexModel
+@{
+    Layout = null;
+    string StatusBadge(string s) => s switch {
+        "Reserved"     => "bg-amber-100 text-amber-700",
+        "Available"    => "bg-green-100 text-green-700",
+        "Sold"         => "bg-gray-100 text-gray-500",
+        _              => "bg-gray-100 text-gray-500"
+    };
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Quản lý Sản phẩm | GAIA Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <style>body { font-family: 'Inter', sans-serif; }</style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+<div class="flex min-h-screen">
+    <aside class="w-64 bg-white border-r border-gray-200 flex flex-col shadow-sm fixed h-full z-30">
+        <div class="p-6 border-b border-gray-100">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-green-700 rounded-xl flex items-center justify-center shadow-lg">
+                    <span class="material-symbols-outlined text-white text-2xl">shield</span>
+                </div>
+                <div>
+                    <div class="font-bold text-green-700 text-lg leading-tight">GAIA Admin</div>
+                    <div class="text-xs text-gray-400">Quản trị hệ thống</div>
+                </div>
+            </div>
+        </div>
+        <nav class="flex-1 p-4 space-y-1">
+            <a href="/Admin/Index" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 font-medium text-sm">
+                <span class="material-symbols-outlined text-xl">dashboard</span> Dashboard
+            </a>
+            <a href="/Admin/Suppliers/Index" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 font-medium text-sm">
+                <span class="material-symbols-outlined text-xl">group</span> Nhà cung cấp
+            </a>
+            <a href="/Admin/Batches/Index" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 font-medium text-sm">
+                <span class="material-symbols-outlined text-xl">inventory_2</span> Lô nguyên liệu
+            </a>
+            <a href="/Admin/Products/Index" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-green-50 text-green-700 font-semibold text-sm">
+                <span class="material-symbols-outlined text-xl">category</span> Sản phẩm
+            </a>
+        </nav>
+        <div class="p-4 border-t border-gray-100">
+            <a href="/Logout" class="flex items-center gap-2 px-4 py-2 rounded-lg text-red-500 hover:bg-red-50 text-sm font-medium w-full">
+                <span class="material-symbols-outlined text-base">logout</span> Đăng xuất
+            </a>
+        </div>
+    </aside>
+
+    <main class="flex-1 ml-64 p-8">
+        <div class="flex justify-between items-center mb-6">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-800">Sản phẩm</h1>
+                <p class="text-gray-500 text-sm mt-1">Quản lý danh sách sản phẩm trong hệ thống</p>
+            </div>
+            <a href="/Admin/Products/Create" class="flex items-center gap-2 bg-green-700 text-white px-5 py-2.5 rounded-xl font-semibold text-sm hover:bg-green-800 transition-colors shadow-sm">
+                <span class="material-symbols-outlined text-base">add</span> Thêm sản phẩm
+            </a>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.Message))
+        {
+            <div class="mb-4 px-4 py-3 rounded-xl text-sm font-medium @(Model.IsSuccess ? "bg-green-50 text-green-700 border border-green-200" : "bg-red-50 text-red-700 border border-red-200")">
+                @Model.Message
+            </div>
+        }
+
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="bg-gray-50 border-b border-gray-100">
+                        <th class="px-6 py-4 text-left font-semibold text-gray-600">Sản phẩm</th>
+                        <th class="px-6 py-4 text-left font-semibold text-gray-600">Lô nguyên liệu</th>
+                        <th class="px-6 py-4 text-left font-semibold text-gray-600">QR Token</th>
+                        <th class="px-6 py-4 text-left font-semibold text-gray-600">Trạng thái</th>
+                        <th class="px-6 py-4 text-left font-semibold text-gray-600">Ngày tạo</th>
+                        <th class="px-6 py-4 text-right font-semibold text-gray-600">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-50">
+                    @foreach (var p in Model.Products)
+                    {
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4">
+                                <div class="font-semibold text-gray-800">@p.ProductName</div>
+                                <div class="text-xs text-gray-400 max-w-[180px] truncate">@p.Description</div>
+                            </td>
+                            <td class="px-6 py-4 text-gray-700">
+                                <div>@(p.Batch?.BatchCode ?? "—")</div>
+                                <div class="text-xs text-gray-400">@(p.Batch?.Supplier?.WarehouseName ?? "")</div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="font-mono text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                                    @p.Qrtoken.ToString().Substring(0, 8)...
+                                </span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="px-2.5 py-1 rounded-full text-xs font-semibold @StatusBadge(p.CurrentStatus)">
+                                    @p.CurrentStatus
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 text-gray-500 text-xs">@p.CreatedDate.ToString("dd/MM/yyyy")</td>
+                            <td class="px-6 py-4">
+                                <div class="flex justify-end gap-2">
+                                    <a href="/Admin/Products/Edit?productId=@p.ProductId"
+                                       class="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-gray-200 text-gray-600 hover:border-blue-300 hover:text-blue-600 text-xs font-medium transition-colors">
+                                        <span class="material-symbols-outlined text-sm">edit</span> Sửa
+                                    </a>
+                                    <form method="post" asp-page-handler="Delete" asp-route-productId="@p.ProductId"
+                                          onsubmit="return confirm('Xóa sản phẩm @p.ProductName? Hành động này không thể hoàn tác.')">
+                                        <button type="submit" class="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-gray-200 text-gray-600 hover:border-red-300 hover:text-red-600 text-xs font-medium transition-colors">
+                                            <span class="material-symbols-outlined text-sm">delete</span> Xóa
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                    @if (!Model.Products.Any())
+                    {
+                        <tr><td colspan="6" class="px-6 py-12 text-center text-gray-400">Chưa có sản phẩm nào.</td></tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
+</body>
+</html>

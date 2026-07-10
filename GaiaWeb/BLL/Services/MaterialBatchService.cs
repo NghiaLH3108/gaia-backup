@@ -173,4 +173,50 @@ public class MaterialBatchService : IMaterialBatchService
 
         return (true, "Cập nhật trạng thái vận chuyển thành công.");
     }
+
+    // ──────────────────────────────────────────────
+    // UC18 – Admin: get all batches
+    // ──────────────────────────────────────────────
+    public async Task<List<MaterialBatch>> GetAllBatchesAsync()
+    {
+        return await _batchRepository.GetAllAsync();
+    }
+
+    // ──────────────────────────────────────────────
+    // UC18 – Approve a pending batch
+    // ──────────────────────────────────────────────
+    public async Task<(bool Success, string Message)> ApproveBatchAsync(int batchId)
+    {
+        var batch = await _batchRepository.GetByIdAsync(batchId);
+        if (batch == null)
+            return (false, "Không tìm thấy lô hàng.");
+
+        if (batch.Status != "Pending")
+            return (false, $"Lô hàng hiện đang ở trạng thái '{batch.Status}', không thể phê duyệt.");
+
+        batch.Status = "Approved";
+        batch.ApprovedTime = DateTime.Now;
+        await _batchRepository.UpdateAsync(batch);
+
+        return (true, $"Đã phê duyệt lô hàng {batch.BatchCode} thành công.");
+    }
+
+    // ──────────────────────────────────────────────
+    // UC19 – Reject a pending batch
+    // ──────────────────────────────────────────────
+    public async Task<(bool Success, string Message)> RejectBatchAsync(int batchId)
+    {
+        var batch = await _batchRepository.GetByIdAsync(batchId);
+        if (batch == null)
+            return (false, "Không tìm thấy lô hàng.");
+
+        if (batch.Status != "Pending")
+            return (false, $"Lô hàng hiện đang ở trạng thái '{batch.Status}', không thể từ chối.");
+
+        batch.Status = "Rejected";
+        await _batchRepository.UpdateAsync(batch);
+
+        return (true, $"Đã từ chối lô hàng {batch.BatchCode}.");
+    }
 }
+

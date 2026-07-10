@@ -4,10 +4,6 @@ using GaiaWeb.DAL.Repositories;
 using GaiaWeb.BLL.Services.Interfaces;
 using GaiaWeb.BLL.Services;
 using Microsoft.EntityFrameworkCore;
-using GaiaWeb.DAL.Repositories.Interfaces;
-using GaiaWeb.DAL.Repositories;
-using GaiaWeb.BLL.Services.Interfaces;
-using GaiaWeb.BLL.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +15,8 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IMaterialBatchRepository, MaterialBatchRepository>();
 builder.Services.AddScoped<IMaterialBatchService, MaterialBatchService>();
+builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
+builder.Services.AddScoped<ISupplierService, SupplierService>();
 
 // Add distributed memory cache and session support
 builder.Services.AddDistributedMemoryCache();
