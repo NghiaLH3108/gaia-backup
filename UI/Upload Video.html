@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tải lên Video Sản xuất Thủ công | GAIA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;family=Space+Grotesk:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "error-container": "#ffdad6",
+                "secondary-fixed-dim": "#b9c7e0",
+                "on-secondary-fixed": "#0d1c2f",
+                "on-error": "#ffffff",
+                "surface-tint": "#006c49",
+                "on-primary-fixed-variant": "#005236",
+                "on-primary": "#ffffff",
+                "on-error-container": "#93000a",
+                "surface-container-low": "#eff4ff",
+                "on-surface-variant": "#3c4a42",
+                "outline-variant": "#bbcabf",
+                "tertiary-container": "#e29100",
+                "on-primary-fixed": "#002113",
+                "surface-bright": "#f8f9ff",
+                "on-tertiary": "#ffffff",
+                "on-secondary-fixed-variant": "#3a485c",
+                "primary-fixed": "#6ffbbe",
+                "secondary": "#515f74",
+                "tertiary-fixed": "#ffddb8",
+                "inverse-primary": "#4edea3",
+                "surface": "#f8f9ff",
+                "primary-fixed-dim": "#4edea3",
+                "on-surface": "#0b1c30",
+                "surface-container-lowest": "#ffffff",
+                "secondary-container": "#d5e3fd",
+                "on-background": "#0b1c30",
+                "surface-dim": "#cbdbf5",
+                "inverse-surface": "#213145",
+                "inverse-on-surface": "#eaf1ff",
+                "surface-container-high": "#dce9ff",
+                "on-primary-container": "#00422b",
+                "on-tertiary-fixed-variant": "#653e00",
+                "surface-variant": "#d3e4fe",
+                "on-tertiary-fixed": "#2a1700",
+                "on-secondary": "#ffffff",
+                "error": "#ba1a1a",
+                "surface-container-highest": "#d3e4fe",
+                "surface-container": "#e5eeff",
+                "tertiary": "#855300",
+                "on-secondary-container": "#57657b",
+                "secondary-fixed": "#d5e3fd",
+                "tertiary-fixed-dim": "#ffb95f",
+                "primary": "#006c49",
+                "background": "#f8f9ff",
+                "primary-container": "#10b981",
+                "outline": "#6c7a71",
+                "on-tertiary-container": "#523200"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "xs": "4px",
+                "md": "24px",
+                "margin-mobile": "16px",
+                "gutter": "24px",
+                "sm": "12px",
+                "xl": "80px",
+                "margin-desktop": "64px",
+                "lg": "48px",
+                "base": "8px"
+            },
+            "fontFamily": {
+                "label-md": ["Plus Jakarta Sans"],
+                "label-sm": ["Plus Jakarta Sans"],
+                "body-lg": ["Plus Jakarta Sans"],
+                "headline-xl": ["Space Grotesk"],
+                "body-md": ["Plus Jakarta Sans"],
+                "headline-md": ["Space Grotesk"],
+                "headline-lg": ["Space Grotesk"],
+                "headline-lg-mobile": ["Space Grotesk"],
+                "body-sm": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #bbcabf;
+        border-radius: 10px;
+      }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar (Shared Component) -->
+<nav class="fixed top-0 w-full z-50 bg-glass-fill flex justify-between items-center px-gutter h-16 backdrop-blur-md border-b border-glass-stroke shadow-sm">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold text-primary">GAIA</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Overview</a>
+<a class="font-body-md text-body-md text-primary font-bold border-b-2 border-primary pb-1" href="#">Collections</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Shipments</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors scale-95 active:scale-90">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors scale-95 active:scale-90">help_outline</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a female artisan working in a high-end textile studio. The lighting is soft and natural, emphasizing a warm and authentic craftsmanship environment. She is smiling subtly, wearing a sustainable linen apron, with rolls of organic fabric in the background. High-quality digital photography with a focus on human connection and professional storytelling." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJoJtKHYFkJg8yGcZF50fPLQZARXem2MQ-45noDq7hJ9mTyZGbKIF6yHnlr1gUM--cKtvjyZnDI0kUKCni7th-RtE0kSzRtBHma2RoEbrcqtgjJuBG75PzwXR8W3bsvxETdYelt-lpxy49oFvSYnHRQrosvD6Alx9-pKIsruGjFnaqXmy24OTYN6F9AGRHFHve86zNKVDowjgGtAD10g6hftmR1SDxt7fAuQNrSlBaMsUtlH5fMDPa"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar (Desktop Only) -->
+<aside class="hidden md:flex flex-col fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-surface p-4 gap-2 bg-surface-container-low shadow-md z-40">
+<div class="flex flex-col gap-1 mb-6 p-2">
+<span class="font-headline-md text-headline-md font-extrabold text-secondary">GAIA Portal</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Sustainable Supply Chain</span>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-label-sm">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold transition-all duration-200" href="#">
+<span class="material-symbols-outlined">recycling</span>
+<span class="font-label-sm text-label-sm">Collections</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-label-sm text-label-sm">Shipments</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined">verified</span>
+<span class="font-label-sm text-label-sm">Certifications</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined">contact_support</span>
+<span class="font-label-sm text-label-sm">Support</span>
+</a>
+</nav>
+<div class="border-t border-outline-variant pt-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-sm text-label-sm">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-12 md:pl-72 px-margin-mobile md:px-margin-desktop min-h-screen">
+<!-- Hero Section -->
+<header class="mb-lg">
+<div class="max-w-4xl">
+<h1 class="font-headline-xl text-headline-xl text-primary mb-2">Tải lên Video Sản xuất Thủ công</h1>
+<p class="font-body-lg text-body-lg text-secondary max-w-2xl">
+                    Chia sẻ hành trình sáng tạo của bạn. Những thước phim chân thực giúp khách hàng hiểu rõ giá trị bền vững và tâm huyết trong từng sản phẩm thủ công.
+                </p>
+</div>
+</header>
+<!-- Bento Layout Form -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left Column: Upload & Preview -->
+<div class="lg:col-span-7 space-y-gutter">
+<!-- Drag & Drop Upload -->
+<section class="glass-card p-lg rounded-xl shadow-sm text-center border-dashed border-2 border-outline-variant hover:border-primary transition-colors cursor-pointer group relative overflow-hidden" id="drop-zone">
+<input accept="video/*" class="hidden" id="video-input" type="file"/>
+<div class="py-8">
+<span class="material-symbols-outlined text-6xl text-primary mb-4 block group-hover:scale-110 transition-transform">cloud_upload</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Kéo và thả video vào đây</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6">Hỗ trợ định dạng MP4, MOV lên đến 500MB</p>
+<button class="bg-primary text-white px-lg py-sm rounded-lg font-label-md text-label-md hover:scale-[1.02] active:scale-95 transition-all shadow-md">Chọn tệp từ máy tính</button>
+</div>
+<!-- Mock Progress Bar (Hidden by default) -->
+<div class="hidden absolute inset-0 bg-white/90 backdrop-blur-sm flex flex-col items-center justify-center p-lg" id="upload-progress">
+<div class="w-full max-w-sm">
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-md text-label-md text-primary">Đang tải lên...</span>
+<span class="font-label-md text-label-md text-primary" id="progress-percent">45%</span>
+</div>
+<div class="w-full h-2 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary transition-all duration-300" style="width: 45%"></div>
+</div>
+<button class="mt-4 text-error font-label-sm text-label-sm flex items-center gap-1 mx-auto">
+<span class="material-symbols-outlined text-sm">cancel</span> Hủy tải lên
+                            </button>
+</div>
+</div>
+</section>
+<!-- Thumbnail Preview Grid -->
+<section class="glass-card p-md rounded-xl shadow-sm">
+<h4 class="font-label-md text-label-md text-on-surface mb-4">Hình thu nhỏ (Thumbnail)</h4>
+<div class="grid grid-cols-3 md:grid-cols-4 gap-sm">
+<!-- Auto-generated mock thumbnails -->
+<div class="aspect-video rounded-lg overflow-hidden border-2 border-primary relative cursor-pointer ring-2 ring-primary ring-offset-2">
+<img class="w-full h-full object-cover" data-alt="A close-up high-definition shot of an artisan's hands weaving natural bamboo fibers. The focus is sharp on the intricate texture of the material, with a soft blur in the background showing a traditional Vietnamese workshop. Warm afternoon sunlight filters through, creating a serene and authentic atmosphere. Part of a Gaia sustainability series." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNyeylguZTRwgddtmk52XTmIarF-eX8PXZftY0_gkxvwMWqOEjNEZhHE-4dW_vbMJGRDJL7R2AVOntjDF15dsq0UxNrXkxKdtgGGfqjV3m9nYAc1Hte9CyIqyiLPvX8G1v5KkIw9e4AgpasDxQIffUnYR1lXx1e136HyLZNoDIWv52id2g4CT3MzPe7XWnJRQ1IKFY49nYt1J1RqxA7GizLt0FmPlTqCwBD7rAst5RCU2hSItGb7Ad"/>
+<div class="absolute inset-0 flex items-center justify-center bg-black/20">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<div class="aspect-video rounded-lg overflow-hidden border border-outline-variant hover:border-primary transition-colors cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="A wide shot of a sustainable crafting workshop, featuring raw materials like clay and recycled textiles organized neatly on wooden shelves. An artisan in a green apron is visible in the soft-focus background, working at a bench. The lighting is bright and airy, following a modern minimalist GAIA aesthetic with subtle green accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWHXUZjZCKUpReyRtNope7JJxf5LLXQ68LQB5IzEt0aAQlg1am-PZWoOKDcsHnxzCtCKBQdumzT3oSFh2uhmCoWcLIW1eQH_Le-wcl9F41Y7ZCEsJhIJYOFKWBA8kGOmpiA-2Ct4ni4_uxXFbnsISCtoJYQRyzG4AeaY2XfDA9wcvEzmqbcx9BX4fNwtVEA5XfBaZFSWryhAn6C43eRLZWQiLVYrbwkznzf9PLHKoKCyNwboaOCNEJ"/>
+</div>
+<div class="aspect-video rounded-lg overflow-hidden border border-outline-variant hover:border-primary transition-colors cursor-pointer">
+<img class="w-full h-full object-cover opacity-80" data-alt="Close-up of a finished handcrafted ceramic pot with organic, irregular textures. The pot sits on a dark wooden table with a sprig of dried lavender beside it. The mood is calm and professional, showcasing high-end craftsmanship and natural materials. Soft, diffused lighting highlights the delicate details." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDa010BfAdIsCq64MtHV9vjkfI6iS-1AlMiZtCjFLdj4WwFaeIhFX8otLgYKE4UMP-lYS7nNcOWK2DgFaqM8AqDKr2yQEOp0kYYBK-0Yv_3P20MPv0Ogy0xPjTQyRsL9gSdYkbNwqRVt8SYoBb-ibug_Ya4rh1Dyz-25o4wJhvt83C5wQ9zS-MDvxYEiX17AHTd5Oo0e9puRzdQ32dqMH3y_tCucxRcxELY7l52B5a3hYIPOuzkchqN"/>
+</div>
+<button class="aspect-video rounded-lg border border-dashed border-outline-variant flex flex-col items-center justify-center gap-1 hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-secondary">add_a_photo</span>
+<span class="text-[10px] font-bold uppercase">Tải lên</span>
+</button>
+</div>
+</section>
+</div>
+<!-- Right Column: Form Fields -->
+<div class="lg:col-span-5">
+<form class="glass-card p-lg rounded-xl shadow-sm space-y-md">
+<!-- Title -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2">Tiêu đề Video</label>
+<input class="w-full bg-[#F1F5F9] border-transparent focus:border-primary focus:ring-0 rounded-lg py-3 px-4 font-body-md transition-all" placeholder="Ví dụ: Quy trình nhuộm vải tự nhiên từ vỏ cây" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<!-- Step -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2">Công đoạn</label>
+<select class="w-full bg-[#F1F5F9] border-transparent focus:border-primary focus:ring-0 rounded-lg py-3 px-4 font-body-md transition-all appearance-none">
+<option>Sơ chế nguyên liệu</option>
+<option>Chế tác thủ công</option>
+<option>Hoàn thiện &amp; Kiểm định</option>
+<option>Đóng gói bền vững</option>
+</select>
+</div>
+<!-- Artisan Name -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2">Nghệ nhân</label>
+<input class="w-full bg-[#F1F5F9] border-transparent focus:border-primary focus:ring-0 rounded-lg py-3 px-4 font-body-md transition-all" placeholder="Tên nghệ nhân" type="text"/>
+</div>
+</div>
+<!-- Description -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2">Mô tả quy trình</label>
+<textarea class="w-full bg-[#F1F5F9] border-transparent focus:border-primary focus:ring-0 rounded-lg py-3 px-4 font-body-md transition-all resize-none" placeholder="Mô tả chi tiết các bước thực hiện và các giá trị bền vững được áp dụng..." rows="4"></textarea>
+</div>
+<!-- Sustainability Tags -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2">Chỉ số Bền vững</label>
+<div class="flex flex-wrap gap-2 mb-3">
+<span class="bg-primary-container/20 text-on-primary-container px-3 py-1 rounded-full text-xs font-bold border border-primary-container/30 flex items-center gap-1">
+                                #CircularEconomy <button class="material-symbols-outlined text-[14px]">close</button>
+</span>
+<span class="bg-secondary-container/20 text-on-secondary-container px-3 py-1 rounded-full text-xs font-bold border border-secondary-container/30 flex items-center gap-1">
+                                #Handmade <button class="material-symbols-outlined text-[14px]">close</button>
+</span>
+<span class="bg-tertiary-container/20 text-on-tertiary-container px-3 py-1 rounded-full text-xs font-bold border border-tertiary-container/30 flex items-center gap-1">
+                                #EcoFriendly <button class="material-symbols-outlined text-[14px]">close</button>
+</span>
+</div>
+<div class="relative">
+<input class="w-full bg-[#F1F5F9] border-transparent focus:border-primary focus:ring-0 rounded-lg py-2 px-4 text-sm font-body-md transition-all" placeholder="Thêm thẻ (nhấn Enter)..." type="text"/>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="pt-4 flex items-center gap-4">
+<button class="flex-1 font-label-md text-label-md text-secondary border border-outline-variant hover:bg-surface-variant py-3 rounded-lg transition-all active:scale-95" type="button">Hủy bỏ</button>
+<button class="flex-[2] font-label-md text-label-md bg-primary text-white py-3 rounded-lg shadow-md hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-2" type="submit">
+<span class="material-symbols-outlined">publish</span> Tải lên video
+                        </button>
+</div>
+</form>
+<!-- Information Tip -->
+<div class="mt-gutter p-md bg-primary-container/10 border border-primary-container/20 rounded-xl flex gap-3">
+<span class="material-symbols-outlined text-primary">lightbulb</span>
+<p class="text-xs text-on-primary-fixed-variant leading-relaxed">
+<strong>Mẹo:</strong> Video có độ dài từ 30-60 giây tập trung vào các thao tác tay tinh xảo thường nhận được sự tương tác cao nhất từ cộng đồng GAIA.
+                    </p>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="w-full py-8 px-container-padding-desktop flex flex-col md:flex-row justify-between items-center bg-surface-container-lowest border-t border-outline-variant">
+<div class="mb-4 md:mb-0">
+<span class="font-headline-md text-headline-md text-primary font-bold">GAIA</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-2">© 2024 GAIA Sustainable Systems. All rights reserved.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors opacity-80 hover:opacity-100" href="#">Sustainability Report</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors opacity-80 hover:opacity-100" href="#">Global Compliance</a>
+</div>
+</footer>
+<!-- Micro-interactions Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dropZone = document.getElementById('drop-zone');
+            const videoInput = document.getElementById('video-input');
+            const progressArea = document.getElementById('upload-progress');
+
+            dropZone.addEventListener('click', () => videoInput.click());
+
+            dropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.classList.add('border-primary', 'bg-primary/5');
+            });
+
+            dropZone.addEventListener('dragleave', () => {
+                dropZone.classList.remove('border-primary', 'bg-primary/5');
+            });
+
+            dropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('border-primary', 'bg-primary/5');
+                handleFileUpload();
+            });
+
+            videoInput.addEventListener('change', () => {
+                if (videoInput.files.length > 0) {
+                    handleFileUpload();
+                }
+            });
+
+            function handleFileUpload() {
+                progressArea.classList.remove('hidden');
+                // Simulate progress
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += Math.floor(Math.random() * 10) + 2;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                        setTimeout(() => {
+                            // progressArea.classList.add('hidden');
+                            document.getElementById('progress-percent').innerText = "Hoàn tất";
+                        }, 1000);
+                    }
+                    document.getElementById('progress-percent').innerText = progress + "%";
+                    progressArea.querySelector('.bg-primary').style.width = progress + "%";
+                }, 400);
+            }
+        });
+    </script>
+</body></html>

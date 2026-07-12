@@ -16,6 +16,12 @@ namespace GaiaWeb.DAL.Repositories.Interfaces
         Task<Product> CreateAsync(Product product);
         Task UpdateAsync(Product product);
         Task DeleteAsync(int productId);
+
+        // UC21 – Upload Handmade Video
+        Task<List<ProductTimeline>> GetProductTimelinesByProductIdAsync(int productId);
+        Task<ProductTimeline?> GetTimelineByIdAsync(int timelineId);
+        Task UpdateTimelineAsync(ProductTimeline timeline);
     }
 }
+
 

@@ -218,5 +218,35 @@ public class MaterialBatchService : IMaterialBatchService
 
         return (true, $"Đã từ chối lô hàng {batch.BatchCode}.");
     }
+
+    // UC22/23 – Dashboard and Statistics
+    public async Task<decimal> GetTotalWeightSavedAsync()
+    {
+        var batches = await _batchRepository.GetAllAsync();
+        return batches
+            .Where(b => b.Status == "Approved" || b.Status == "Transporting" || b.Status == "ArrivedFactory")
+            .Sum(b => b.WeightKg);
+    }
+
+    public async Task<Dictionary<string, decimal>> GetMonthlyWeightCollectionAsync()
+    {
+        var batches = await _batchRepository.GetAllAsync();
+        return batches
+            .Where(b => b.Status == "Approved" || b.Status == "Transporting" || b.Status == "ArrivedFactory")
+            .GroupBy(b => b.CollectionTime.ToString("yyyy-MM"))
+            .OrderBy(g => g.Key)
+            .ToDictionary(g => g.Key, g => g.Sum(b => b.WeightKg));
+    }
+
+    public async Task<Dictionary<string, decimal>> GetTopSuppliersWeightAsync(int limit)
+    {
+        var batches = await _batchRepository.GetAllAsync();
+        return batches
+            .Where(b => b.Status == "Approved" || b.Status == "Transporting" || b.Status == "ArrivedFactory")
+            .GroupBy(b => b.Supplier?.WarehouseName ?? "N/A")
+            .OrderByDescending(g => g.Sum(b => b.WeightKg))
+            .Take(limit)
+            .ToDictionary(g => g.Key, g => g.Sum(b => b.WeightKg));
+    }
 }
 

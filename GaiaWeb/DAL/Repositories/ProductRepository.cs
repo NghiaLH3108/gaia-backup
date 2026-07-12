@@ -74,6 +74,28 @@ namespace GaiaWeb.DAL.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+
+        // UC21 – Upload Handmade Video
+        public async Task<List<ProductTimeline>> GetProductTimelinesByProductIdAsync(int productId)
+        {
+            return await _context.ProductTimelines
+                .Where(t => t.ProductId == productId)
+                .OrderBy(t => t.StepOrder)
+                .ToListAsync();
+        }
+
+        public async Task<ProductTimeline?> GetTimelineByIdAsync(int timelineId)
+        {
+            return await _context.ProductTimelines
+                .Include(t => t.Product)
+                .FirstOrDefaultAsync(t => t.TimelineId == timelineId);
+        }
+
+        public async Task UpdateTimelineAsync(ProductTimeline timeline)
+        {
+            _context.ProductTimelines.Update(timeline);
+            await _context.SaveChangesAsync();
+        }
     }
 }
 

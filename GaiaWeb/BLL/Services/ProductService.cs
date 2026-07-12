@@ -92,6 +92,47 @@ namespace GaiaWeb.BLL.Services
             await _productRepository.DeleteAsync(productId);
             return (true, $"Đã xóa sản phẩm '{product.ProductName}'.");
         }
+
+        // UC21 – Upload Handmade Video
+        public async Task<List<ProductTimeline>> GetProductTimelinesByProductIdAsync(int productId)
+        {
+            return await _productRepository.GetProductTimelinesByProductIdAsync(productId);
+        }
+
+        public async Task<ProductTimeline?> GetTimelineByIdAsync(int timelineId)
+        {
+            return await _productRepository.GetTimelineByIdAsync(timelineId);
+        }
+
+        public async Task<(bool Success, string Message)> UpdateTimelineVideoAsync(
+            int timelineId, string title, string description, string videoUrl)
+        {
+            var timeline = await _productRepository.GetTimelineByIdAsync(timelineId);
+            if (timeline == null)
+                return (false, "Không tìm thấy bước quy trình.");
+
+            if (string.IsNullOrWhiteSpace(title))
+                return (false, "Tiêu đề video không được để trống.");
+
+            if (string.IsNullOrWhiteSpace(description))
+                return (false, "Mô tả quy trình không được để trống.");
+
+            timeline.Title = title;
+            timeline.Description = description;
+            timeline.VideoUrl = videoUrl;
+
+            await _productRepository.UpdateTimelineAsync(timeline);
+            return (true, "Cập nhật video sản xuất thủ công thành công.");
+        }
+
+        // UC22/23 – Dashboard and Statistics
+        public async Task<Dictionary<string, int>> GetProductStatusDistributionAsync()
+        {
+            var products = await _productRepository.GetAllAsync();
+            return products
+                .GroupBy(p => p.CurrentStatus)
+                .ToDictionary(g => g.Key, g => g.Count());
+        }
     }
 }
 
