@@ -1,80 +1,24 @@
 @page
 @model GaiaWeb.Pages.Supplier.Batches.EditModel
 @{
-    Layout = null;
+    Layout = "_SupplierLayout";
+    ViewData["Title"] = "Chỉnh sửa lô hàng";
+    ViewData["PageTitle"] = "Chỉnh Sửa Lô Hàng";
+    ViewData["ActivePage"] = "Batches";
+
     string collTimeVal = Model.Input.CollectionTime == default
         ? DateTime.Now.ToString("yyyy-MM-ddTHH:mm")
         : Model.Input.CollectionTime.ToString("yyyy-MM-ddTHH:mm");
     bool isEditable = Model.Batch?.Status == "Pending";
 }
-<!DOCTYPE html>
-<html class="light" lang="vi">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chỉnh sửa lô hàng | GAIA</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@@100..700,0..1&display=swap" rel="stylesheet">
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "outline-variant": "#bfcaba", "glass-fill": "rgba(255,255,255,0.7)",
-                        "secondary": "#006e1c", "background": "#fff8f6",
-                        "on-primary": "#ffffff", "primary-container": "#2e7d32",
-                        "surface-container-low": "#fff1ec", "on-secondary-container": "#00731e",
-                        "tertiary": "#00598f", "error": "#ba1a1a", "surface-accent": "#C8E6C9",
-                        "surface-light": "#FFFFFF", "on-primary-container": "#cbffc2",
-                        "secondary-container": "#91f78e", "on-surface": "#2b160f",
-                        "outline": "#707a6c", "primary": "#0d631b", "surface-variant": "#ffdbce",
-                        "tertiary-container": "#0072b6", "on-secondary": "#ffffff",
-                        "glass-stroke": "rgba(255,255,255,0.3)", "surface-container-lowest": "#ffffff",
-                        "surface-container-high": "#ffe2d9", "surface-container": "#ffe9e2",
-                        "warning-orange": "#FF9800", "surface": "#fff8f6",
-                        "error-container": "#ffdad6", "on-surface-variant": "#40493d",
-                        "on-error-container": "#93000a", "on-background": "#2b160f"
-                    },
-                    fontFamily: { "headline-md": ["Inter"], "headline-lg": ["Inter"], "body-md": ["Inter"], "label-sm": ["Inter"] },
-                    fontSize: {
-                        "headline-lg": ["32px", { lineHeight: "40px", fontWeight: "700" }],
-                        "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
-                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
-                        "label-sm": ["14px", { lineHeight: "20px", letterSpacing: "0.05em", fontWeight: "600" }]
-                    },
-                    spacing: { "gutter": "24px", "container-padding-desktop": "64px" }
-                }
-            }
-        }
-    </script>
+
+@section Head {
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #fff8f6; }
-        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
         .glass-card { background: rgba(255,255,255,0.7); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.3); }
     </style>
-</head>
-<body class="bg-background text-on-background font-body-md min-h-screen">
+}
 
-<!-- Header -->
-<header class="bg-glass-fill backdrop-blur-md border-b border-glass-stroke shadow-sm fixed top-0 w-full z-50 flex justify-between items-center px-gutter h-16">
-    <div class="flex items-center gap-4">
-        <h1 class="font-headline-md text-headline-md font-bold text-primary">GAIA</h1>
-        <nav class="hidden md:flex gap-6 ml-8">
-            <a href="/Supplier/Index" class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm">Tổng quan</a>
-            <a href="/Supplier/Batches" class="text-primary font-bold border-b-2 border-primary pb-1 font-label-sm text-label-sm">Lô hàng</a>
-        </nav>
-    </div>
-    <div class="flex items-center gap-4">
-        <span class="text-sm text-on-surface-variant hidden md:block">@Model.SupplierName</span>
-        <a href="/Logout" class="text-red-600 flex items-center gap-1 text-sm font-medium hover:text-red-700">
-            <span class="material-symbols-outlined text-[18px]">logout</span>
-        </a>
-    </div>
-</header>
-
-<main class="pt-24 pb-16 px-gutter md:px-container-padding-desktop max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
 
     <!-- Left column: Form -->
     <div class="lg:col-span-8 space-y-6">
@@ -84,7 +28,7 @@
         {
             <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-4 flex items-center gap-4">
                 <span class="material-symbols-outlined text-warning-orange">warning</span>
-                <p class="text-on-surface font-label-sm text-label-sm">
+                <p class="text-on-surface text-sm font-semibold">
                     Lô hàng này có trạng thái <strong>@Model.Batch.Status</strong> — không thể chỉnh sửa. Chỉ chỉnh sửa được khi trạng thái là <strong>Pending</strong>.
                 </p>
             </div>
@@ -93,7 +37,7 @@
         {
             <div class="bg-orange-50 border border-orange-200 rounded-xl p-4 flex items-center gap-4">
                 <span class="material-symbols-outlined text-warning-orange">info</span>
-                <p class="text-on-surface font-label-sm text-label-sm">
+                <p class="text-on-surface text-sm font-semibold">
                     Thông tin chỉ có thể chỉnh sửa trước khi Quản trị viên phê duyệt.
                 </p>
             </div>
@@ -112,24 +56,24 @@
             <h2 class="font-headline-lg text-headline-lg text-on-surface">
                 Chỉnh sửa Lô hàng <span class="text-primary">@(Model.Batch?.BatchCode ?? "")</span>
             </h2>
-            <p class="text-on-surface-variant font-body-md text-body-md">Cập nhật chi tiết thông tin thu gom và nguyên liệu.</p>
+            <p class="text-on-surface-variant text-sm">Cập nhật chi tiết thông tin thu gom và nguyên liệu.</p>
         </div>
 
         <!-- Form Card -->
-        <div class="bg-surface-container-lowest rounded-xl p-8 shadow-sm border border-outline-variant/30 space-y-8">
+        <div class="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-outline-variant/30 space-y-8">
 
             <!-- Supplier info (read-only) -->
             <div class="space-y-4">
                 <div class="flex items-center gap-2 border-l-4 border-primary pl-3">
-                    <h3 class="font-headline-md text-headline-md text-primary">Thông tin Nhà cung cấp</h3>
+                    <h3 class="font-bold text-on-surface">Thông tin Nhà cung cấp</h3>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div>
-                        <label class="font-label-sm text-label-sm text-on-surface-variant mb-1 block">Tên Nhà cung cấp</label>
+                        <label class="text-xs font-semibold text-on-surface-variant mb-1 block">Tên Nhà cung cấp</label>
                         <input type="text" value="@Model.SupplierName" readonly class="w-full bg-surface-accent/10 border-none rounded-lg p-3 text-sm outline-none cursor-not-allowed text-on-surface-variant">
                     </div>
                     <div>
-                        <label class="font-label-sm text-label-sm text-on-surface-variant mb-1 block">Cơ sở / Kho</label>
+                        <label class="text-xs font-semibold text-on-surface-variant mb-1 block">Cơ sở / Kho</label>
                         <input type="text" value="@Model.WarehouseName" readonly class="w-full bg-surface-accent/10 border-none rounded-lg p-3 text-sm outline-none cursor-not-allowed text-on-surface-variant">
                     </div>
                 </div>
@@ -138,7 +82,7 @@
             <!-- Material details (editable) -->
             <div class="space-y-4">
                 <div class="flex items-center gap-2 border-l-4 border-secondary pl-3">
-                    <h3 class="font-headline-md text-headline-md text-secondary">Chi tiết Nguyên liệu</h3>
+                    <h3 class="font-bold text-on-surface">Chi tiết Nguyên liệu</h3>
                 </div>
                 <form method="post" action="/Supplier/Batches/Edit?batchId=@Model.BatchId" id="editForm">
                     @Html.AntiForgeryToken()
@@ -146,7 +90,7 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div>
-                            <label class="font-label-sm text-label-sm text-on-surface-variant mb-1 block">Khối lượng (kg) <span class="text-error">*</span></label>
+                            <label class="text-xs font-semibold text-on-surface-variant mb-1 block">Khối lượng (kg) <span class="text-error">*</span></label>
                             <input id="weightKg"
                                    name="Input.WeightKg"
                                    type="number"
@@ -154,23 +98,23 @@
                                    min="0.01"
                                    value="@(Model.Input.WeightKg > 0 ? Model.Input.WeightKg.ToString() : Model.Batch?.WeightKg.ToString() ?? "")"
                                    @(isEditable ? "" : "readonly")
-                                   class="w-full @(isEditable ? "bg-surface-accent/20" : "bg-surface-accent/10 cursor-not-allowed") border-none rounded-lg p-3 text-sm focus:ring-2 focus:ring-secondary outline-none">
+                                   class="w-full @(isEditable ? "bg-surface-accent/20 border border-outline-variant focus:ring-2 focus:ring-secondary" : "bg-surface-accent/10 cursor-not-allowed border-none") rounded-lg p-3 text-sm outline-none">
                             <span asp-validation-for="Input.WeightKg" class="text-error text-xs mt-1 block"></span>
                         </div>
 
                         <div>
-                            <label class="font-label-sm text-label-sm text-on-surface-variant mb-1 block">Thời gian thu gom <span class="text-error">*</span></label>
+                            <label class="text-xs font-semibold text-on-surface-variant mb-1 block">Thời gian thu gom <span class="text-error">*</span></label>
                             <input id="collectionTime"
                                    name="Input.CollectionTime"
                                    type="datetime-local"
                                    value="@collTimeVal"
                                    @(isEditable ? "" : "readonly")
-                                   class="w-full @(isEditable ? "bg-surface-accent/20" : "bg-surface-accent/10 cursor-not-allowed") border-none rounded-lg p-3 text-sm focus:ring-2 focus:ring-secondary outline-none">
+                                   class="w-full @(isEditable ? "bg-surface-accent/20 border border-outline-variant focus:ring-2 focus:ring-secondary" : "bg-surface-accent/10 cursor-not-allowed border-none") rounded-lg p-3 text-sm outline-none">
                             <span asp-validation-for="Input.CollectionTime" class="text-error text-xs mt-1 block"></span>
                         </div>
 
                         <div class="md:col-span-2">
-                            <label class="font-label-sm text-label-sm text-on-surface-variant mb-1 block">Địa điểm thu gom <span class="text-error">*</span></label>
+                            <label class="text-xs font-semibold text-on-surface-variant mb-1 block">Địa điểm thu gom <span class="text-error">*</span></label>
                             <div class="relative">
                                 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">location_on</span>
                                 <input id="collectionAddress"
@@ -178,7 +122,7 @@
                                        type="text"
                                        value="@(string.IsNullOrEmpty(Model.Input.CollectionAddress) ? Model.Batch?.CollectionAddress : Model.Input.CollectionAddress)"
                                        @(isEditable ? "" : "readonly")
-                                       class="w-full pl-10 @(isEditable ? "bg-surface-accent/20" : "bg-surface-accent/10 cursor-not-allowed") border-none rounded-lg p-3 text-sm focus:ring-2 focus:ring-secondary outline-none">
+                                       class="w-full pl-10 @(isEditable ? "bg-surface-accent/20 border border-outline-variant focus:ring-2 focus:ring-secondary" : "bg-surface-accent/10 cursor-not-allowed border-none") rounded-lg p-3 text-sm outline-none">
                             </div>
                             <span asp-validation-for="Input.CollectionAddress" class="text-error text-xs mt-1 block"></span>
                         </div>
@@ -189,7 +133,7 @@
                     {
                         <div class="mt-6 space-y-3">
                             <div class="flex items-center justify-between border-l-4 border-tertiary-container pl-3">
-                                <h3 class="font-headline-md text-headline-md text-tertiary-container">Hình ảnh đã upload</h3>
+                                <h3 class="font-bold text-on-surface">Hình ảnh đã upload</h3>
                             </div>
                             <div class="grid grid-cols-3 md:grid-cols-5 gap-3">
                                 @foreach (var img in Model.Batch.MaterialImages)
@@ -204,14 +148,14 @@
 
                     <!-- Actions -->
                     <div class="flex flex-col md:flex-row items-center justify-end gap-4 pt-6 border-t border-outline-variant/30 mt-6">
-                        <a href="/Supplier/Batches" class="w-full md:w-auto px-8 py-3 border-2 border-secondary text-secondary font-label-sm text-label-sm rounded-lg hover:bg-secondary/5 transition-colors text-center">
+                        <a href="/Supplier/Batches" class="w-full md:w-auto px-8 py-2.5 border border-outline-variant text-on-surface-variant font-semibold rounded-lg hover:bg-surface-container-low transition-colors text-center text-sm">
                             Hủy bỏ
                         </a>
                         @if (isEditable)
                         {
                             <button type="submit" id="saveBtn"
-                                    class="w-full md:w-auto px-10 py-3 bg-primary text-white font-label-sm text-label-sm rounded-lg hover:bg-primary/90 shadow-md shadow-primary/20 transition-all flex items-center justify-center gap-2">
-                                Lưu thay đổi <span class="material-symbols-outlined">check_circle</span>
+                                    class="w-full md:w-auto px-10 py-2.5 bg-primary text-white font-semibold rounded-lg hover:opacity-90 shadow-md shadow-primary/20 transition-all flex items-center justify-center gap-2 text-sm">
+                                Lưu thay đổi <span class="material-symbols-outlined text-[18px]">check_circle</span>
                             </button>
                         }
                     </div>
@@ -226,10 +170,10 @@
         <!-- Transportation History -->
         @if (Model.Batch != null && Model.Batch.TransportationHistories.Any())
         {
-            <div class="bg-surface-container-low rounded-xl p-6 border border-outline-variant/30 space-y-5">
+            <div class="bg-white rounded-xl p-6 border border-outline-variant/30 space-y-5">
                 <div class="flex items-center gap-2">
                     <span class="material-symbols-outlined text-secondary">local_shipping</span>
-                    <h3 class="font-headline-md text-headline-md">Lịch sử vận chuyển</h3>
+                    <h3 class="font-bold text-on-surface">Lịch sử vận chuyển</h3>
                 </div>
                 <div class="space-y-5 relative">
                     <div class="absolute left-4 top-2 bottom-2 w-0.5 bg-outline-variant/50"></div>
@@ -238,7 +182,7 @@
                         <div class="relative pl-10">
                             <div class="absolute left-2.5 top-1.5 w-3 h-3 rounded-full bg-secondary ring-4 ring-secondary/20"></div>
                             <div>
-                                <p class="font-label-sm text-label-sm text-on-surface">@hist.Status</p>
+                                <p class="font-bold text-sm text-on-surface">@hist.Status</p>
                                 <p class="text-xs text-on-surface-variant">@hist.UpdateTime.ToString("dd/MM/yyyy HH:mm")</p>
                                 <p class="text-xs text-on-surface mt-1 italic">@hist.Description</p>
                             </div>
@@ -250,23 +194,23 @@
 
         <!-- Status card -->
         <div class="glass-card rounded-xl p-6 space-y-4">
-            <h4 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Trạng thái hiện tại</h4>
+            <h4 class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Trạng thái hiện tại</h4>
             @{
                 var (statusColor, statusLabel) = (Model.Batch?.Status ?? "") switch {
                     "Pending"        => ("text-warning-orange", "Đang chờ phê duyệt"),
                     "Approved"       => ("text-primary", "Đã phê duyệt"),
                     "Rejected"       => ("text-error", "Đã từ chối"),
-                    "Transporting"   => ("text-tertiary-container", "Đang vận chuyển"),
+                    "Transporting"   => ("text-tertiary", "Đang vận chuyển"),
                     "ArrivedFactory" => ("text-secondary", "Đã đến nhà máy"),
                     _                => ("text-outline", "Không xác định")
                 };
             }
             <div class="flex items-center gap-3">
                 <div class="w-3 h-3 rounded-full bg-current @statusColor animate-pulse"></div>
-                <span class="font-headline-md text-headline-md @statusColor">@statusLabel</span>
+                <span class="font-bold text-lg @statusColor">@statusLabel</span>
             </div>
             <div class="p-4 bg-surface-accent/20 rounded-lg flex items-start gap-3">
-                <span class="material-symbols-outlined text-primary text-sm">info</span>
+                <span class="material-symbols-outlined text-primary text-sm shrink-0">info</span>
                 <p class="text-xs text-on-surface-variant leading-relaxed">
                     @if (isEditable)
                     {
@@ -283,8 +227,8 @@
         <!-- Batch meta info -->
         @if (Model.Batch != null)
         {
-            <div class="bg-surface-container-low rounded-xl p-6 border border-outline-variant/30 space-y-3">
-                <h4 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Thông tin lô hàng</h4>
+            <div class="bg-white rounded-xl p-6 border border-outline-variant/30 space-y-3">
+                <h4 class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Thông tin lô hàng</h4>
                 <div class="space-y-2 text-sm">
                     <div class="flex justify-between">
                         <span class="text-on-surface-variant">Mã lô:</span>
@@ -303,23 +247,17 @@
         }
     </aside>
 
-</main>
+</div>
 
-<!-- Footer -->
-<footer class="w-full py-6 px-container-padding-desktop flex flex-col md:flex-row justify-between items-center bg-surface-container-lowest border-t border-outline-variant">
-    <h2 class="font-headline-md text-headline-md text-primary font-bold text-sm">GAIA</h2>
-    <p class="font-label-sm text-label-sm text-on-surface-variant text-xs">© 2024 GAIA Sustainable Systems. All rights reserved.</p>
-</footer>
-
+@section Scripts {
 <script>
     const form = document.getElementById('editForm');
     const saveBtn = document.getElementById('saveBtn');
     if (form && saveBtn) {
         form.addEventListener('submit', () => {
-            saveBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Đang lưu...';
+            saveBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-[18px]">sync</span> Đang lưu...';
             setTimeout(() => { saveBtn.disabled = true; }, 0);
         });
     }
 </script>
-</body>
-</html>
+}

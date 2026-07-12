@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html class="light" lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] | GAIA Supplier Portal</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "error": "#ba1a1a",
+                        "surface-light": "#FFFFFF",
+                        "surface": "#fff8f6",
+                        "surface-accent": "#C8E6C9",
+                        "glass-fill": "rgba(255,255,255,0.85)",
+                        "glass-stroke": "rgba(200,220,200,0.4)",
+                        "surface-container-low": "#fff1ec",
+                        "surface-container-high": "#ffe2d9",
+                        "surface-container-highest": "#ffdbce",
+                        "surface-container": "#ffe9e2",
+                        "surface-variant": "#e8f5e9",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#40493d",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#2b160f",
+                        "outline-variant": "#bfcaba",
+                        "outline": "#707a6c",
+                        "background": "#fff8f6",
+                        "on-background": "#2b160f",
+                        "primary": "#0d631b",
+                        "primary-container": "#2e7d32",
+                        "on-primary-container": "#cbffc2",
+                        "secondary": "#006e1c",
+                        "secondary-container": "#91f78e",
+                        "on-secondary-container": "#00731e",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#00598f",
+                        "tertiary-container": "#0072b6",
+                        "warning-orange": "#FF9800",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    fontFamily: {
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "mono-data": ["Inter"]
+                    },
+                    fontSize: {
+                        "headline-lg": ["32px", { lineHeight: "40px", fontWeight: "700" }],
+                        "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+                        "label-sm": ["14px", { lineHeight: "20px", letterSpacing: "0.05em", fontWeight: "600" }],
+                        "label-md": ["14px", { lineHeight: "20px", fontWeight: "600" }],
+                        "mono-data": ["13px", { lineHeight: "18px", fontWeight: "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at top right, #e8f5e9 0%, #fff8f6 60%); min-height: 100vh; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-panel { backdrop-filter: blur(15px); background: rgba(255,255,255,0.75); border: 1px solid rgba(255,255,255,0.4); }
+        .status-pill { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 9999px; font-size: 12px; font-weight: 700; }
+        .nav-active { background-color: #91f78e; color: #00731e; font-weight: 700; }
+        .nav-idle { color: #40493d; }
+        .nav-idle:hover { background-color: #e8f5e9; }
+    </style>
+    @await RenderSectionAsync("Head", required: false)
+</head>
+<body class="text-on-surface">
+<div class="flex h-screen overflow-hidden">
+    @{
+        var userName = Context.Session.GetString("UserName") ?? "Supplier";
+        var warehouseName = Context.Session.GetString("WarehouseName") ?? "Kho hàng";
+        var supplierInitial = userName.Length > 0 ? userName[0].ToString() : "S";
+    }
+
+    <!-- Side Navigation -->
+    <aside class="hidden md:flex flex-col h-screen p-4 gap-2 bg-white w-64 shadow-md border-r border-outline-variant shrink-0">
+        <div class="flex items-center gap-3 px-2 py-4 mb-2">
+            <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white shadow-lg shrink-0">
+                <span class="material-symbols-outlined">recycling</span>
+            </div>
+            <div>
+                <h2 class="font-bold text-primary text-lg leading-tight">GAIA Portal</h2>
+                <p class="text-xs text-on-surface-variant">Cổng Nhà Cung Cấp</p>
+            </div>
+        </div>
+        <nav class="flex-1 space-y-1">
+            <a href="/Supplier/Index" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition-all @(ViewData["ActivePage"]?.ToString() == "Overview" ? "nav-active" : "nav-idle")">
+                <span class="material-symbols-outlined text-xl">dashboard</span>
+                <span class="font-medium">Tổng quan</span>
+            </a>
+            <a href="/Supplier/Batches" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition-all @(ViewData["ActivePage"]?.ToString() == "Batches" ? "nav-active" : "nav-idle")">
+                <span class="material-symbols-outlined text-xl">inventory_2</span>
+                <span class="font-medium">Lô hàng</span>
+            </a>
+            <a href="/Supplier/Collection" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition-all @(ViewData["ActivePage"]?.ToString() == "Collection" ? "nav-active" : "nav-idle")">
+                <span class="material-symbols-outlined text-xl">recycling</span>
+                <span class="font-medium">Thu gom mới</span>
+            </a>
+        </nav>
+        <div class="border-t border-outline-variant pt-4 space-y-1">
+            <div class="flex items-center px-4 mb-3">
+                <div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-white font-bold text-sm shrink-0">
+                    @supplierInitial
+                </div>
+                <div class="ml-3 min-w-0">
+                    <p class="text-sm font-bold truncate">@warehouseName</p>
+                    <p class="text-xs text-on-surface-variant truncate">@userName</p>
+                </div>
+            </div>
+            <a href="/Logout" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-red-600 hover:bg-red-50 transition-all font-medium">
+                <span class="material-symbols-outlined text-xl">logout</span>
+                <span>Đăng xuất</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col overflow-y-auto min-w-0">
+        <!-- Top App Bar -->
+        <header class="sticky top-0 w-full z-50 flex justify-between items-center px-6 md:px-8 h-16 bg-glass-fill backdrop-blur-md border-b border-glass-stroke shadow-sm shrink-0">
+            <div class="flex items-center gap-4">
+                <span class="font-bold text-xl text-primary md:hidden">GAIA</span>
+                <span class="font-semibold text-lg text-primary hidden md:block">@ViewData["PageTitle"]</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="text-sm text-on-surface-variant hidden md:block">Xin chào, <strong>@userName</strong></span>
+                <a href="/Logout" class="flex items-center gap-1 bg-red-50 hover:bg-red-100 text-red-600 px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors">
+                    <span class="material-symbols-outlined text-[18px]">logout</span>
+                    <span class="hidden md:inline">Đăng xuất</span>
+                </a>
+            </div>
+        </header>
+
+        <!-- Content Canvas -->
+        <div class="flex-1 p-4 md:p-8">
+            @RenderBody()
+        </div>
+
+        <!-- Footer -->
+        <footer class="w-full py-5 px-8 border-t border-outline-variant flex flex-col md:flex-row justify-between items-center gap-3 bg-white/60 shrink-0">
+            <span class="font-bold text-primary text-sm">GAIA</span>
+            <p class="text-on-surface-variant text-xs">© 2024 GAIA Sustainable Systems. Kết nối Công nghệ & Sự bền vững.</p>
+        </footer>
+    </main>
+</div>
+
+<!-- Mobile bottom nav -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-glass-fill backdrop-blur-md border-t border-glass-stroke grid grid-cols-4 py-3 z-50">
+    <a href="/Supplier/Index" class="flex flex-col items-center @(ViewData["ActivePage"]?.ToString() == "Overview" ? "text-primary" : "text-on-surface-variant")">
+        <span class="material-symbols-outlined text-[22px]">dashboard</span>
+        <span class="text-[10px] font-bold">Trang chủ</span>
+    </a>
+    <a href="/Supplier/Batches" class="flex flex-col items-center @(ViewData["ActivePage"]?.ToString() == "Batches" ? "text-primary" : "text-on-surface-variant")">
+        <span class="material-symbols-outlined text-[22px]">inventory_2</span>
+        <span class="text-[10px] font-bold">Lô hàng</span>
+    </a>
+    <a href="/Supplier/Collection" class="flex flex-col items-center @(ViewData["ActivePage"]?.ToString() == "Collection" ? "text-primary" : "text-on-surface-variant")">
+        <span class="material-symbols-outlined text-[22px]">recycling</span>
+        <span class="text-[10px] font-bold">Thu gom</span>
+    </a>
+    <a href="/Logout" class="flex flex-col items-center text-on-surface-variant">
+        <span class="material-symbols-outlined text-[22px]">logout</span>
+        <span class="text-[10px] font-bold">Đăng xuất</span>
+    </a>
+</nav>
+
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

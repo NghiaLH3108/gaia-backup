@@ -1,147 +1,63 @@
 @page
 @model GaiaWeb.Pages.Supplier.Batches.IndexModel
 @{
-    Layout = null;
+    Layout = "_SupplierLayout";
+    ViewData["Title"] = "Lô hàng đã nộp";
+    ViewData["PageTitle"] = "Lô Hàng Đã Nộp";
+    ViewData["ActivePage"] = "Batches";
 }
-<!DOCTYPE html>
-<html class="light" lang="vi">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAIA | Lô hàng đã nộp</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@@100..700,0..1&display=swap" rel="stylesheet">
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "outline-variant": "#bfcaba", "glass-fill": "rgba(255,255,255,0.7)",
-                        "secondary": "#006e1c", "surface-bright": "#fff8f6",
-                        "on-primary": "#ffffff", "primary-container": "#2e7d32",
-                        "background": "#fff8f6", "surface-container-low": "#fff1ec",
-                        "on-secondary-container": "#00731e", "tertiary": "#00598f",
-                        "error": "#ba1a1a", "surface-accent": "#C8E6C9",
-                        "surface-light": "#FFFFFF", "on-primary-container": "#cbffc2",
-                        "secondary-container": "#91f78e", "surface-container-highest": "#ffdbce",
-                        "on-surface": "#2b160f", "outline": "#707a6c",
-                        "primary": "#0d631b", "surface-variant": "#ffdbce",
-                        "tertiary-container": "#0072b6", "on-secondary": "#ffffff",
-                        "glass-stroke": "rgba(255,255,255,0.3)", "surface-container-lowest": "#ffffff",
-                        "surface-container-high": "#ffe2d9", "surface-container": "#ffe9e2",
-                        "warning-orange": "#FF9800", "surface": "#fff8f6",
-                        "error-container": "#ffdad6", "on-surface-variant": "#40493d",
-                        "on-error-container": "#93000a", "on-background": "#2b160f"
-                    },
-                    fontFamily: { "headline-md": ["Inter"], "body-md": ["Inter"], "label-sm": ["Inter"], "mono-data": ["Inter"] },
-                    fontSize: {
-                        "headline-lg": ["32px", { lineHeight: "40px", fontWeight: "700" }],
-                        "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
-                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
-                        "label-sm": ["14px", { lineHeight: "20px", letterSpacing: "0.05em", fontWeight: "600" }],
-                        "mono-data": ["13px", { lineHeight: "18px", fontWeight: "500" }]
-                    }
-                }
-            }
-        }
-    </script>
+
+@section Head {
     <style>
-        body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at top right, #e8f5e9, #fff8f6); min-height: 100vh; }
-        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-        .glass-panel { backdrop-filter: blur(15px); background: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.3); }
         .status-pill { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 9999px; font-size: 12px; font-weight: 700; }
     </style>
-</head>
-<body class="font-body-md text-on-surface">
+}
 
-<!-- TopNav -->
-<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-glass-fill backdrop-blur-md border-b border-glass-stroke shadow-sm">
-    <div class="flex items-center gap-4">
-        <span class="font-headline-md text-headline-md font-bold text-primary">GAIA</span>
-        <span class="hidden md:block text-sm text-on-surface-variant font-medium">| Cổng Nhà Cung Cấp</span>
-    </div>
-    <div class="flex items-center gap-4">
-        <span class="text-sm text-on-surface-variant hidden md:block">Xin chào, <strong>@Model.SupplierName</strong></span>
-        <a href="/Logout" class="text-red-600 hover:text-red-700 flex items-center gap-1 text-sm font-medium">
-            <span class="material-symbols-outlined text-[20px]">logout</span>
-        </a>
-    </div>
-</nav>
-
-<!-- SideNav -->
-<aside class="hidden md:flex flex-col h-screen fixed left-0 top-0 pt-20 p-4 gap-2 w-64 bg-surface-container-low border-r border-outline-variant/20 z-40">
-    <div class="mb-4 px-2">
-        <h2 class="font-headline-md text-headline-md font-extrabold text-secondary">GAIA Portal</h2>
-        <p class="font-label-sm text-label-sm text-on-surface-variant">Supplier Dashboard</p>
-    </div>
-    <nav class="flex-1 space-y-1">
-        <a href="/Supplier/Index" class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-all rounded-lg font-label-sm text-label-sm">
-            <span class="material-symbols-outlined">dashboard</span> Tổng quan
-        </a>
-        <a href="/Supplier/Batches" class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold font-label-sm text-label-sm">
-            <span class="material-symbols-outlined">inventory_2</span> Lô hàng
-        </a>
-        <a href="/Supplier/Collection" class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-all rounded-lg font-label-sm text-label-sm">
-            <span class="material-symbols-outlined">recycling</span> Thu gom mới
-        </a>
-    </nav>
-    <div class="pt-4 border-t border-outline-variant/30 space-y-1">
-        <a href="/Logout" class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-all rounded-lg font-label-sm text-label-sm">
-            <span class="material-symbols-outlined">logout</span> Đăng xuất
-        </a>
-    </div>
-</aside>
-
-<!-- Main -->
-<main class="md:ml-64 pt-24 pb-16 px-4 md:px-8">
+<div class="max-w-6xl mx-auto space-y-6">
 
     @if (!string.IsNullOrEmpty(Model.SuccessMessage))
     {
-        <div class="max-w-6xl mx-auto mb-4 flex items-center gap-3 bg-green-50 border border-green-200 text-green-800 p-3 rounded-xl text-sm">
+        <div class="flex items-center gap-3 bg-green-50 border border-green-200 text-green-800 p-3 rounded-xl text-sm">
             <span class="material-symbols-outlined text-green-600">check_circle</span> @Model.SuccessMessage
         </div>
     }
 
     <!-- Header -->
-    <header class="max-w-6xl mx-auto mb-8">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <div>
-                <h1 class="font-headline-lg text-headline-lg text-primary mb-1">Lô hàng đã nộp</h1>
-                <p class="font-body-md text-body-md text-on-surface-variant">Quản lý và theo dõi trạng thái các lô nguyên liệu – @Model.WarehouseName</p>
-            </div>
-            <a href="/Supplier/Collection" class="flex items-center gap-2 px-5 py-2.5 bg-primary text-white font-label-sm text-label-sm rounded-xl shadow-md hover:opacity-90 transition-opacity whitespace-nowrap">
-                <span class="material-symbols-outlined text-[20px]">add</span> Nộp lô mới
-            </a>
+    <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+            <h1 class="font-headline-lg text-headline-lg text-primary mb-1">Lô hàng đã nộp</h1>
+            <p class="text-on-surface-variant text-sm">Quản lý và theo dõi trạng thái các lô nguyên liệu – @Model.WarehouseName</p>
         </div>
+        <a href="/Supplier/Collection" class="flex items-center gap-2 px-5 py-2.5 bg-primary text-white font-semibold text-sm rounded-xl shadow-md hover:opacity-90 transition-opacity whitespace-nowrap">
+            <span class="material-symbols-outlined text-[20px]">add</span> Nộp lô mới
+        </a>
     </header>
 
     <!-- KPI Grid -->
-    <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        <div class="bg-surface-light p-5 rounded-xl shadow-md border-t-4 border-warning-orange">
-            <p class="text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider mb-1">Chờ xử lý</p>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-white p-5 rounded-xl shadow-sm border border-outline-variant/30 border-t-4 border-warning-orange">
+            <p class="text-on-surface-variant text-xs font-bold uppercase tracking-wider mb-1">Chờ xử lý</p>
             <div class="flex items-end gap-2">
                 <span class="text-3xl font-bold text-on-surface">@Model.CountPending</span>
                 <span class="text-warning-orange mb-1 font-bold text-sm">Lô</span>
             </div>
         </div>
-        <div class="bg-surface-light p-5 rounded-xl shadow-md border-t-4 border-tertiary">
-            <p class="text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider mb-1">Đang vận chuyển</p>
+        <div class="bg-white p-5 rounded-xl shadow-sm border border-outline-variant/30 border-t-4 border-tertiary">
+            <p class="text-on-surface-variant text-xs font-bold uppercase tracking-wider mb-1">Đang vận chuyển</p>
             <div class="flex items-end gap-2">
                 <span class="text-3xl font-bold text-on-surface">@Model.CountTransporting</span>
                 <span class="text-tertiary mb-1 font-bold text-sm">Lô</span>
             </div>
         </div>
-        <div class="bg-surface-light p-5 rounded-xl shadow-md border-t-4 border-secondary">
-            <p class="text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider mb-1">Đã đến nhà máy</p>
+        <div class="bg-white p-5 rounded-xl shadow-sm border border-outline-variant/30 border-t-4 border-secondary">
+            <p class="text-on-surface-variant text-xs font-bold uppercase tracking-wider mb-1">Đã đến nhà máy</p>
             <div class="flex items-end gap-2">
                 <span class="text-3xl font-bold text-on-surface">@Model.CountArrived</span>
                 <span class="text-secondary mb-1 font-bold text-sm">Lô</span>
             </div>
         </div>
-        <div class="bg-surface-light p-5 rounded-xl shadow-md border-t-4 border-primary">
-            <p class="text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider mb-1">Đã phê duyệt</p>
+        <div class="bg-white p-5 rounded-xl shadow-sm border border-outline-variant/30 border-t-4 border-primary">
+            <p class="text-on-surface-variant text-xs font-bold uppercase tracking-wider mb-1">Đã phê duyệt</p>
             <div class="flex items-end gap-2">
                 <span class="text-3xl font-bold text-on-surface">@Model.CountApproved</span>
                 <span class="text-primary mb-1 font-bold text-sm">Lô</span>
@@ -150,32 +66,32 @@
     </div>
 
     <!-- Filters -->
-    <div class="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center justify-between mb-5 gap-4">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pt-4">
         <div class="flex items-center p-1 bg-surface-container-high rounded-lg overflow-x-auto gap-1">
-            <a href="/Supplier/Batches" class="px-4 py-2 text-sm rounded-md whitespace-nowrap @(string.IsNullOrEmpty(Model.StatusFilter) ? "bg-surface-light text-primary font-bold shadow-sm" : "text-on-surface-variant hover:text-primary font-medium")">Tất cả</a>
-            <a href="/Supplier/Batches?statusFilter=Pending" class="px-4 py-2 text-sm rounded-md whitespace-nowrap @(Model.StatusFilter == "Pending" ? "bg-surface-light text-primary font-bold shadow-sm" : "text-on-surface-variant hover:text-primary font-medium")">Chờ xử lý</a>
-            <a href="/Supplier/Batches?statusFilter=Transporting" class="px-4 py-2 text-sm rounded-md whitespace-nowrap @(Model.StatusFilter == "Transporting" ? "bg-surface-light text-primary font-bold shadow-sm" : "text-on-surface-variant hover:text-primary font-medium")">Vận chuyển</a>
-            <a href="/Supplier/Batches?statusFilter=ArrivedFactory" class="px-4 py-2 text-sm rounded-md whitespace-nowrap @(Model.StatusFilter == "ArrivedFactory" ? "bg-surface-light text-primary font-bold shadow-sm" : "text-on-surface-variant hover:text-primary font-medium")">Đã đến</a>
-            <a href="/Supplier/Batches?statusFilter=Approved" class="px-4 py-2 text-sm rounded-md whitespace-nowrap @(Model.StatusFilter == "Approved" ? "bg-surface-light text-primary font-bold shadow-sm" : "text-on-surface-variant hover:text-primary font-medium")">Đã duyệt</a>
+            <a href="/Supplier/Batches" class="px-4 py-2 text-sm rounded-md whitespace-nowrap @(string.IsNullOrEmpty(Model.StatusFilter) ? "bg-white text-primary font-bold shadow-sm" : "text-on-surface-variant hover:text-primary font-medium")">Tất cả</a>
+            <a href="/Supplier/Batches?statusFilter=Pending" class="px-4 py-2 text-sm rounded-md whitespace-nowrap @(Model.StatusFilter == "Pending" ? "bg-white text-primary font-bold shadow-sm" : "text-on-surface-variant hover:text-primary font-medium")">Chờ xử lý</a>
+            <a href="/Supplier/Batches?statusFilter=Transporting" class="px-4 py-2 text-sm rounded-md whitespace-nowrap @(Model.StatusFilter == "Transporting" ? "bg-white text-primary font-bold shadow-sm" : "text-on-surface-variant hover:text-primary font-medium")">Vận chuyển</a>
+            <a href="/Supplier/Batches?statusFilter=ArrivedFactory" class="px-4 py-2 text-sm rounded-md whitespace-nowrap @(Model.StatusFilter == "ArrivedFactory" ? "bg-white text-primary font-bold shadow-sm" : "text-on-surface-variant hover:text-primary font-medium")">Đã đến</a>
+            <a href="/Supplier/Batches?statusFilter=Approved" class="px-4 py-2 text-sm rounded-md whitespace-nowrap @(Model.StatusFilter == "Approved" ? "bg-white text-primary font-bold shadow-sm" : "text-on-surface-variant hover:text-primary font-medium")">Đã duyệt</a>
         </div>
         <span class="text-sm text-on-surface-variant">Hiển thị <strong>@Model.Batches.Count</strong> lô hàng</span>
     </div>
 
     <!-- Table -->
-    <div class="max-w-6xl mx-auto bg-surface-light rounded-xl shadow-md overflow-hidden border border-outline-variant/20">
+    <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-outline-variant/30">
         <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse">
                 <thead class="bg-surface-container-low border-b border-outline-variant/30">
                     <tr>
-                        <th class="px-5 py-4 font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Mã lô</th>
-                        <th class="px-5 py-4 font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Ngày tạo</th>
-                        <th class="px-5 py-4 font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Địa chỉ thu gom</th>
-                        <th class="px-5 py-4 font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Khối lượng (kg)</th>
-                        <th class="px-5 py-4 font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Trạng thái</th>
-                        <th class="px-5 py-4 font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant text-center">Thao tác</th>
+                        <th class="px-5 py-4 font-bold text-xs uppercase tracking-wider text-on-surface-variant">Mã lô</th>
+                        <th class="px-5 py-4 font-bold text-xs uppercase tracking-wider text-on-surface-variant">Ngày tạo</th>
+                        <th class="px-5 py-4 font-bold text-xs uppercase tracking-wider text-on-surface-variant">Địa chỉ thu gom</th>
+                        <th class="px-5 py-4 font-bold text-xs uppercase tracking-wider text-on-surface-variant">Khối lượng (kg)</th>
+                        <th class="px-5 py-4 font-bold text-xs uppercase tracking-wider text-on-surface-variant">Trạng thái</th>
+                        <th class="px-5 py-4 font-bold text-xs uppercase tracking-wider text-on-surface-variant text-center">Thao tác</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-outline-variant/10">
+                <tbody class="divide-y divide-outline-variant/10 text-sm">
                     @if (!Model.Batches.Any())
                     {
                         <tr>
@@ -187,13 +103,13 @@
                     }
                     @foreach (var batch in Model.Batches)
                     {
-                        <tr class="hover:bg-surface-accent/5 transition-colors group">
-                            <td class="px-5 py-4 font-mono-data text-mono-data font-bold text-primary">@batch.BatchCode</td>
-                            <td class="px-5 py-4 text-sm text-on-surface">@batch.CreatedDate.ToString("dd/MM/yyyy")</td>
-                            <td class="px-5 py-4 text-sm max-w-[220px]">
+                        <tr class="hover:bg-primary/5 transition-colors group">
+                            <td class="px-5 py-4 font-mono font-bold text-primary">@batch.BatchCode</td>
+                            <td class="px-5 py-4 text-on-surface">@batch.CreatedDate.ToString("dd/MM/yyyy")</td>
+                            <td class="px-5 py-4 max-w-[220px]">
                                 <span class="block truncate" title="@batch.CollectionAddress">@batch.CollectionAddress</span>
                             </td>
-                            <td class="px-5 py-4 text-sm font-bold">@batch.WeightKg.ToString("N2")</td>
+                            <td class="px-5 py-4 font-bold">@batch.WeightKg.ToString("N2")</td>
                             <td class="px-5 py-4">
                                 @{
                                     var (pillBg, pillText, icon) = batch.Status switch {
@@ -223,7 +139,7 @@
                                     {
                                         <a href="/Supplier/Batches/Edit?batchId=@batch.BatchId"
                                            title="Chỉnh sửa"
-                                           class="p-2 text-on-surface-variant hover:bg-surface-variant rounded-full transition-all">
+                                           class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-all">
                                             <span class="material-symbols-outlined text-[20px]">edit</span>
                                         </a>
                                     }
@@ -231,7 +147,7 @@
                                     {
                                         <a href="/Supplier/Batches/Transportation?batchId=@batch.BatchId"
                                            title="Cập nhật vận chuyển"
-                                           class="p-2 text-tertiary-container hover:bg-blue-50 rounded-full transition-all">
+                                           class="p-2 text-tertiary hover:bg-blue-50 rounded-full transition-all">
                                             <span class="material-symbols-outlined text-[20px]">local_shipping</span>
                                         </a>
                                     }
@@ -245,17 +161,8 @@
     </div>
 
     <!-- Motivational Banner -->
-    <div class="max-w-6xl mx-auto mt-12 rounded-2xl overflow-hidden bg-gradient-to-r from-primary to-secondary p-8 text-white text-center shadow-xl">
+    <div class="rounded-2xl overflow-hidden bg-gradient-to-r from-primary to-secondary p-8 text-white text-center shadow-md">
         <h3 class="font-headline-md text-headline-md font-bold mb-2">Cam kết Bền vững</h3>
         <p class="text-white/80 text-sm max-w-xl mx-auto">Mỗi lô hàng bạn nộp góp phần vào vòng tròn kinh tế tuần hoàn. Cùng GAIA giảm thiểu rác thải từ vỏ sầu riêng.</p>
     </div>
-</main>
-
-<!-- Footer -->
-<footer class="md:ml-64 w-full py-6 px-8 flex flex-col md:flex-row justify-between items-center bg-surface-container-lowest border-t border-outline-variant/30">
-    <span class="font-headline-md text-headline-md text-primary font-bold text-sm">GAIA</span>
-    <p class="text-on-surface-variant font-label-sm text-label-sm text-xs mt-2 md:mt-0">© 2024 GAIA Sustainable Systems. All rights reserved.</p>
-</footer>
-
-</body>
-</html>
+</div>

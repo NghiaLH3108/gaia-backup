@@ -1,7 +1,11 @@
 @page
 @model GaiaWeb.Pages.Admin.IndexModel
 @{
-    Layout = null;
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Dashboard";
+    ViewData["PageTitle"] = "Bảng Điều Khiển Hệ Thống";
+    ViewData["ActivePage"] = "Dashboard";
+    ViewData["UserName"] = Model.UserName;
 
     // Process monthly collection chart coordinates
     var monthlyData = Model.MonthlyWeightCollection.OrderBy(k => k.Key).TakeLast(5).ToList();
@@ -44,110 +48,8 @@
     double reservedPct = totalProds > 0 ? (double)reservedCount / totalProds * 100 : 0;
     double soldPct = totalProds > 0 ? (double)soldCount / totalProds * 100 : 0;
 }
-<!DOCTYPE html>
-<html lang="vi" class="light">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bảng điều khiển &amp; Thống kê | GAIA Admin</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "surface-container-high": "#dce9ff",
-                    "outline-variant": "#bbcabf",
-                    "on-error": "#ffffff",
-                    "on-primary-container": "#00422b",
-                    "primary": "#006c49",
-                    "on-tertiary-fixed": "#2a1700",
-                    "error": "#ba1a1a",
-                    "on-surface-variant": "#3c4a42",
-                    "on-primary-fixed-variant": "#005236",
-                    "surface-variant": "#d3e4fe",
-                    "on-error-container": "#93000a",
-                    "surface-container-highest": "#d3e4fe",
-                    "secondary-fixed-dim": "#b9c7e0",
-                    "secondary-container": "#d5e3fd",
-                    "primary-fixed": "#6ffbbe",
-                    "inverse-primary": "#4edea3",
-                    "surface-container-low": "#eff4ff",
-                    "tertiary": "#855300",
-                    "on-secondary-fixed-variant": "#3a485c",
-                    "on-primary-fixed": "#002113",
-                    "primary-container": "#10b981",
-                    "tertiary-fixed": "#ffddb8",
-                    "surface-container-lowest": "#ffffff",
-                    "surface": "#f8f9ff",
-                    "on-tertiary-fixed-variant": "#653e00",
-                    "outline": "#6c7a71",
-                    "error-container": "#ffdad6",
-                    "on-secondary-fixed": "#0d1c2f",
-                    "surface-container": "#e5eeff",
-                    "primary-fixed-dim": "#4edea3",
-                    "on-secondary": "#ffffff",
-                    "inverse-on-surface": "#eaf1ff",
-                    "on-background": "#0b1c30",
-                    "surface-bright": "#f8f9ff",
-                    "inverse-surface": "#213145",
-                    "on-surface": "#0b1c30",
-                    "secondary-fixed": "#d5e3fd",
-                    "surface-tint": "#006c49",
-                    "on-tertiary-container": "#523200",
-                    "on-secondary-container": "#57657b",
-                    "secondary": "#515f74",
-                    "tertiary-fixed-dim": "#ffb95f",
-                    "surface-dim": "#cbdbf5",
-                    "tertiary-container": "#e29100",
-                    "on-tertiary": "#ffffff",
-                    "on-primary": "#ffffff",
-                    "background": "#f8f9ff"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-            },
-            "spacing": {
-                    "margin-mobile": "16px",
-                    "xl": "80px",
-                    "xs": "4px",
-                    "lg": "48px",
-                    "sm": "12px",
-                    "margin-desktop": "64px",
-                    "gutter": "24px",
-                    "base": "8px",
-                    "md": "24px"
-            },
-            "fontFamily": {
-                    "body-md": ["Plus Jakarta Sans"],
-                    "label-md": ["Plus Jakarta Sans"],
-                    "body-sm": ["Plus Jakarta Sans"],
-                    "headline-md": ["Space Grotesk"],
-                    "headline-xl": ["Space Grotesk"],
-                    "body-lg": ["Plus Jakarta Sans"],
-                    "label-sm": ["Plus Jakarta Sans"],
-                    "headline-lg": ["Space Grotesk"]
-            },
-            "fontSize": {
-                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
-                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
-                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                    "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
-                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
-            }
-          }
-        }
-      }
-    </script>
+
+@section Head {
     <style>
         .glass-panel {
             background: rgba(255, 255, 255, 0.8);
@@ -156,370 +58,284 @@
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
         }
     </style>
-</head>
-<body class="bg-surface text-on-surface">
-<div class="flex h-screen overflow-hidden">
-    
-    <!-- Side Navigation Shell -->
-    <aside class="hidden md:flex flex-col h-screen p-4 gap-2 bg-surface-container-low w-64 shadow-md transition-all duration-200 ease-in-out border-r border-outline-variant">
-        <div class="flex items-center gap-3 px-2 py-4 mb-4">
-            <div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-white">
-                <span class="material-symbols-outlined">recycling</span>
+}
+
+<div class="space-y-md">
+    <!-- Header Section -->
+    <div class="flex flex-col md:flex-row justify-between items-end gap-md">
+        <div class="space-y-xs">
+            <h1 class="font-headline-xl text-headline-xl text-primary tracking-tight">Bảng điều khiển &amp; Phân tích Tác động</h1>
+            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Theo dõi dữ liệu rác thải thời gian thực và đánh giá sự đóng góp của bạn vào mục tiêu phát thải ròng bằng không.</p>
+        </div>
+        <div class="flex gap-sm">
+            <button type="button" onclick="alert('Đã chia sẻ thông điệp tác động môi trường của GAIA!')" class="flex items-center gap-2 bg-white text-secondary px-6 py-3 rounded-lg border border-outline-variant font-label-md text-label-md hover:scale-[1.02] active:scale-95 transition-transform shadow-sm">
+                <span class="material-symbols-outlined text-[18px]">share</span>
+                Chia sẻ tác động
+            </button>
+            <button type="button" onclick="window.print()" class="flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-label-md text-label-md hover:scale-[1.02] active:scale-95 transition-transform shadow-sm">
+                <span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+                Xuất báo cáo PDF
+            </button>
+        </div>
+    </div>
+
+    <!-- KPI Overview Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-md">
+        <!-- Card 1 -->
+        <div class="glass-panel p-md rounded-xl border-l-4 border-primary">
+            <div class="flex justify-between items-start mb-sm">
+                <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Tổng rác thải đã lưu</span>
+                <div class="bg-primary-container/20 text-on-primary-container px-2 py-1 rounded text-xs font-bold">100% Recycled</div>
             </div>
-            <div>
-                <h2 class="font-headline-md text-headline-md font-extrabold text-secondary">GAIA Portal</h2>
-                <p class="font-label-sm text-label-sm text-on-surface-variant">Sustainable Supply Chain</p>
+            <div class="flex items-baseline gap-2">
+                <h3 class="font-headline-lg text-headline-lg text-on-surface">@Model.TotalWeightSaved.ToString("N0")</h3>
+                <span class="font-body-md text-body-md text-on-surface-variant">kg</span>
+            </div>
+            <p class="font-body-sm text-body-sm text-on-surface-variant mt-2 italic">Trọng lượng vỏ sầu riêng đã sơ chế</p>
+        </div>
+        <!-- Card 2 -->
+        <div class="glass-panel p-md rounded-xl border-l-4 border-primary-container">
+            <div class="flex justify-between items-start mb-sm">
+                <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Giảm phát thải CO2</span>
+                <span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">eco</span>
+            </div>
+            <div class="flex items-baseline gap-2">
+                <h3 class="font-headline-lg text-headline-lg text-on-surface">@Model.Co2Reduction.ToString("F1")</h3>
+                <span class="font-body-md text-body-md text-on-surface-variant">tấn</span>
+            </div>
+            <p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Tương đương @Model.EquivalentTrees cây xanh hấp thụ</p>
+        </div>
+        <!-- Card 3 -->
+        <div class="glass-panel p-md rounded-xl border-l-4 border-secondary">
+            <div class="flex justify-between items-start mb-sm">
+                <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Sản phẩm đã tạo</span>
+                <span class="material-symbols-outlined text-secondary">inventory_2</span>
+            </div>
+            <div class="flex items-baseline gap-2">
+                <h3 class="font-headline-lg text-headline-lg text-on-surface">@Model.TotalProducts</h3>
+                <span class="font-body-md text-body-md text-on-surface-variant">mục</span>
+            </div>
+            <p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Có hộ chiếu số và QR code</p>
+        </div>
+        <!-- Card 4 -->
+        <div class="glass-panel p-md rounded-xl border-l-4 border-tertiary">
+            <div class="flex justify-between items-start mb-sm">
+                <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Lô chờ phê duyệt</span>
+                <span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">pending_actions</span>
+            </div>
+            <div class="flex items-baseline gap-2">
+                <h3 class="font-headline-lg text-headline-lg text-on-surface">@Model.PendingBatches</h3>
+                <span class="font-body-md text-body-md text-on-surface-variant">lô</span>
+            </div>
+            <div class="w-full bg-surface-container-high h-1.5 rounded-full mt-4 overflow-hidden">
+                <div class="bg-tertiary h-full rounded-full" style="width: @(Model.TotalSuppliers > 0 ? (Model.PendingBatches * 100 / Model.TotalSuppliers) : 0)%"></div>
             </div>
         </div>
-        <nav class="flex-1 space-y-1">
-            <a href="/Admin/Index" class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold transition-all">
-                <span class="material-symbols-outlined">dashboard</span>
-                <span class="font-label-sm text-label-sm">Dashboard</span>
-            </a>
-            <a href="/Admin/Suppliers/Index" class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all">
-                <span class="material-symbols-outlined">group</span>
-                <span class="font-label-sm text-label-sm">Nhà cung cấp</span>
-            </a>
-            <a href="/Admin/Batches/Index" class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all">
-                <span class="material-symbols-outlined">inventory_2</span>
-                <span class="font-label-sm text-label-sm">Lô nguyên liệu</span>
-            </a>
-            <a href="/Admin/Products/Index" class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all">
-                <span class="material-symbols-outlined">category</span>
-                <span class="font-label-sm text-label-sm">Sản phẩm</span>
-            </a>
-        </nav>
-        <div class="mt-auto border-t border-outline-variant pt-4 space-y-1">
-            <a href="/Logout" class="flex items-center gap-3 px-4 py-3 text-error hover:bg-error-container/20 rounded-lg transition-all">
-                <span class="material-symbols-outlined">logout</span>
-                <span class="font-label-sm text-label-sm">Đăng xuất</span>
-            </a>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-md items-stretch">
+        
+        <!-- Left: Analytics -->
+        <div class="lg:col-span-8 flex flex-col gap-md">
+            
+            <!-- Line Chart: Monthly weight trend -->
+            <div class="glass-panel p-md rounded-xl flex-1 flex flex-col">
+                <div class="flex justify-between items-center mb-md">
+                    <h4 class="font-headline-md text-headline-md text-secondary">Khối lượng thu gom theo tháng</h4>
+                    <div class="flex gap-2">
+                        <span class="px-3 py-1 rounded bg-surface-container-high font-label-sm text-label-sm text-primary font-bold">5 tháng gần nhất</span>
+                    </div>
+                </div>
+                <div class="h-64 w-full relative border-b border-outline-variant flex items-end pb-2">
+                    <svg class="w-full h-full" viewBox="0 0 800 200">
+                        <line x1="50" y1="20" x2="750" y2="20" stroke="#eff4ff" stroke-width="1"></line>
+                        <line x1="50" y1="60" x2="750" y2="60" stroke="#eff4ff" stroke-width="1"></line>
+                        <line x1="50" y1="100" x2="750" y2="100" stroke="#eff4ff" stroke-width="1"></line>
+                        <line x1="50" y1="140" x2="750" y2="140" stroke="#eff4ff" stroke-width="1"></line>
+                        <line x1="50" y1="180" x2="750" y2="180" stroke="#bbcabf" stroke-width="1"></line>
+                        @if (svgPoints.Any()) {
+                            var areaPoints = $"50,180 {string.Join(" ", svgPoints)} 750,180";
+                            <polygon points="@areaPoints" fill="url(#chartGrad)" opacity="0.15"></polygon>
+                        }
+                        <polyline points="@polylinePoints" fill="none" stroke="#006c49" stroke-width="3"></polyline>
+                        @for (int i = 0; i < monthlyData.Count; i++)
+                        {
+                            var x = 50 + (i * 700 / xDivisor);
+                            var y = 180 - (double)(monthlyData[i].Value / maxMonthlyWeight * 140m);
+                            <circle cx="@x" cy="@y" fill="#006c49" r="5"></circle>
+                            @Html.Raw($"<text x=\"{x}\" y=\"{(int)(y - 12)}\" text-anchor=\"middle\" fill=\"#006c49\" font-size=\"11\" font-weight=\"bold\">{monthlyData[i].Value:F0} kg</text>")
+                        }
+                        <defs>
+                            <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#006c49" />
+                                <stop offset="100%" stop-color="#006c49" stop-opacity="0" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="flex justify-between mt-3 font-label-sm text-label-sm text-outline px-12">
+                    @foreach (var d in monthlyData)
+                    {
+                        <span>@d.Key</span>
+                    }
+                </div>
+            </div>
+
+            <!-- Bar Chart: Top suppliers -->
+            <div class="glass-panel p-md rounded-xl flex-1">
+                <h4 class="font-headline-md text-headline-md text-secondary mb-md">Top 5 nhà cung cấp đóng góp nguyên liệu nhiều nhất</h4>
+                <div class="flex items-end justify-between h-56 gap-4 px-4 pt-6">
+                    @foreach (var s in Model.TopSuppliersWeight)
+                    {
+                        var name = s.Key;
+                        var val = s.Value;
+                        var pct = (double)(val / maxSupplierWeight * 100);
+                        if (pct < 5) pct = 5;
+                        
+                        <div class="flex flex-col items-center gap-2 w-full">
+                            <div class="w-full bg-primary-container/20 rounded-t-lg relative h-40 group">
+                                <div class="absolute bottom-0 w-full bg-primary rounded-t-lg transition-all" style="height: @(pct)%"></div>
+                                <div class="opacity-0 group-hover:opacity-100 absolute -top-8 left-1/2 -translate-x-1/2 bg-on-surface text-white text-xs px-2 py-1 rounded shadow transition-opacity pointer-events-none whitespace-nowrap z-20">
+                                    @val.ToString("N0") kg
+                                </div>
+                            </div>
+                            <span class="font-label-sm text-label-sm text-outline truncate max-w-[120px] text-center" title="@name">@name</span>
+                        </div>
+                    }
+                    @if (!Model.TopSuppliersWeight.Any())
+                    {
+                        <div class="w-full text-center py-12 text-on-surface-variant italic">Chưa có dữ liệu đóng góp.</div>
+                    }
+                </div>
+            </div>
         </div>
-    </aside>
 
-    <!-- Main Content Area -->
-    <main class="flex-1 flex flex-col overflow-y-auto">
-        <!-- Top App Bar -->
-        <header class="bg-glass-fill sticky top-0 w-full z-50 flex justify-between items-center px-gutter h-16 backdrop-blur-md border-b border-glass-stroke shadow-sm px-8">
-            <div class="flex items-center gap-4">
-                <span class="font-headline-md text-headline-md text-primary font-bold">Bảng Điều Khiển Hệ Thống</span>
-            </div>
-            <div class="flex items-center gap-4">
-                <div class="flex items-center gap-2 px-3 py-1.5 bg-surface-container-high rounded-full border border-outline-variant">
-                    <span class="material-symbols-outlined text-green-700 text-sm">person</span>
-                    <span class="text-xs font-semibold text-gray-800">@Model.UserName</span>
-                </div>
-                <a href="/Logout" class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-variant transition-colors">
-                    <span class="material-symbols-outlined">logout</span>
-                </a>
-            </div>
-        </header>
-
-        <!-- Content Canvas -->
-        <div class="p-8 space-y-md">
-            <!-- Header Section -->
-            <div class="flex flex-col md:flex-row justify-between items-end gap-md">
-                <div class="space-y-xs">
-                    <h1 class="font-headline-xl text-headline-xl text-primary tracking-tight">Bảng điều khiển &amp; Phân tích Tác động</h1>
-                    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Theo dõi dữ liệu rác thải thời gian thực và đánh giá sự đóng góp của bạn vào mục tiêu phát thải ròng bằng không.</p>
-                </div>
-                <div class="flex gap-sm">
-                    <button type="button" onclick="alert('Đã chia sẻ thông điệp tác động môi trường của GAIA!')" class="flex items-center gap-2 bg-white text-secondary px-6 py-3 rounded-lg border border-outline-variant font-label-md text-label-md hover:scale-[1.02] active:scale-95 transition-transform shadow-sm">
-                        <span class="material-symbols-outlined text-[18px]">share</span>
-                        Chia sẻ tác động
-                    </button>
-                    <button type="button" onclick="window.print()" class="flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-label-md text-label-md hover:scale-[1.02] active:scale-95 transition-transform shadow-sm">
-                        <span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
-                        Xuất báo cáo PDF
-                    </button>
-                </div>
-            </div>
-
-            <!-- KPI Overview Cards -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-md">
-                <!-- Card 1 -->
-                <div class="glass-panel p-md rounded-xl border-l-4 border-primary">
-                    <div class="flex justify-between items-start mb-sm">
-                        <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Tổng rác thải đã lưu</span>
-                        <div class="bg-primary-container/20 text-on-primary-container px-2 py-1 rounded text-xs font-bold">100% Recycled</div>
-                    </div>
-                    <div class="flex items-baseline gap-2">
-                        <h3 class="font-headline-lg text-headline-lg text-on-surface">@Model.TotalWeightSaved.ToString("N0")</h3>
-                        <span class="font-body-md text-body-md text-on-surface-variant">kg</span>
-                    </div>
-                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-2 italic">Trọng lượng vỏ sầu riêng đã sơ chế</p>
-                </div>
-                <!-- Card 2 -->
-                <div class="glass-panel p-md rounded-xl border-l-4 border-primary-container">
-                    <div class="flex justify-between items-start mb-sm">
-                        <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Giảm phát thải CO2</span>
-                        <span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">eco</span>
-                    </div>
-                    <div class="flex items-baseline gap-2">
-                        <h3 class="font-headline-lg text-headline-lg text-on-surface">@Model.Co2Reduction.ToString("F1")</h3>
-                        <span class="font-body-md text-body-md text-on-surface-variant">tấn</span>
-                    </div>
-                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Tương đương @Model.EquivalentTrees cây xanh hấp thụ</p>
-                </div>
-                <!-- Card 3 -->
-                <div class="glass-panel p-md rounded-xl border-l-4 border-secondary">
-                    <div class="flex justify-between items-start mb-sm">
-                        <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Sản phẩm đã tạo</span>
-                        <span class="material-symbols-outlined text-secondary">inventory_2</span>
-                    </div>
-                    <div class="flex items-baseline gap-2">
-                        <h3 class="font-headline-lg text-headline-lg text-on-surface">@Model.TotalProducts</h3>
-                        <span class="font-body-md text-body-md text-on-surface-variant">mục</span>
-                    </div>
-                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Có hộ chiếu số và QR code</p>
-                </div>
-                <!-- Card 4 -->
-                <div class="glass-panel p-md rounded-xl border-l-4 border-tertiary">
-                    <div class="flex justify-between items-start mb-sm">
-                        <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Lô chờ phê duyệt</span>
-                        <span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">pending_actions</span>
-                    </div>
-                    <div class="flex items-baseline gap-2">
-                        <h3 class="font-headline-lg text-headline-lg text-on-surface">@Model.PendingBatches</h3>
-                        <span class="font-body-md text-body-md text-on-surface-variant">lô</span>
-                    </div>
-                    <div class="w-full bg-surface-container-high h-1.5 rounded-full mt-4 overflow-hidden">
-                        <div class="bg-tertiary h-full rounded-full" style="width: @(Model.TotalSuppliers > 0 ? (Model.PendingBatches * 100 / Model.TotalSuppliers) : 0)%"></div>
+        <!-- Right: Contextual Data -->
+        <div class="lg:col-span-4 flex flex-col gap-md">
+            
+            <!-- Donut Chart: Inventory Status -->
+            <div class="glass-panel p-md rounded-xl">
+                <h4 class="font-headline-md text-headline-md text-secondary mb-md">Cơ cấu trạng thái sản phẩm</h4>
+                <div class="flex justify-center relative my-8">
+                    <div class="w-48 h-48 rounded-full shadow-inner flex items-center justify-center relative" 
+                         style="background: conic-gradient(#006c49 0% @(availablePct)%, #10b981 @(availablePct)% @(availablePct + reservedPct)%, #ffb95f @(availablePct + reservedPct)% 100%)">
+                        <div class="absolute w-36 h-36 bg-white rounded-full flex flex-col items-center justify-center shadow-md">
+                            <span class="font-headline-md text-headline-md text-primary font-bold">@totalProds</span>
+                            <span class="font-label-sm text-label-sm text-outline">Sản phẩm</span>
+                        </div>
                     </div>
                 </div>
+                <ul class="space-y-sm mt-4">
+                    <li class="flex items-center justify-between font-body-sm text-body-sm">
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-primary"></div>
+                            <span>Sẵn có (Available)</span>
+                        </div>
+                        <span class="font-bold">@availableCount (@(availablePct.ToString("F0"))%)</span>
+                    </li>
+                    <li class="flex items-center justify-between font-body-sm text-body-sm">
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-primary-container"></div>
+                            <span>Đặt trước (Reserved)</span>
+                        </div>
+                        <span class="font-bold">@reservedCount (@(reservedPct.ToString("F0"))%)</span>
+                    </li>
+                    <li class="flex items-center justify-between font-body-sm text-body-sm">
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-[#ffb95f]"></div>
+                            <span>Đã bán (Sold)</span>
+                        </div>
+                        <span class="font-bold">@soldCount (@(soldPct.ToString("F0"))%)</span>
+                    </li>
+                </ul>
             </div>
 
-            <!-- Main Content Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-md items-stretch">
-                
-                <!-- Left: Analytics -->
-                <div class="lg:col-span-8 flex flex-col gap-md">
-                    
-                    <!-- Line Chart Area: Monthly weight trend -->
-                    <div class="glass-panel p-md rounded-xl flex-1 flex flex-col">
-                        <div class="flex justify-between items-center mb-md">
-                            <h4 class="font-headline-md text-headline-md text-secondary">Khối lượng thu gom theo tháng</h4>
-                            <div class="flex gap-2">
-                                <span class="px-3 py-1 rounded bg-surface-container-high font-label-sm text-label-sm text-primary font-bold">5 tháng gần nhất</span>
+            <!-- Collection Points List -->
+            <div class="glass-panel p-md rounded-xl flex-1 flex flex-col">
+                <div class="flex justify-between items-center mb-md">
+                    <h4 class="font-headline-md text-headline-md text-secondary">Vựa thu gom chính</h4>
+                    <a class="text-primary font-label-md text-label-md hover:underline" href="/Admin/Suppliers/Index">Tất cả</a>
+                </div>
+                <div class="space-y-4 flex-1">
+                    @foreach (var s in Model.TopSuppliersInfo)
+                    {
+                        var weight = Model.TopSuppliersWeight.GetValueOrDefault(s.WarehouseName, 0m);
+                        <div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-lg border border-outline-variant/30">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                                <span class="material-symbols-outlined">location_on</span>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="font-label-md text-label-md truncate">@s.WarehouseName</p>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant truncate">@weight.ToString("N0") kg tích lũy • @s.Address</p>
                             </div>
                         </div>
-                        <div class="h-64 w-full relative border-b border-outline-variant flex items-end pb-2">
-                            <!-- Dynamic SVG Chart -->
-                            <svg class="w-full h-full" viewBox="0 0 800 200">
-                                <!-- Background lines -->
-                                <line x1="50" y1="20" x2="750" y2="20" stroke="#eff4ff" stroke-width="1"></line>
-                                <line x1="50" y1="60" x2="750" y2="60" stroke="#eff4ff" stroke-width="1"></line>
-                                <line x1="50" y1="100" x2="750" y2="100" stroke="#eff4ff" stroke-width="1"></line>
-                                <line x1="50" y1="140" x2="750" y2="140" stroke="#eff4ff" stroke-width="1"></line>
-                                <line x1="50" y1="180" x2="750" y2="180" stroke="#bbcabf" stroke-width="1"></line>
-
-                                <!-- Area filling under line -->
-                                @if (svgPoints.Any()) {
-                                    var areaPoints = $"50,180 {string.Join(" ", svgPoints)} 750,180";
-                                    <polygon points="@areaPoints" fill="url(#chartGrad)" opacity="0.15"></polygon>
-                                }
-
-                                <polyline points="@polylinePoints" fill="none" stroke="#006c49" stroke-width="3"></polyline>
-                                
-                                @for (int i = 0; i < monthlyData.Count; i++)
-                                {
-                                    var x = 50 + (i * 700 / xDivisor);
-                                    var y = 180 - (double)(monthlyData[i].Value / maxMonthlyWeight * 140m);
-                                    <circle cx="@x" cy="@y" fill="#006c49" r="5"></circle>
-                                    @Html.Raw($"<text x=\"{x}\" y=\"{(int)(y - 12)}\" text-anchor=\"middle\" fill=\"#006c49\" font-size=\"11\" font-weight=\"bold\">{monthlyData[i].Value:F0} kg</text>")
-                                }
-
-                                <defs>
-                                    <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="0%" stop-color="#006c49" />
-                                        <stop offset="100%" stop-color="#006c49" stop-opacity="0" />
-                                    </linearGradient>
-                                </defs>
-                            </svg>
-                        </div>
-                        <div class="flex justify-between mt-3 font-label-sm text-label-sm text-outline px-12">
-                            @foreach (var d in monthlyData)
-                            {
-                                <span>@d.Key</span>
-                            }
-                        </div>
-                    </div>
-
-                    <!-- Bar Chart Area: Diverted Waste by Supplier -->
-                    <div class="glass-panel p-md rounded-xl flex-1">
-                        <h4 class="font-headline-md text-headline-md text-secondary mb-md">Top 5 nhà cung cấp đóng góp nguyên liệu nhiều nhất</h4>
-                        <div class="flex items-end justify-between h-56 gap-4 px-4 pt-6">
-                            @foreach (var s in Model.TopSuppliersWeight)
-                            {
-                                var name = s.Key;
-                                var val = s.Value;
-                                var pct = (double)(val / maxSupplierWeight * 100);
-                                if (pct < 5) pct = 5; // Minimum height for visualization
-                                
-                                <div class="flex flex-col items-center gap-2 w-full">
-                                    <div class="w-full bg-primary-container/20 rounded-t-lg relative h-40 group">
-                                        <div class="absolute bottom-0 w-full bg-primary rounded-t-lg transition-all" style="height: @(pct)%"></div>
-                                        <!-- Tooltip on hover -->
-                                        <div class="opacity-0 group-hover:opacity-100 absolute -top-8 left-1/2 -translate-x-1/2 bg-on-surface text-white text-xs px-2 py-1 rounded shadow transition-opacity pointer-events-none whitespace-nowrap z-20">
-                                            @val.ToString("N0") kg
-                                        </div>
-                                    </div>
-                                    <span class="font-label-sm text-label-sm text-outline truncate max-w-[120px] text-center" title="@name">@name</span>
-                                </div>
-                            }
-                            @if (!Model.TopSuppliersWeight.Any())
-                            {
-                                <div class="w-full text-center py-12 text-on-surface-variant italic">Chưa có dữ liệu đóng góp.</div>
-                            }
-                        </div>
-                    </div>
+                    }
+                    @if (!Model.TopSuppliersInfo.Any())
+                    {
+                        <div class="text-center py-8 text-on-surface-variant italic">Chưa có nhà cung cấp nào.</div>
+                    }
                 </div>
-
-                <!-- Right: Contextual Data -->
-                <div class="lg:col-span-4 flex flex-col gap-md">
-                    
-                    <!-- Donut Chart: Inventory Status -->
-                    <div class="glass-panel p-md rounded-xl">
-                        <h4 class="font-headline-md text-headline-md text-secondary mb-md">Cơ cấu trạng thái sản phẩm</h4>
-                        <div class="flex justify-center relative my-8">
-                            <!-- Premium CSS Conic-Gradient Donut -->
-                            <div class="w-48 h-48 rounded-full shadow-inner flex items-center justify-center relative" 
-                                 style="background: conic-gradient(#006c49 0% @(availablePct)%, #10b981 @(availablePct)% @(availablePct + reservedPct)%, #ffb95f @(availablePct + reservedPct)% 100%)">
-                                <div class="absolute w-36 h-36 bg-white rounded-full flex flex-col items-center justify-center shadow-md">
-                                    <span class="font-headline-md text-headline-md text-primary font-bold">@totalProds</span>
-                                    <span class="font-label-sm text-label-sm text-outline">Sản phẩm</span>
-                                </div>
-                            </div>
-                        </div>
-                        <ul class="space-y-sm mt-4">
-                            <li class="flex items-center justify-between font-body-sm text-body-sm">
-                                <div class="flex items-center gap-2">
-                                    <div class="w-3 h-3 rounded-full bg-primary"></div>
-                                    <span>Sẵn có (Available)</span>
-                                </div>
-                                <span class="font-bold">@availableCount (@(availablePct.ToString("F0"))%)</span>
-                            </li>
-                            <li class="flex items-center justify-between font-body-sm text-body-sm">
-                                <div class="flex items-center gap-2">
-                                    <div class="w-3 h-3 rounded-full bg-primary-container"></div>
-                                    <span>Đặt trước (Reserved)</span>
-                                </div>
-                                <span class="font-bold">@reservedCount (@(reservedPct.ToString("F0"))%)</span>
-                            </li>
-                            <li class="flex items-center justify-between font-body-sm text-body-sm">
-                                <div class="flex items-center gap-2">
-                                    <div class="w-3 h-3 rounded-full bg-[#ffb95f]"></div>
-                                    <span>Đã bán (Sold)</span>
-                                </div>
-                                <span class="font-bold">@soldCount (@(soldPct.ToString("F0"))%)</span>
-                            </li>
-                        </ul>
+                <!-- Map Placement -->
+                <div class="mt-md h-32 rounded-xl overflow-hidden relative border border-outline-variant">
+                    <div class="absolute inset-0 bg-gray-100 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-outline text-4xl">map</span>
                     </div>
-
-                    <!-- Collection Points List -->
-                    <div class="glass-panel p-md rounded-xl flex-1 flex flex-col">
-                        <div class="flex justify-between items-center mb-md">
-                            <h4 class="font-headline-md text-headline-md text-secondary">Vựa thu gom chính</h4>
-                            <a class="text-primary font-label-md text-label-md hover:underline" href="/Admin/Suppliers/Index">Tất cả</a>
-                        </div>
-                        <div class="space-y-4 flex-1">
-                            @foreach (var s in Model.TopSuppliersInfo)
-                            {
-                                var weight = Model.TopSuppliersWeight.GetValueOrDefault(s.WarehouseName, 0m);
-                                <div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-lg border border-outline-variant/30">
-                                    <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
-                                        <span class="material-symbols-outlined">location_on</span>
-                                    </div>
-                                    <div class="flex-1 min-w-0">
-                                        <p class="font-label-md text-label-md truncate">@s.WarehouseName</p>
-                                        <p class="font-body-sm text-body-sm text-on-surface-variant truncate">@weight.ToString("N0") kg tích lũy • @s.Address</p>
-                                    </div>
-                                </div>
-                            }
-                            @if (!Model.TopSuppliersInfo.Any())
-                            {
-                                <div class="text-center py-8 text-on-surface-variant italic">Chưa có nhà cung cấp nào.</div>
-                            }
-                        </div>
-                        <!-- Map Placement -->
-                        <div class="mt-md h-32 rounded-xl overflow-hidden relative border border-outline-variant">
-                            <div class="absolute inset-0 bg-gray-100 flex items-center justify-center">
-                                <span class="material-symbols-outlined text-outline text-4xl">map</span>
-                            </div>
-                            <img class="w-full h-full object-cover grayscale contrast-125 opacity-40" data-location="Ho Chi Minh City" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqlcvN0K9p-zdebIJPIjjUz5abBGRvTYujXoUsiB4KSzLNKft7a8eKKS2eLgeOlnS3VrvLDQ7SWEbx9fEUQq6c8nHUZVgRiVFCjA4pMngIShHqEqw8whXcaSMxQRjDUxnlhoUj7rit2RlgtljTu33o1UMUGMJm2Q6yS8eywLAo0jgZRd8jiRvfNzaenPvhlxoTS-PwvHk-0BEO-ueMGSm1e-Vj8D92d7Zei3vHwkP0tny9SjjY3FMp">
-                            <div class="absolute top-2 left-2 px-2 py-1 bg-white/95 rounded-md text-[10px] font-bold shadow-sm">BẢN ĐỒ THU GOM</div>
-                        </div>
-                    </div>
+                    <img class="w-full h-full object-cover grayscale contrast-125 opacity-40" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqlcvN0K9p-zdebIJPIjjUz5abBGRvTYujXoUsiB4KSzLNKft7a8eKKS2eLgeOlnS3VrvLDQ7SWEbx9fEUQq6c8nHUZVgRiVFCjA4pMngIShHqEqw8whXcaSMxQRjDUxnlhoUj7rit2RlgtljTu33o1UMUGMJm2Q6yS8eywLAo0jgZRd8jiRvfNzaenPvhlxoTS-PwvHk-0BEO-ueMGSm1e-Vj8D92d7Zei3vHwkP0tny9SjjY3FMp">
+                    <div class="absolute top-2 left-2 px-2 py-1 bg-white/95 rounded-md text-[10px] font-bold shadow-sm">BẢN ĐỒ THU GOM</div>
                 </div>
             </div>
-
-            <!-- Impact Milestones -->
-            <section class="glass-panel p-md rounded-xl">
-                <h4 class="font-headline-md text-headline-md text-secondary mb-lg">Hành trình Tác động môi trường</h4>
-                <div class="relative flex flex-col md:flex-row justify-between items-start gap-md px-base">
-                    <div class="absolute top-8 left-4 md:left-0 md:top-1/2 md:w-full h-full md:h-0.5 bg-outline-variant/30 z-0"></div>
-                    
-                    <div class="relative z-10 flex flex-col items-start md:items-center text-left md:text-center max-w-[200px]">
-                        <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mb-sm shadow">
-                            <span class="material-symbols-outlined text-[20px]">check</span>
-                        </div>
-                        <p class="font-label-md text-label-md text-on-surface">Đạt mốc 1 tấn</p>
-                        <p class="font-body-sm text-body-sm text-on-surface-variant">05/2024 • Đã hoàn thành</p>
-                    </div>
-
-                    <div class="relative z-10 flex flex-col items-start md:items-center text-left md:text-center max-w-[200px]">
-                        <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mb-sm shadow">
-                            <span class="material-symbols-outlined text-[20px]">check</span>
-                        </div>
-                        <p class="font-label-md text-label-md text-on-surface">Chứng nhận B-Corp</p>
-                        <p class="font-body-sm text-body-sm text-on-surface-variant">08/2024 • Đã xác minh</p>
-                    </div>
-
-                    <div class="relative z-10 flex flex-col items-start md:items-center text-left md:text-center max-w-[200px]">
-                        <div class="w-10 h-10 rounded-full bg-primary-container text-white flex items-center justify-center mb-sm shadow">
-                            <span class="material-symbols-outlined text-[20px]">sync</span>
-                        </div>
-                        <p class="font-label-md text-label-md text-on-surface">Mở rộng Điểm thu gom</p>
-                        <p class="font-body-sm text-body-sm text-on-surface-variant">Đang mở rộng 12 điểm mới</p>
-                    </div>
-
-                    <div class="relative z-10 flex flex-col items-start md:items-center text-left md:text-center max-w-[200px]">
-                        <div class="w-10 h-10 rounded-full bg-surface-container-high text-outline flex items-center justify-center mb-sm shadow">
-                            <span class="material-symbols-outlined text-[20px]">flag</span>
-                        </div>
-                        <p class="font-label-md text-label-md text-outline">Net Zero 2026</p>
-                        <p class="font-body-sm text-body-sm text-outline">Mục tiêu trung hạn</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Footer Section -->
-            <footer class="w-full py-8 border-t border-outline-variant flex flex-col md:flex-row justify-between items-center gap-md">
-                <div class="flex flex-col items-center md:items-start">
-                    <span class="font-headline-md text-headline-md text-primary font-bold">GAIA</span>
-                    <p class="font-label-sm text-label-sm text-on-surface-variant">© 2024 GAIA Sustainable Systems. All rights reserved.</p>
-                </div>
-                <div class="flex gap-lg font-label-sm text-label-sm text-on-surface-variant">
-                    <a class="hover:text-secondary transition-colors" href="#">Privacy Policy</a>
-                    <a class="hover:text-secondary transition-colors" href="#">Terms of Service</a>
-                    <a class="hover:text-secondary transition-colors" href="#">Sustainability Report</a>
-                    <a class="hover:text-secondary transition-colors" href="#">Global Compliance</a>
-                </div>
-            </footer>
         </div>
-    </main>
+    </div>
+
+    <!-- Impact Milestones -->
+    <section class="glass-panel p-md rounded-xl">
+        <h4 class="font-headline-md text-headline-md text-secondary mb-lg">Hành trình Tác động môi trường</h4>
+        <div class="relative flex flex-col md:flex-row justify-between items-start gap-md px-base">
+            <div class="absolute top-8 left-4 md:left-0 md:top-1/2 md:w-full h-full md:h-0.5 bg-outline-variant/30 z-0"></div>
+            
+            <div class="relative z-10 flex flex-col items-start md:items-center text-left md:text-center max-w-[200px]">
+                <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mb-sm shadow">
+                    <span class="material-symbols-outlined text-[20px]">check</span>
+                </div>
+                <p class="font-label-md text-label-md text-on-surface">Đạt mốc 1 tấn</p>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">05/2024 • Đã hoàn thành</p>
+            </div>
+
+            <div class="relative z-10 flex flex-col items-start md:items-center text-left md:text-center max-w-[200px]">
+                <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mb-sm shadow">
+                    <span class="material-symbols-outlined text-[20px]">check</span>
+                </div>
+                <p class="font-label-md text-label-md text-on-surface">Chứng nhận B-Corp</p>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">08/2024 • Đã xác minh</p>
+            </div>
+
+            <div class="relative z-10 flex flex-col items-start md:items-center text-left md:text-center max-w-[200px]">
+                <div class="w-10 h-10 rounded-full bg-primary-container text-white flex items-center justify-center mb-sm shadow">
+                    <span class="material-symbols-outlined text-[20px]">sync</span>
+                </div>
+                <p class="font-label-md text-label-md text-on-surface">Mở rộng Điểm thu gom</p>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">Đang mở rộng 12 điểm mới</p>
+            </div>
+
+            <div class="relative z-10 flex flex-col items-start md:items-center text-left md:text-center max-w-[200px]">
+                <div class="w-10 h-10 rounded-full bg-surface-container-high text-outline flex items-center justify-center mb-sm shadow">
+                    <span class="material-symbols-outlined text-[20px]">flag</span>
+                </div>
+                <p class="font-label-md text-label-md text-outline">Net Zero 2026</p>
+                <p class="font-body-sm text-body-sm text-outline">Mục tiêu trung hạn</p>
+            </div>
+        </div>
+    </section>
 </div>
 
-<!-- Micro-interaction Scripts -->
+@section Scripts {
 <script>
     document.querySelectorAll('button').forEach(button => {
         button.addEventListener('click', function() {
             this.classList.add('scale-95');
-            setTimeout(() => {
-                this.classList.remove('scale-95');
-            }, 150);
+            setTimeout(() => { this.classList.remove('scale-95'); }, 150);
         });
     });
 </script>
-</body>
-</html>
+}

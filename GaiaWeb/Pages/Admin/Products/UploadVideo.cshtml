@@ -1,393 +1,202 @@
 @page
 @model GaiaWeb.Pages.Admin.Products.UploadVideoModel
 @{
-    Layout = null;
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Tải lên Video";
+    ViewData["PageTitle"] = "Tải Lên Video Sản Xuất";
+    ViewData["ActivePage"] = "Products";
 }
-<!DOCTYPE html>
-<html class="light" lang="vi">
-<head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Tải lên Video Sản xuất Thủ công | GAIA Admin</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;family=Space+Grotesk:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-    <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                "error-container": "#ffdad6",
-                "secondary-fixed-dim": "#b9c7e0",
-                "on-secondary-fixed": "#0d1c2f",
-                "on-error": "#ffffff",
-                "surface-tint": "#006c49",
-                "on-primary-fixed-variant": "#005236",
-                "on-primary": "#ffffff",
-                "on-error-container": "#93000a",
-                "surface-container-low": "#eff4ff",
-                "on-surface-variant": "#3c4a42",
-                "outline-variant": "#bbcabf",
-                "tertiary-container": "#e29100",
-                "on-primary-fixed": "#002113",
-                "surface-bright": "#f8f9ff",
-                "on-tertiary": "#ffffff",
-                "on-secondary-fixed-variant": "#3a485c",
-                "primary-fixed": "#6ffbbe",
-                "secondary": "#515f74",
-                "tertiary-fixed": "#ffddb8",
-                "inverse-primary": "#4edea3",
-                "surface": "#f8f9ff",
-                "primary-fixed-dim": "#4edea3",
-                "on-surface": "#0b1c30",
-                "surface-container-lowest": "#ffffff",
-                "secondary-container": "#d5e3fd",
-                "on-background": "#0b1c30",
-                "surface-dim": "#cbdbf5",
-                "inverse-surface": "#213145",
-                "inverse-on-surface": "#eaf1ff",
-                "surface-container-high": "#dce9ff",
-                "on-primary-container": "#00422b",
-                "on-tertiary-fixed-variant": "#653e00",
-                "surface-variant": "#d3e4fe",
-                "on-tertiary-fixed": "#2a1700",
-                "on-secondary": "#ffffff",
-                "error": "#ba1a1a",
-                "surface-container-highest": "#d3e4fe",
-                "surface-container": "#e5eeff",
-                "tertiary": "#855300",
-                "on-secondary-container": "#57657b",
-                "secondary-fixed": "#d5e3fd",
-                "tertiary-fixed-dim": "#ffb95f",
-                "primary": "#006c49",
-                "background": "#f8f9ff",
-                "primary-container": "#10b981",
-                "outline": "#6c7a71",
-                "on-tertiary-container": "#523200"
-            },
-            "borderRadius": {
-                "DEFAULT": "0.25rem",
-                "lg": "0.5rem",
-                "xl": "0.75rem",
-                "full": "9999px"
-            },
-            "spacing": {
-                "xs": "4px",
-                "md": "24px",
-                "margin-mobile": "16px",
-                "gutter": "24px",
-                "sm": "12px",
-                "xl": "80px",
-                "margin-desktop": "64px",
-                "lg": "48px",
-                "base": "8px"
-            },
-            "fontFamily": {
-                "label-md": ["Plus Jakarta Sans"],
-                "label-sm": ["Plus Jakarta Sans"],
-                "body-lg": ["Plus Jakarta Sans"],
-                "headline-xl": ["Space Grotesk"],
-                "body-md": ["Plus Jakarta Sans"],
-                "headline-md": ["Space Grotesk"],
-                "headline-lg": ["Space Grotesk"],
-                "headline-lg-mobile": ["Space Grotesk"],
-                "body-sm": ["Plus Jakarta Sans"]
-            },
-            "fontSize": {
-                "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
-                "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
-                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
-                "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
-                "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
-            }
-          }
-        }
-      }
-    </script>
+
+@section Head {
     <style>
-      .material-symbols-outlined {
-        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-      }
-      .glass-card {
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.5);
-      }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
     </style>
-</head>
-<body class="bg-background text-on-background font-body-md min-h-screen selection:bg-primary-container selection:text-on-primary-container">
+}
 
-<!-- TopNavBar -->
-<nav class="fixed top-0 w-full z-50 bg-glass-fill flex justify-between items-center px-gutter h-16 backdrop-blur-md border-b border-glass-stroke shadow-sm">
-    <div class="flex items-center gap-4">
-        <span class="font-headline-md text-headline-md font-bold text-primary">GAIA Admin</span>
-    </div>
-    <div class="flex items-center gap-4">
-        <div class="flex items-center gap-2 px-3 py-1.5 bg-surface-container-high rounded-full border border-outline-variant">
-            <span class="material-symbols-outlined text-green-700 text-sm">person</span>
-            <span class="text-xs font-semibold text-gray-800">@Model.UserName</span>
+<!-- Hero Section -->
+<header class="mb-6">
+    <div class="flex items-center justify-between">
+        <div>
+            <h1 class="font-headline-lg text-headline-lg text-primary mb-1">Tải lên Video Sản xuất Thủ công</h1>
+            <p class="text-on-surface-variant text-sm max-w-2xl">
+                Chia sẻ hành trình sáng tạo của sản phẩm. Video chân thực giúp khách hàng hiểu rõ giá trị bền vững trong từng sản phẩm.
+            </p>
         </div>
-        <a href="/Logout" class="material-symbols-outlined text-red-500 hover:text-red-700 transition-colors">logout</a>
-    </div>
-</nav>
-
-<!-- SideNavBar -->
-<aside class="hidden md:flex flex-col fixed left-0 top-16 h-[calc(100vh-64px)] w-64 p-4 gap-2 bg-surface-container-low shadow-md z-40 border-r border-outline-variant">
-    <div class="flex flex-col gap-1 mb-6 p-2">
-        <span class="font-headline-md text-headline-md font-extrabold text-secondary">GAIA Portal</span>
-        <span class="font-label-sm text-label-sm text-on-surface-variant">Sustainable Supply Chain</span>
-    </div>
-    <nav class="flex-1 space-y-1">
-        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200" href="/Admin/Index">
-            <span class="material-symbols-outlined">dashboard</span>
-            <span class="font-label-sm text-label-sm">Overview</span>
-        </a>
-        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200" href="/Admin/Suppliers/Index">
-            <span class="material-symbols-outlined">group</span>
-            <span class="font-label-sm text-label-sm">Nhà cung cấp</span>
-        </a>
-        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200" href="/Admin/Batches/Index">
-            <span class="material-symbols-outlined">inventory_2</span>
-            <span class="font-label-sm text-label-sm">Lô nguyên liệu</span>
-        </a>
-        <a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold transition-all duration-200" href="/Admin/Products/Index">
-            <span class="material-symbols-outlined">category</span>
-            <span class="font-label-sm text-label-sm">Sản phẩm</span>
-        </a>
-    </nav>
-    <div class="border-t border-outline-variant pt-4 space-y-1">
-        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200" href="/Logout">
-            <span class="material-symbols-outlined">logout</span>
-            <span class="font-label-sm text-label-sm">Đăng xuất</span>
+        <a href="/Admin/Products/Index" class="inline-flex items-center gap-2 border border-outline-variant text-on-surface-variant hover:bg-surface-container-low px-4 py-2 rounded-lg font-label-md text-label-md transition-all">
+            <span class="material-symbols-outlined text-sm">arrow_back</span> Quay lại
         </a>
     </div>
-</aside>
+</header>
 
-<!-- Main Content -->
-<main class="pt-24 pb-12 md:pl-72 px-margin-mobile md:px-margin-desktop min-h-screen">
-    <!-- Hero Section -->
-    <header class="mb-lg">
-        <div class="max-w-4xl flex items-center justify-between">
-            <div>
-                <h1 class="font-headline-xl text-headline-xl text-primary mb-2">Tải lên Video Sản xuất Thủ công</h1>
-                <p class="font-body-lg text-body-lg text-secondary max-w-2xl">
-                    Chia sẻ hành trình sáng tạo của sản phẩm. Những thước phim chân thực giúp khách hàng hiểu rõ giá trị bền vững và tâm huyết trong từng sản phẩm thủ công.
-                </p>
-            </div>
-            <a href="/Admin/Products/Index" class="inline-flex items-center gap-2 border border-outline-variant text-secondary hover:bg-surface-variant px-4 py-2 rounded-lg font-label-md transition-all">
-                <span class="material-symbols-outlined text-sm">arrow_back</span> Quay lại danh sách
-            </a>
-        </div>
-    </header>
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="mb-6 p-4 rounded-xl text-sm font-medium border @(Model.IsSuccess ? "bg-green-50 text-green-700 border-green-200" : "bg-red-50 text-red-700 border-red-200")">
+        @Model.Message
+    </div>
+}
 
-    @if (!string.IsNullOrEmpty(Model.Message))
-    {
-        <div class="mb-6 p-4 rounded-xl text-sm font-medium border @(Model.IsSuccess ? "bg-green-50 text-green-700 border-green-200" : "bg-red-50 text-red-700 border-red-200")">
-            @Model.Message
-        </div>
-    }
-
-    <!-- Product Selection and Form Wrapper -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+    
+    <!-- Left Column: Upload Zone -->
+    <div class="lg:col-span-6 space-y-6">
         
-        <!-- Left Column: Video Select & Preview -->
-        <div class="lg:col-span-6 space-y-gutter">
-            
-            <!-- Product Selector Dropdown -->
-            <section class="glass-card p-md rounded-xl shadow-sm space-y-4">
-                <div>
-                    <label class="block font-label-md text-label-md text-on-surface mb-2">Chọn sản phẩm cần cập nhật video</label>
-                    <select id="product-select" asp-for="ProductId" asp-items="Model.ProductOptions" class="w-full bg-[#F1F5F9] border-transparent focus:border-primary focus:ring-0 rounded-lg py-3 px-4 font-body-md transition-all">
-                        <option value="">-- Chọn sản phẩm --</option>
-                    </select>
-                </div>
-            </section>
-
-            <!-- Video File Drop Zone -->
-            <section class="glass-card p-lg rounded-xl shadow-sm text-center border-dashed border-2 border-outline-variant hover:border-primary transition-colors cursor-pointer group relative overflow-hidden" id="drop-zone">
-                <div class="py-8">
-                    <span class="material-symbols-outlined text-6xl text-primary mb-4 block group-hover:scale-110 transition-transform">cloud_upload</span>
-                    <h3 class="font-headline-md text-headline-md text-on-surface mb-2" id="upload-status-text">Kéo và thả video vào đây</h3>
-                    <p class="font-body-sm text-body-sm text-on-surface-variant mb-6" id="upload-sub-text">Hỗ trợ định dạng MP4, MOV, AVI lên đến 500MB</p>
-                    <button type="button" class="bg-primary text-white px-lg py-sm rounded-lg font-label-md text-label-md hover:scale-[1.02] active:scale-95 transition-all shadow-md">Chọn tệp từ máy tính</button>
-                </div>
-                
-                <!-- File selected info (Hidden by default) -->
-                <div id="file-info" class="hidden absolute inset-0 bg-white/95 backdrop-blur-sm flex flex-col items-center justify-center p-md">
-                    <span class="material-symbols-outlined text-5xl text-primary mb-2">movie</span>
-                    <h4 class="font-label-md text-label-md text-on-surface font-bold truncate max-w-[80%]" id="selected-file-name">filename.mp4</h4>
-                    <p class="text-xs text-on-surface-variant mb-4" id="selected-file-size">0 MB</p>
-                    <button type="button" id="remove-file-btn" class="text-error font-label-sm text-label-sm flex items-center gap-1">
-                        <span class="material-symbols-outlined text-sm">delete</span> Thay đổi tệp
-                    </button>
-                </div>
-            </section>
-
-            <!-- Current Video Player / Info -->
-            <section id="current-video-area" class="glass-card p-md rounded-xl shadow-sm hidden">
-                <h4 class="font-label-md text-label-md text-on-surface mb-3 flex items-center gap-1">
-                    <span class="material-symbols-outlined text-primary">play_circle</span> Video hiện tại của bước này
-                </h4>
-                <div class="aspect-video rounded-lg overflow-hidden border border-outline-variant bg-black flex items-center justify-center relative">
-                    <video id="current-video-player" class="w-full h-full object-contain" controls>
-                        <source id="current-video-source" src="" type="video/mp4"/>
-                        Trình duyệt của bạn không hỗ trợ phát video.
-                    </video>
-                </div>
-                <div class="mt-3 flex justify-between items-center text-xs">
-                    <span class="text-on-surface-variant truncate max-w-[80%]" id="current-video-path"></span>
-                    <a id="current-video-link" href="#" target="_blank" class="text-primary font-bold hover:underline">Mở tab mới</a>
-                </div>
-            </section>
-        </div>
-
-        <!-- Right Column: Form Fields -->
-        <div class="lg:col-span-6">
-            <form method="post" enctype="multipart/form-data" class="glass-card p-lg rounded-xl shadow-sm space-y-md">
-                
-                <!-- Anti-Forgery Token -->
-                @Html.AntiForgeryToken()
-                
-                <!-- Hidden inputs to post ProductId and Video File -->
-                <input type="hidden" asp-for="ProductId"/>
-                <input type="file" id="video-input" asp-for="VideoFile" accept="video/*" class="hidden"/>
-
-                <!-- Step selection (Công đoạn) -->
-                <div>
-                    <label class="block font-label-md text-label-md text-on-surface mb-2">Công đoạn sản xuất</label>
-                    <select id="timeline-select" asp-for="SelectedTimelineId" class="w-full bg-[#F1F5F9] border-transparent focus:border-primary focus:ring-0 rounded-lg py-3 px-4 font-body-md transition-all appearance-none">
-                        <option value="0">-- Chọn công đoạn --</option>
-                        @foreach (var t in Model.Timelines)
-                        {
-                            <option value="@t.TimelineId">Bước @t.StepOrder: @t.Title</option>
-                        }
-                    </select>
-                </div>
-
-                <!-- Video Title -->
-                <div>
-                    <label class="block font-label-md text-label-md text-on-surface mb-2">Tiêu đề Video / Bước</label>
-                    <input id="video-title" type="text" asp-for="VideoTitle" class="w-full bg-[#F1F5F9] border-transparent focus:border-primary focus:ring-0 rounded-lg py-3 px-4 font-body-md transition-all" placeholder="Ví dụ: Sơ chế nguyên liệu và phơi khô bột vỏ sầu riêng"/>
-                </div>
-
-                <!-- Artisan Name -->
-                <div>
-                    <label class="block font-label-md text-label-md text-on-surface mb-2">Nghệ nhân thực hiện</label>
-                    <input id="artisan-name" type="text" asp-for="ArtisanName" class="w-full bg-[#F1F5F9] border-transparent focus:border-primary focus:ring-0 rounded-lg py-3 px-4 font-body-md transition-all" placeholder="Tên nghệ nhân (ví dụ: Nghệ nhân Nguyễn Văn An)"/>
-                </div>
-
-                <!-- Description -->
-                <div>
-                    <label class="block font-label-md text-label-md text-on-surface mb-2">Mô tả quy trình chi tiết</label>
-                    <textarea id="video-description" asp-for="ProcessDescription" class="w-full bg-[#F1F5F9] border-transparent focus:border-primary focus:ring-0 rounded-lg py-3 px-4 font-body-md transition-all resize-none" placeholder="Mô tả chi tiết các bước thực hiện..." rows="4"></textarea>
-                </div>
-
-                <!-- Sustainability Tags (Mocked decoration from template) -->
-                <div>
-                    <label class="block font-label-md text-label-md text-on-surface mb-2">Chỉ số Bền vững (Gợi ý)</label>
-                    <div class="flex flex-wrap gap-2 mb-3">
-                        <span class="bg-primary-container/20 text-on-primary-container px-3 py-1 rounded-full text-xs font-bold border border-primary-container/30 flex items-center gap-1">
-                            #CircularEconomy
-                        </span>
-                        <span class="bg-secondary-container/20 text-on-secondary-container px-3 py-1 rounded-full text-xs font-bold border border-secondary-container/30 flex items-center gap-1">
-                            #Handmade
-                        </span>
-                        <span class="bg-tertiary-container/20 text-on-tertiary-container px-3 py-1 rounded-full text-xs font-bold border border-tertiary-container/30 flex items-center gap-1">
-                            #EcoFriendly
-                        </span>
-                    </div>
-                </div>
-
-                <!-- Action Buttons -->
-                <div class="pt-4 flex items-center gap-4">
-                    <a href="/Admin/Products/Index" class="flex-1 text-center font-label-md text-label-md text-secondary border border-outline-variant hover:bg-surface-variant py-3 rounded-lg transition-all active:scale-95">Hủy bỏ</a>
-                    <button class="flex-[2] font-label-md text-label-md bg-primary text-white py-3 rounded-lg shadow-md hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-2" type="submit">
-                        <span class="material-symbols-outlined">publish</span> Tải lên video
-                    </button>
-                </div>
-            </form>
-
-            <!-- Tip area -->
-            <div class="mt-gutter p-md bg-primary-container/10 border border-primary-container/20 rounded-xl flex gap-3">
-                <span class="material-symbols-outlined text-primary">lightbulb</span>
-                <p class="text-xs text-on-primary-fixed-variant leading-relaxed">
-                    <strong>Mẹo:</strong> Video có độ dài ngắn khoảng 30-60 giây, tập trung cận cảnh vào quá trình chế tác thủ công giúp khách hàng cảm nhận sâu sắc hơn giá trị của sản phẩm GAIA.
-                </p>
+        <!-- Product Selector -->
+        <section class="glass-card p-6 rounded-xl shadow-sm space-y-4">
+            <div>
+                <label class="block font-semibold text-on-surface text-sm mb-2">Chọn sản phẩm cần cập nhật video</label>
+                <select id="product-select" asp-for="ProductId" asp-items="Model.ProductOptions" 
+                        class="w-full bg-surface-container-low border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary rounded-lg py-2.5 px-4 text-sm transition-all">
+                    <option value="">-- Chọn sản phẩm --</option>
+                </select>
             </div>
+        </section>
+
+        <!-- Video Drop Zone -->
+        <section class="glass-card p-8 rounded-xl shadow-sm text-center border-dashed border-2 border-outline-variant hover:border-primary transition-colors cursor-pointer group relative overflow-hidden" id="drop-zone">
+            <div class="py-4">
+                <span class="material-symbols-outlined text-6xl text-primary mb-4 block group-hover:scale-110 transition-transform">cloud_upload</span>
+                <h3 class="font-headline-md text-headline-md text-on-surface mb-2" id="upload-status-text">Kéo và thả video vào đây</h3>
+                <p class="text-on-surface-variant text-sm mb-6" id="upload-sub-text">Hỗ trợ MP4, MOV, AVI lên đến 500MB</p>
+                <button type="button" class="bg-primary text-white px-6 py-2.5 rounded-lg font-semibold text-sm hover:opacity-90 active:scale-95 transition-all shadow-md">Chọn tệp từ máy tính</button>
+            </div>
+            <div id="file-info" class="hidden absolute inset-0 bg-white/95 backdrop-blur-sm flex flex-col items-center justify-center p-6">
+                <span class="material-symbols-outlined text-5xl text-primary mb-2">movie</span>
+                <h4 class="font-semibold text-on-surface truncate max-w-[80%] text-sm" id="selected-file-name">filename.mp4</h4>
+                <p class="text-xs text-on-surface-variant mb-4" id="selected-file-size">0 MB</p>
+                <button type="button" id="remove-file-btn" class="text-error text-sm font-semibold flex items-center gap-1">
+                    <span class="material-symbols-outlined text-sm">delete</span> Thay đổi tệp
+                </button>
+            </div>
+        </section>
+
+        <!-- Current Video Player -->
+        <section id="current-video-area" class="glass-card p-6 rounded-xl shadow-sm hidden">
+            <h4 class="font-semibold text-on-surface text-sm mb-3 flex items-center gap-1">
+                <span class="material-symbols-outlined text-primary">play_circle</span> Video hiện tại của bước này
+            </h4>
+            <div class="aspect-video rounded-lg overflow-hidden border border-outline-variant bg-black">
+                <video id="current-video-player" class="w-full h-full object-contain" controls>
+                    <source id="current-video-source" src="" type="video/mp4"/>
+                    Trình duyệt không hỗ trợ phát video.
+                </video>
+            </div>
+            <div class="mt-3 flex justify-between items-center text-xs">
+                <span class="text-on-surface-variant truncate max-w-[80%]" id="current-video-path"></span>
+                <a id="current-video-link" href="#" target="_blank" class="text-primary font-bold hover:underline">Mở tab mới</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Right Column: Form Fields -->
+    <div class="lg:col-span-6">
+        <form method="post" enctype="multipart/form-data" class="glass-card p-6 rounded-xl shadow-sm space-y-6">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="ProductId"/>
+            <input type="file" id="video-input" asp-for="VideoFile" accept="video/*" class="hidden"/>
+
+            <div>
+                <label class="block font-semibold text-on-surface text-sm mb-2">Công đoạn sản xuất</label>
+                <select id="timeline-select" asp-for="SelectedTimelineId" 
+                        class="w-full bg-surface-container-low border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary rounded-lg py-2.5 px-4 text-sm transition-all">
+                    <option value="0">-- Chọn công đoạn --</option>
+                    @foreach (var t in Model.Timelines)
+                    {
+                        <option value="@t.TimelineId">Bước @t.StepOrder: @t.Title</option>
+                    }
+                </select>
+            </div>
+
+            <div>
+                <label class="block font-semibold text-on-surface text-sm mb-2">Tiêu đề Video / Bước</label>
+                <input id="video-title" type="text" asp-for="VideoTitle" 
+                       class="w-full bg-surface-container-low border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary rounded-lg py-2.5 px-4 text-sm transition-all"
+                       placeholder="Ví dụ: Sơ chế nguyên liệu và phơi khô bột vỏ sầu riêng"/>
+            </div>
+
+            <div>
+                <label class="block font-semibold text-on-surface text-sm mb-2">Nghệ nhân thực hiện</label>
+                <input id="artisan-name" type="text" asp-for="ArtisanName" 
+                       class="w-full bg-surface-container-low border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary rounded-lg py-2.5 px-4 text-sm transition-all"
+                       placeholder="Tên nghệ nhân"/>
+            </div>
+
+            <div>
+                <label class="block font-semibold text-on-surface text-sm mb-2">Mô tả quy trình chi tiết</label>
+                <textarea id="video-description" asp-for="ProcessDescription" 
+                          class="w-full bg-surface-container-low border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary rounded-lg py-2.5 px-4 text-sm transition-all resize-none"
+                          placeholder="Mô tả chi tiết các bước thực hiện..." rows="4"></textarea>
+            </div>
+
+            <div>
+                <label class="block font-semibold text-on-surface text-sm mb-2">Chỉ số Bền vững (Gợi ý)</label>
+                <div class="flex flex-wrap gap-2">
+                    <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold border border-primary/20">#CircularEconomy</span>
+                    <span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-xs font-bold border border-secondary/20">#Handmade</span>
+                    <span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full text-xs font-bold border border-tertiary/20">#EcoFriendly</span>
+                </div>
+            </div>
+
+            <div class="pt-2 flex items-center gap-4">
+                <a href="/Admin/Products/Index" class="flex-1 text-center font-semibold text-sm text-on-surface-variant border border-outline-variant hover:bg-surface-container-low py-2.5 rounded-lg transition-all">Hủy bỏ</a>
+                <button class="flex-[2] font-semibold text-sm bg-primary text-white py-2.5 rounded-lg shadow-md hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-2" type="submit">
+                    <span class="material-symbols-outlined">publish</span> Tải lên video
+                </button>
+            </div>
+        </form>
+
+        <!-- Tip area -->
+        <div class="mt-4 p-4 bg-primary/5 border border-primary/20 rounded-xl flex gap-3">
+            <span class="material-symbols-outlined text-primary shrink-0">lightbulb</span>
+            <p class="text-xs text-on-surface-variant leading-relaxed">
+                <strong>Mẹo:</strong> Video ngắn 30-60 giây, tập trung cận cảnh vào quá trình chế tác thủ công giúp khách hàng cảm nhận giá trị sản phẩm GAIA sâu sắc hơn.
+            </p>
         </div>
     </div>
-</main>
+</div>
 
-<!-- Footer -->
-<footer class="w-full py-8 flex flex-col md:flex-row justify-between items-center bg-surface-container-lowest border-t border-outline-variant px-gutter md:px-margin-desktop md:pl-72">
-    <div>
-        <span class="font-headline-md text-headline-md text-primary font-bold">GAIA</span>
-        <p class="font-label-sm text-label-sm text-on-surface-variant mt-2">© 2024 GAIA Sustainable Systems. All rights reserved.</p>
-    </div>
-    <div class="flex flex-wrap justify-center gap-6 mt-4 md:mt-0">
-        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Privacy Policy</a>
-        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Terms of Service</a>
-        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Sustainability Report</a>
-    </div>
-</footer>
-
-<!-- Interactive Scripts -->
+@section Scripts {
 <script>
-    // Serialize timelines list into JavaScript array
     const timelines = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.Timelines.Select(t => new { 
-        t.TimelineId, 
-        t.Title, 
-        t.Description, 
-        t.VideoUrl 
+        t.TimelineId, t.Title, t.Description, t.VideoUrl 
     })));
 
     document.addEventListener('DOMContentLoaded', () => {
         const dropZone = document.getElementById('drop-zone');
         const videoInput = document.getElementById('video-input');
-        
         const fileInfo = document.getElementById('file-info');
         const selectedFileName = document.getElementById('selected-file-name');
         const selectedFileSize = document.getElementById('selected-file-size');
         const removeFileBtn = document.getElementById('remove-file-btn');
-        
         const productSelect = document.getElementById('product-select');
         const timelineSelect = document.getElementById('timeline-select');
-        
         const videoTitleInput = document.getElementById('video-title');
         const artisanNameInput = document.getElementById('artisan-name');
         const videoDescInput = document.getElementById('video-description');
-        
         const currentVideoArea = document.getElementById('current-video-area');
         const currentVideoPlayer = document.getElementById('current-video-player');
         const currentVideoSource = document.getElementById('current-video-source');
         const currentVideoLink = document.getElementById('current-video-link');
         const currentVideoPath = document.getElementById('current-video-path');
 
-        // Product Selector Change
         productSelect.addEventListener('change', function() {
-            if (this.value) {
-                window.location.href = `/Admin/Products/UploadVideo?productId=${this.value}`;
-            }
+            if (this.value) window.location.href = `/Admin/Products/UploadVideo?productId=${this.value}`;
         });
 
-        // Timeline Selector Change
         timelineSelect.addEventListener('change', function() {
             const selectedId = parseInt(this.value);
             const step = timelines.find(t => t.TimelineId === selectedId);
-            
             if (step) {
                 videoTitleInput.value = step.Title || '';
-                
-                // Try parsing Artisan name from description
                 let rawDesc = step.Description || '';
-                let artisan = '';
-                let cleanDesc = rawDesc;
-                
+                let artisan = '', cleanDesc = rawDesc;
                 const artisanPrefix = "Nghệ nhân: ";
                 if (rawDesc.startsWith(artisanPrefix)) {
                     const newlineIndex = rawDesc.indexOf('\n');
@@ -399,12 +208,9 @@
                         cleanDesc = '';
                     }
                 }
-                
                 artisanNameInput.value = artisan;
                 videoDescInput.value = cleanDesc;
-
-                // Load existing video if any
-                if (step.VideoUrl && step.VideoUrl !== '/videos/process_collect.mp4' && step.VideoUrl !== '/videos/process_clean.mp4' && step.VideoUrl !== '/videos/process_mold.mp4') {
+                if (step.VideoUrl && !step.VideoUrl.startsWith('/videos/process_')) {
                     currentVideoSource.src = step.VideoUrl;
                     currentVideoPlayer.load();
                     currentVideoPath.innerText = step.VideoUrl;
@@ -415,15 +221,11 @@
                     currentVideoPlayer.pause();
                 }
             } else {
-                videoTitleInput.value = '';
-                artisanNameInput.value = '';
-                videoDescInput.value = '';
-                currentVideoArea.classList.add('hidden');
-                currentVideoPlayer.pause();
+                videoTitleInput.value = ''; artisanNameInput.value = ''; videoDescInput.value = '';
+                currentVideoArea.classList.add('hidden'); currentVideoPlayer.pause();
             }
         });
 
-        // Trigger first step by default if selected or available
         if (timelineSelect.value && timelineSelect.value !== "0") {
             timelineSelect.dispatchEvent(new Event('change'));
         } else if (timelineSelect.options.length > 1) {
@@ -431,39 +233,15 @@
             timelineSelect.dispatchEvent(new Event('change'));
         }
 
-        // Drag and Drop File Interactions
         dropZone.addEventListener('click', () => videoInput.click());
-
-        dropZone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            dropZone.classList.add('border-primary', 'bg-primary/5');
-        });
-
-        dropZone.addEventListener('dragleave', () => {
-            dropZone.classList.remove('border-primary', 'bg-primary/5');
-        });
-
+        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('border-primary', 'bg-primary/5'); });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('border-primary', 'bg-primary/5'));
         dropZone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropZone.classList.remove('border-primary', 'bg-primary/5');
-            
-            if (e.dataTransfer.files.length > 0) {
-                videoInput.files = e.dataTransfer.files;
-                displayFileInfo(e.dataTransfer.files[0]);
-            }
+            e.preventDefault(); dropZone.classList.remove('border-primary', 'bg-primary/5');
+            if (e.dataTransfer.files.length > 0) { videoInput.files = e.dataTransfer.files; displayFileInfo(e.dataTransfer.files[0]); }
         });
-
-        videoInput.addEventListener('change', () => {
-            if (videoInput.files.length > 0) {
-                displayFileInfo(videoInput.files[0]);
-            }
-        });
-
-        removeFileBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Stop clicking from opening file dialog again
-            videoInput.value = '';
-            fileInfo.classList.add('hidden');
-        });
+        videoInput.addEventListener('change', () => { if (videoInput.files.length > 0) displayFileInfo(videoInput.files[0]); });
+        removeFileBtn.addEventListener('click', (e) => { e.stopPropagation(); videoInput.value = ''; fileInfo.classList.add('hidden'); });
 
         function displayFileInfo(file) {
             selectedFileName.innerText = file.name;
@@ -472,5 +250,4 @@
         }
     });
 </script>
-</body>
-</html>
+}

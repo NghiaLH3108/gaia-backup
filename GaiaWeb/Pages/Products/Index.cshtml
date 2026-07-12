@@ -1,0 +1,306 @@
+@page
+@model GaiaWeb.Pages.Products.IndexModel
+@{
+    ViewData["Title"] = "GAIA | Bộ sưu tập Signature";
+    Layout = "_GuestLayout";
+}
+
+<!-- TopNavBar -->
+<header id="main-header" class="fixed top-0 w-full z-50 bg-glass-fill backdrop-blur-md border-b border-glass-stroke shadow-sm h-20 flex justify-between items-center px-container-padding-mobile md:px-container-padding-desktop transition-all duration-300">
+    <a asp-page="/Index" class="font-display-hero text-headline-md font-extrabold text-primary cursor-pointer transition-transform active:scale-95 no-underline">GAIA</a>
+    <nav class="hidden md:flex items-center gap-8">
+        <a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-sm text-label-sm uppercase tracking-wider" href="#">Collections</a>
+        <a asp-page="/Index" class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm uppercase tracking-wider">Our Story</a>
+        <a href="#impact-section" class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm uppercase tracking-wider">Impact</a>
+        <a href="#" class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm uppercase tracking-wider">Traceability</a>
+    </nav>
+    <div class="flex items-center gap-4">
+        <button class="material-symbols-outlined p-2 text-on-surface-variant hover:bg-surface-accent/10 rounded-full transition-all duration-300">shopping_bag</button>
+        <button class="material-symbols-outlined p-2 text-on-surface-variant hover:bg-surface-accent/10 rounded-full transition-all duration-300">person</button>
+        <button id="mobile-menu-btn" class="md:hidden material-symbols-outlined p-2 text-on-surface-variant">menu</button>
+    </div>
+</header>
+
+<main class="pt-32 pb-section-margin px-container-padding-mobile md:px-container-padding-desktop max-w-[1440px] mx-auto">
+    <!-- Hero Header -->
+    <div class="mb-16 max-w-3xl">
+        <h1 class="font-display-hero text-headline-lg-mobile md:text-headline-lg text-primary mb-6">
+            Bộ sưu tập GAIA Signature
+        </h1>
+        <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+            Mỗi sản phẩm là một câu chuyện về sự hồi sinh, kết hợp giữa nghệ thuật thủ công truyền thống và giải pháp bền vững cho tương lai.
+        </p>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
+        <div class="flex flex-wrap gap-3" id="filter-group">
+            <button class="filter-btn px-6 py-2 rounded-full bg-primary text-white font-label-sm text-label-sm shadow-sm transition-all hover:brightness-110 active:scale-95" data-filter="all">Tất cả</button>
+            <button class="filter-btn px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-accent/20 transition-all active:scale-95" data-filter="Active">Đang bán</button>
+            <button class="filter-btn px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-accent/20 transition-all active:scale-95" data-filter="Inactive">Ngừng bán</button>
+        </div>
+        <div class="flex items-center gap-2 text-on-surface-variant font-label-sm">
+            <span class="material-symbols-outlined text-[20px]">sort</span>
+            <span>Sắp xếp: Mới nhất</span>
+            <span class="ml-4 text-primary font-bold">@Model.Products.Count sản phẩm</span>
+        </div>
+    </div>
+
+    <!-- Product Grid -->
+    @if (Model.Products.Any())
+    {
+        <!-- Placeholder images cycle for products that have no image stored -->
+        var placeholderImages = new[]
+        {
+            "https://lh3.googleusercontent.com/aida/AP1WRLuZFDqCn1evgBArvGKdXMN8vuBIL_R0eAccW21KY1mRt9nSsMR11gCXOT6sKGFEx5WhEhHFmhzylHrhk9TEWKvr5w0VbTQJ0HzqLQBAxVR5velUl3kmZdRMuQK8ENA15m8OxwECmtjfL0I32RUatql1tErTdKPPdYOnloFPRWLIGiN-v4XKOSCO20o3XqvCunRt-5D2xeily_toT0nc7i8vO6twrymU-qd2bhbltjI1HaP3pG87Hmbtl_s",
+            "https://lh3.googleusercontent.com/aida-public/AB6AXuAvHS22-P69teZzPWfbET-Ruf5dqZPsN1ILeufTyXTGHSAQnaD9Eeao4bieh43o2EsEyyBavCpU73NWu3ow3IaQNApwbrN-pTOXU20SrK7wAvw-ssbxRY6FuESaQW9uaEqtYcvjZC2JP43pHrKu0UdWpPAN5XPJGwDLHEdG9-l0n9GWG2dCVzzGkEPCShSEMX2NTmRGxdGYxDGIevTwt0298w28mbcz8cXfo7KCdE8ItGQgKgim3o_t",
+            "https://lh3.googleusercontent.com/aida-public/AB6AXuAo6yg3fK3BpEQXiR7gcrlec3pCr3tVsn6XYiHaArAklZik5btan7xNL_Z1jF8Ho9-huOKhrtxeisKhhd7wb3XWsljhs3_CJG6bIUGbuNzn2bWNEgY3b4DUHfpllIuaYAcuqVmAf3NC_NIxbghuQLQw-MLn4S7L-9uidhUT-p-Oekux2C5CK6GMaNaIwvOUdqml5-ewd9H64sl_IcoDXEuP1pxyKQrf6LMRkvx6Icdu0aBRdxQqQWUk",
+            "https://lh3.googleusercontent.com/aida-public/AB6AXuCjzdeaBwgvqAyrrfXltI_POXzUmMllfoVRotEJUZ3XCqIFFmkZRyKaGwSilWjYAMUA0UcSwORBojLyXaNERQRuwA5fERS_5v0Hp6mKpzoJfOtLXubCXIkX9FEQyF2mQoufRTMuASpL2Y-y03dWDdqsz6gCfToL5_b76AQJU89WFenOuYJrtz404oHpGtT02ZcLMWJ8KPOcB6k96XvAESE79dESPQTTqQ-40cwie25iv-FsKv_Zo2fu"
+        };
+        var badgeColors = new[]
+        {
+            "bg-primary/90 text-white",
+            "bg-secondary-container text-on-secondary-container",
+            "bg-tertiary-container text-on-tertiary-container",
+            "bg-surface-accent text-primary"
+        };
+
+        <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-card-gap">
+            @for (int i = 0; i < Model.Products.Count; i++)
+            {
+                var product = Model.Products[i];
+                var imgSrc = placeholderImages[i % placeholderImages.Length];
+                var badgeCls = badgeColors[i % badgeColors.Length];
+                <div class="product-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-outline-variant/30"
+                     data-status="@product.CurrentStatus">
+                    <div class="relative aspect-square overflow-hidden product-image-hover">
+                        <img class="w-full h-full object-cover transition-transform duration-700 ease-out"
+                             src="@imgSrc"
+                             alt="@product.ProductName" />
+                        <div class="absolute top-4 left-4 @badgeCls px-3 py-1 rounded-full text-[12px] font-bold tracking-wider uppercase">
+                            @product.CurrentStatus
+                        </div>
+                        <div class="absolute top-4 right-4 bg-white/80 backdrop-blur-sm text-on-surface-variant px-2 py-1 rounded-full text-[11px] font-medium">
+                            #@product.ProductId
+                        </div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-headline-md text-headline-md text-on-surface">@product.ProductName</h3>
+                        </div>
+                        <p class="font-body-md text-body-md text-on-surface-variant mb-4 flex-grow line-clamp-3">
+                            @product.Description
+                        </p>
+                        <div class="text-xs text-on-surface-variant mb-6 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[14px]">calendar_today</span>
+                            @product.CreatedDate.ToString("dd/MM/yyyy")
+                        </div>
+                        <div class="flex gap-3">
+                            <a asp-page="/Story/Index" asp-route-qrtoken="@product.Qrtoken"
+                               class="flex-1 py-3 px-4 border-2 border-primary text-primary font-label-sm rounded-lg hover:bg-primary/5 transition-colors active:scale-95 text-center">
+                                Xem câu chuyện
+                            </a>
+                            <button class="flex-none w-14 h-12 flex items-center justify-center bg-primary text-white rounded-lg hover:brightness-110 transition-all active:scale-95 shadow-sm">
+                                <span class="material-symbols-outlined">qr_code_scanner</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <!-- Empty State -->
+        <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-card-gap">
+            <!-- Placeholder products khi chưa có data trong DB -->
+            <div class="group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-outline-variant/30">
+                <div class="relative aspect-square overflow-hidden product-image-hover">
+                    <img class="w-full h-full object-cover transition-transform duration-700 ease-out"
+                         src="https://lh3.googleusercontent.com/aida/AP1WRLuZFDqCn1evgBArvGKdXMN8vuBIL_R0eAccW21KY1mRt9nSsMR11gCXOT6sKGFEx5WhEhHFmhzylHrhk9TEWKvr5w0VbTQJ0HzqLQBAxVR5velUl3kmZdRMuQK8ENA15m8OxwECmtjfL0I32RUatql1tErTdKPPdYOnloFPRWLIGiN-v4XKOSCO20o3XqvCunRt-5D2xeily_toT0nc7i8vO6twrymU-qd2bhbltjI1HaP3pG87Hmbtl_s"
+                         alt="Sổ Tay GAIA Earth" />
+                    <div class="absolute top-4 left-4 bg-primary/90 text-white px-3 py-1 rounded-full text-[12px] font-bold tracking-wider uppercase">Vỏ sầu riêng</div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-headline-md text-headline-md text-on-surface">Sổ Tay GAIA Earth</h3>
+                        <span class="font-mono-data text-primary font-bold text-lg">450.000đ</span>
+                    </div>
+                    <p class="font-body-md text-body-md text-on-surface-variant mb-8 flex-grow">Làm từ 100% vỏ sầu riêng tái chế. Bề mặt giấy có vân tự nhiên độc bản, mang hơi thở của đất mẹ.</p>
+                    <div class="flex gap-3">
+                        <button class="flex-1 py-3 px-4 border-2 border-primary text-primary font-label-sm rounded-lg hover:bg-primary/5 transition-colors active:scale-95">Chi tiết sản phẩm</button>
+                        <button class="flex-none w-14 h-12 flex items-center justify-center bg-primary text-white rounded-lg hover:brightness-110 transition-all active:scale-95 shadow-sm">
+                            <span class="material-symbols-outlined">shopping_cart</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-outline-variant/30">
+                <div class="relative aspect-square overflow-hidden product-image-hover">
+                    <div class="w-full h-full bg-cover bg-center transition-transform duration-700 ease-out"
+                         style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAvHS22-P69teZzPWfbET-Ruf5dqZPsN1ILeufTyXTGHSAQnaD9Eeao4bieh43o2EsEyyBavCpU73NWu3ow3IaQNApwbrN-pTOXU20SrK7wAvw-ssbxRY6FuESaQW9uaEqtYcvjZC2JP43pHrKu0UdWpPAN5XPJGwDLHEdG9-l0n9GWG2dCVzzGkEPCShSEMX2NTmRGxdGYxDGIevTwt0298w28mbcz8cXfo7KCdE8ItGQgKgim3o_t')">
+                    </div>
+                    <div class="absolute top-4 left-4 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[12px] font-bold tracking-wider uppercase">Thủ công</div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-headline-md text-headline-md text-on-surface">Bát Decor Nghệ Nhân</h3>
+                        <span class="font-mono-data text-primary font-bold text-lg">320.000đ</span>
+                    </div>
+                    <p class="font-body-md text-body-md text-on-surface-variant mb-8 flex-grow">Sản phẩm đúc thủ công từ sợi tự nhiên và phế phẩm nông nghiệp. Chống thấm và chịu nhiệt tốt.</p>
+                    <div class="flex gap-3">
+                        <button class="flex-1 py-3 px-4 border-2 border-primary text-primary font-label-sm rounded-lg hover:bg-primary/5 transition-colors active:scale-95">Chi tiết sản phẩm</button>
+                        <button class="flex-none w-14 h-12 flex items-center justify-center bg-primary text-white rounded-lg hover:brightness-110 transition-all active:scale-95 shadow-sm">
+                            <span class="material-symbols-outlined">shopping_cart</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-outline-variant/30">
+                <div class="relative aspect-square overflow-hidden product-image-hover">
+                    <div class="w-full h-full bg-cover bg-center transition-transform duration-700 ease-out"
+                         style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAo6yg3fK3BpEQXiR7gcrlec3pCr3tVsn6XYiHaArAklZik5btan7xNL_Z1jF8Ho9-huOKhrtxeisKhhd7wb3XWsljhs3_CJG6bIUGbuNzn2bWNEgY3b4DUHfpllIuaYAcuqVmAf3NC_NIxbghuQLQw-MLn4S7L-9uidhUT-p-Oekux2C5CK6GMaNaIwvOUdqml5-ewd9H64sl_IcoDXEuP1pxyKQrf6LMRkvx6Icdu0aBRdxQqQWUk')">
+                    </div>
+                    <div class="absolute top-4 left-4 bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full text-[12px] font-bold tracking-wider uppercase">Sợi thực vật</div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-headline-md text-headline-md text-on-surface">Tấm Lót Ly Circular</h3>
+                        <span class="font-mono-data text-primary font-bold text-lg">120.000đ</span>
+                    </div>
+                    <p class="font-body-md text-body-md text-on-surface-variant mb-8 flex-grow">Đan thủ công từ sợi thực vật thu gom tại địa phương. Sản phẩm hoàn toàn có thể phân hủy tự nhiên sau khi sử dụng.</p>
+                    <div class="flex gap-3">
+                        <button class="flex-1 py-3 px-4 border-2 border-primary text-primary font-label-sm rounded-lg hover:bg-primary/5 transition-colors active:scale-95">Chi tiết sản phẩm</button>
+                        <button class="flex-none w-14 h-12 flex items-center justify-center bg-primary text-white rounded-lg hover:brightness-110 transition-all active:scale-95 shadow-sm">
+                            <span class="material-symbols-outlined">shopping_cart</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- Empty filter result message (hidden by default) -->
+    <div id="no-results" class="hidden text-center py-20">
+        <span class="material-symbols-outlined text-6xl text-on-surface-variant mb-4">search_off</span>
+        <p class="font-headline-md text-headline-md text-on-surface-variant">Không có sản phẩm nào phù hợp.</p>
+    </div>
+
+    <!-- Impact Quote Section -->
+    <div id="impact-section" class="mt-24 glass-card rounded-2xl p-10 md:p-16 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full -mr-20 -mt-20 blur-3xl"></div>
+        <div class="relative z-10 max-w-2xl">
+            <span class="material-symbols-outlined text-primary text-4xl mb-6">eco</span>
+            <h2 class="font-headline-lg text-headline-lg text-primary mb-6">Cam kết của chúng tôi</h2>
+            <p class="font-body-lg text-body-lg text-on-surface italic leading-relaxed">
+                "Chúng tôi không chỉ bán sản phẩm, chúng tôi đang tái định nghĩa giá trị của rác thải. GAIA là hành trình tìm về bản nguyên của vật chất, nơi sự sáng tạo biến những điều bình dị nhất thành nghệ thuật bền vững."
+            </p>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-surface-container w-full py-section-margin px-container-padding-mobile md:px-container-padding-desktop">
+    <div class="flex flex-col md:flex-row justify-between items-start gap-12 mb-16 max-w-7xl mx-auto">
+        <div class="max-w-xs">
+            <div class="font-headline-md text-headline-md font-bold text-primary mb-4">GAIA</div>
+            <p class="font-body-md text-body-md text-on-surface-variant">Kiến tạo tương lai từ những di sản bị lãng quên.</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-10">
+            <div class="flex flex-col gap-4">
+                <h4 class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-widest">Khám phá</h4>
+                <a class="text-on-surface-variant hover:text-primary transition-all hover:translate-x-1" href="#">Bộ sưu tập</a>
+                <a class="text-on-surface-variant hover:text-primary transition-all hover:translate-x-1" href="#">Truy xuất nguồn gốc</a>
+                <a class="text-on-surface-variant hover:text-primary transition-all hover:translate-x-1" href="#">Dự án cộng đồng</a>
+            </div>
+            <div class="flex flex-col gap-4">
+                <h4 class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-widest">Hỗ trợ</h4>
+                <a class="text-on-surface-variant hover:text-primary transition-all hover:translate-x-1" href="#">Giao hàng &amp; Đổi trả</a>
+                <a class="text-on-surface-variant hover:text-primary transition-all hover:translate-x-1" href="#">Chăm sóc khách hàng</a>
+                <a class="text-on-surface-variant hover:text-primary transition-all hover:translate-x-1" href="#">Câu hỏi thường gặp</a>
+            </div>
+            <div class="flex flex-col gap-4 col-span-2 md:col-span-1">
+                <h4 class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-widest">Bản tin</h4>
+                <div class="flex gap-2">
+                    <input class="bg-surface-accent/20 border-none rounded-lg px-4 py-2 w-full focus:ring-2 focus:ring-primary outline-none" placeholder="Email của bạn" type="email" />
+                    <button class="bg-primary text-white px-4 rounded-lg material-symbols-outlined">send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="max-w-7xl mx-auto pt-8 border-t border-surface-container-high flex flex-col md:flex-row justify-between items-center gap-6">
+        <p class="text-on-surface-variant text-sm">© 2024 GAIA Sustainable Artifacts. All rights reserved.</p>
+        <div class="flex gap-8">
+            <a class="text-on-surface-variant hover:text-primary text-sm transition-colors" href="#">Sustainability Report</a>
+            <a class="text-on-surface-variant hover:text-primary text-sm transition-colors" href="#">Privacy Policy</a>
+            <a class="text-on-surface-variant hover:text-primary text-sm transition-colors" href="#">Terms of Service</a>
+        </div>
+    </div>
+</footer>
+
+<!-- FAB for Mobile -->
+<button id="filter-fab" class="fixed bottom-6 right-6 md:hidden w-14 h-14 bg-primary text-white rounded-full shadow-lg flex items-center justify-center transition-transform active:scale-90 z-40">
+    <span class="material-symbols-outlined">filter_list</span>
+</button>
+
+@section Scripts {
+<script>
+    // Header scroll effect
+    const header = document.getElementById('main-header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 20) {
+            header.classList.add('shadow-md');
+            header.style.background = 'rgba(255,255,255,0.95)';
+        } else {
+            header.classList.remove('shadow-md');
+            header.style.background = 'rgba(255, 255, 255, 0.7)';
+        }
+    });
+
+    // Filter functionality
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const productCards = document.querySelectorAll('.product-card');
+    const noResults = document.getElementById('no-results');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+            // Update button styles
+            filterBtns.forEach(b => {
+                b.classList.remove('bg-primary', 'text-white');
+                b.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+            });
+            this.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+            this.classList.add('bg-primary', 'text-white');
+
+            const filter = this.getAttribute('data-filter');
+            let visible = 0;
+
+            productCards.forEach(card => {
+                const status = card.getAttribute('data-status');
+                if (filter === 'all' || status === filter) {
+                    card.style.display = '';
+                    visible++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (noResults) {
+                noResults.classList.toggle('hidden', visible > 0);
+            }
+        });
+    });
+
+    // Ripple effect on buttons
+    document.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            let ripple = document.createElement('span');
+            ripple.style.cssText = 'position:absolute;width:20px;height:20px;background:rgba(255,255,255,0.4);border-radius:50%;transform:scale(0);animation:ripple 0.6s linear;pointer-events:none;';
+            this.style.position = 'relative';
+            this.style.overflow = 'hidden';
+            this.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+        });
+    });
+</script>
+}

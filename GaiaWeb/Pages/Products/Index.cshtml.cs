@@ -2,13 +2,13 @@ using GaiaWeb.BLL.Services.Interfaces;
 using GaiaWeb.DAL.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace GaiaWeb.Pages
+namespace GaiaWeb.Pages.Products
 {
     public class IndexModel : PageModel
     {
         private readonly IProductService _productService;
 
-        public List<Product> FeaturedProducts { get; set; } = new();
+        public List<Product> Products { get; set; } = new();
 
         public IndexModel(IProductService productService)
         {
@@ -17,9 +17,8 @@ namespace GaiaWeb.Pages
 
         public async Task OnGetAsync()
         {
-            // Lấy tối đa 3 sản phẩm nổi bật để hiển thị trên trang chủ
-            var all = await _productService.GetAllProductsAsync();
-            FeaturedProducts = all.Take(3).ToList();
+            // Lấy tất cả sản phẩm để hiển thị trong danh sách
+            Products = await _productService.GetAllProductsAsync();
         }
     }
 }

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="vi" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] | GAIA Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#dce9ff",
+                    "outline-variant": "#bbcabf",
+                    "on-error": "#ffffff",
+                    "on-primary-container": "#00422b",
+                    "primary": "#006c49",
+                    "on-tertiary-fixed": "#2a1700",
+                    "error": "#ba1a1a",
+                    "on-surface-variant": "#3c4a42",
+                    "on-primary-fixed-variant": "#005236",
+                    "surface-variant": "#d3e4fe",
+                    "on-error-container": "#93000a",
+                    "surface-container-highest": "#d3e4fe",
+                    "secondary-fixed-dim": "#b9c7e0",
+                    "secondary-container": "#d5e3fd",
+                    "primary-fixed": "#6ffbbe",
+                    "inverse-primary": "#4edea3",
+                    "surface-container-low": "#eff4ff",
+                    "tertiary": "#855300",
+                    "on-secondary-fixed-variant": "#3a485c",
+                    "on-primary-fixed": "#002113",
+                    "primary-container": "#10b981",
+                    "tertiary-fixed": "#ffddb8",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#f8f9ff",
+                    "on-tertiary-fixed-variant": "#653e00",
+                    "outline": "#6c7a71",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed": "#0d1c2f",
+                    "surface-container": "#e5eeff",
+                    "primary-fixed-dim": "#4edea3",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "on-background": "#0b1c30",
+                    "surface-bright": "#f8f9ff",
+                    "inverse-surface": "#213145",
+                    "on-surface": "#0b1c30",
+                    "secondary-fixed": "#d5e3fd",
+                    "surface-tint": "#006c49",
+                    "on-tertiary-container": "#523200",
+                    "on-secondary-container": "#57657b",
+                    "secondary": "#515f74",
+                    "tertiary-fixed-dim": "#ffb95f",
+                    "surface-dim": "#cbdbf5",
+                    "tertiary-container": "#e29100",
+                    "on-tertiary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "background": "#f8f9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "xl": "80px",
+                    "xs": "4px",
+                    "lg": "48px",
+                    "sm": "12px",
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "base": "8px",
+                    "md": "24px"
+            },
+            "fontFamily": {
+                    "body-md": ["Plus Jakarta Sans"],
+                    "label-md": ["Plus Jakarta Sans"],
+                    "body-sm": ["Plus Jakarta Sans"],
+                    "headline-md": ["Space Grotesk"],
+                    "headline-xl": ["Space Grotesk"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Space Grotesk"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+        }
+        .nav-link-active {
+            background-color: #d5e3fd;
+            color: #57657b;
+            font-weight: 700;
+        }
+        .nav-link-idle {
+            color: #3c4a42;
+        }
+        .nav-link-idle:hover {
+            background-color: #d3e4fe;
+        }
+    </style>
+    @await RenderSectionAsync("Head", required: false)
+</head>
+<body class="bg-surface text-on-surface">
+<div class="flex h-screen overflow-hidden">
+
+    <!-- Side Navigation -->
+    <aside class="hidden md:flex flex-col h-screen p-4 gap-2 bg-surface-container-low w-64 shadow-md transition-all duration-200 ease-in-out border-r border-outline-variant shrink-0">
+        <div class="flex items-center gap-3 px-2 py-4 mb-4">
+            <div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-white shrink-0">
+                <span class="material-symbols-outlined">recycling</span>
+            </div>
+            <div>
+                <h2 class="font-headline-md text-headline-md font-extrabold text-secondary">GAIA Admin</h2>
+                <p class="font-label-sm text-label-sm text-on-surface-variant">Quản trị hệ thống</p>
+            </div>
+        </div>
+        <nav class="flex-1 space-y-1">
+            <a href="/Admin/Index" class="flex items-center gap-3 px-4 py-3 rounded-lg font-label-md text-label-md transition-all @(ViewData["ActivePage"]?.ToString() == "Dashboard" ? "nav-link-active" : "nav-link-idle")">
+                <span class="material-symbols-outlined">dashboard</span>
+                <span>Dashboard</span>
+            </a>
+            <a href="/Admin/Suppliers/Index" class="flex items-center gap-3 px-4 py-3 rounded-lg font-label-md text-label-md transition-all @(ViewData["ActivePage"]?.ToString() == "Suppliers" ? "nav-link-active" : "nav-link-idle")">
+                <span class="material-symbols-outlined">group</span>
+                <span>Nhà cung cấp</span>
+            </a>
+            <a href="/Admin/Batches/Index" class="flex items-center gap-3 px-4 py-3 rounded-lg font-label-md text-label-md transition-all @(ViewData["ActivePage"]?.ToString() == "Batches" ? "nav-link-active" : "nav-link-idle")">
+                <span class="material-symbols-outlined">inventory_2</span>
+                <span>Lô nguyên liệu</span>
+            </a>
+            <a href="/Admin/Products/Index" class="flex items-center gap-3 px-4 py-3 rounded-lg font-label-md text-label-md transition-all @(ViewData["ActivePage"]?.ToString() == "Products" ? "nav-link-active" : "nav-link-idle")">
+                <span class="material-symbols-outlined">category</span>
+                <span>Sản phẩm</span>
+            </a>
+        </nav>
+        <div class="mt-auto border-t border-outline-variant pt-4 space-y-1">
+            <a href="/Logout" class="flex items-center gap-3 px-4 py-3 text-error hover:bg-error-container/20 rounded-lg transition-all font-label-md text-label-md">
+                <span class="material-symbols-outlined">logout</span>
+                <span>Đăng xuất</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col overflow-y-auto min-w-0">
+        <!-- Top App Bar -->
+        <header class="sticky top-0 w-full z-50 flex justify-between items-center px-8 h-16 bg-surface/80 backdrop-blur-md border-b border-outline-variant shadow-sm shrink-0">
+            <div class="flex items-center gap-4">
+                <span class="font-headline-md text-headline-md text-primary font-bold">@ViewData["PageTitle"]</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2 px-3 py-1.5 bg-surface-container-high rounded-full border border-outline-variant">
+                    <span class="material-symbols-outlined text-primary text-sm">admin_panel_settings</span>
+                    <span class="text-xs font-semibold text-on-surface">@Context.Session.GetString("UserName")</span>
+                </div>
+                <a href="/Logout" class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-variant transition-colors">
+                    <span class="material-symbols-outlined">logout</span>
+                </a>
+            </div>
+        </header>
+
+        <!-- Content Canvas -->
+        <div class="p-8 flex-1">
+            @RenderBody()
+        </div>
+
+        <!-- Footer -->
+        <footer class="w-full py-6 px-8 border-t border-outline-variant flex flex-col md:flex-row justify-between items-center gap-4 shrink-0">
+            <div class="flex flex-col items-center md:items-start">
+                <span class="font-headline-md text-headline-md text-primary font-bold">GAIA</span>
+                <p class="font-label-sm text-label-sm text-on-surface-variant">© 2024 GAIA Sustainable Systems. All rights reserved.</p>
+            </div>
+            <div class="flex gap-6 font-label-sm text-label-sm text-on-surface-variant">
+                <a class="hover:text-secondary transition-colors" href="#">Privacy Policy</a>
+                <a class="hover:text-secondary transition-colors" href="#">Terms of Service</a>
+            </div>
+        </footer>
+    </main>
+</div>
+
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
