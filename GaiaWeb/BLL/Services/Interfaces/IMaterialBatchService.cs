@@ -45,4 +45,9 @@ public interface IMaterialBatchService
 
     // UC19 – Reject a pending batch
     Task<(bool Success, string Message)> RejectBatchAsync(int batchId);
+
+    // UC22/23 – Dashboard and Statistics
+    Task<decimal> GetTotalWeightSavedAsync();
+    Task<Dictionary<string, decimal>> GetMonthlyWeightCollectionAsync();
+    Task<Dictionary<string, decimal>> GetTopSuppliersWeightAsync(int limit);
 }

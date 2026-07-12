@@ -1,0 +1,467 @@
+<!DOCTYPE html><html lang="vi" class="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">try{
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#dce9ff",
+                    "outline-variant": "#bbcabf",
+                    "on-error": "#ffffff",
+                    "on-primary-container": "#00422b",
+                    "primary": "#006c49",
+                    "on-tertiary-fixed": "#2a1700",
+                    "error": "#ba1a1a",
+                    "on-surface-variant": "#3c4a42",
+                    "on-primary-fixed-variant": "#005236",
+                    "surface-variant": "#d3e4fe",
+                    "on-error-container": "#93000a",
+                    "surface-container-highest": "#d3e4fe",
+                    "secondary-fixed-dim": "#b9c7e0",
+                    "secondary-container": "#d5e3fd",
+                    "primary-fixed": "#6ffbbe",
+                    "inverse-primary": "#4edea3",
+                    "surface-container-low": "#eff4ff",
+                    "tertiary": "#855300",
+                    "on-secondary-fixed-variant": "#3a485c",
+                    "on-primary-fixed": "#002113",
+                    "primary-container": "#10b981",
+                    "tertiary-fixed": "#ffddb8",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#f8f9ff",
+                    "on-tertiary-fixed-variant": "#653e00",
+                    "outline": "#6c7a71",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed": "#0d1c2f",
+                    "surface-container": "#e5eeff",
+                    "primary-fixed-dim": "#4edea3",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "on-background": "#0b1c30",
+                    "surface-bright": "#f8f9ff",
+                    "inverse-surface": "#213145",
+                    "on-surface": "#0b1c30",
+                    "secondary-fixed": "#d5e3fd",
+                    "surface-tint": "#006c49",
+                    "on-tertiary-container": "#523200",
+                    "on-secondary-container": "#57657b",
+                    "secondary": "#515f74",
+                    "tertiary-fixed-dim": "#ffb95f",
+                    "surface-dim": "#cbdbf5",
+                    "tertiary-container": "#e29100",
+                    "on-tertiary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "background": "#f8f9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "xl": "80px",
+                    "xs": "4px",
+                    "lg": "48px",
+                    "sm": "12px",
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "base": "8px",
+                    "md": "24px"
+            },
+            "fontFamily": {
+                    "body-md": ["Plus Jakarta Sans"],
+                    "label-md": ["Plus Jakarta Sans"],
+                    "body-sm": ["Plus Jakarta Sans"],
+                    "headline-md": ["Space Grotesk"],
+                    "headline-xl": ["Space Grotesk"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Space Grotesk"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    }catch(_e){}</script><meta charset="utf-8"></head><body class="bg-surface text-on-surface">
+<div class="flex h-screen overflow-hidden">
+<!-- Side Navigation Shell -->
+<aside class="hidden md:flex flex-col h-screen p-4 gap-2 bg-surface-container-low w-64 shadow-md transition-all duration-200 ease-in-out">
+<div class="flex items-center gap-3 px-2 py-4 mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-white">
+<span class="material-symbols-outlined">recycling</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md font-extrabold text-secondary">GAIA Portal</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Sustainable Supply Chain</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a href="#" class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold transition-all">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-label-sm">Overview</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all">
+<span class="material-symbols-outlined">recycling</span>
+<span class="font-label-sm text-label-sm">Collections</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-label-sm text-label-sm">Shipments</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all">
+<span class="material-symbols-outlined">verified</span>
+<span class="font-label-sm text-label-sm">Certifications</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all">
+<span class="material-symbols-outlined">contact_support</span>
+<span class="font-label-sm text-label-sm">Support</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-outline-variant pt-4 space-y-1">
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-error hover:bg-error-container/20 rounded-lg transition-all">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-sm text-label-sm">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col overflow-y-auto">
+<!-- Top App Bar -->
+<header class="bg-glass-fill sticky top-0 w-full z-50 flex justify-between items-center px-gutter h-16 backdrop-blur-md border-b border-glass-stroke shadow-sm">
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline">search</span>
+</span>
+
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-primary">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a supply chain manager in a minimalist office setting, soft natural lighting, high-end photography style, representing the user profile in the GAIA sustainable systems interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZzr8fittg_3mWCEHopwXQ7mmxnUDjyKSIZ5e2lreMAQbDiY7zErht4_WRaZ7pVt3CamI3ndJYf7LrgqpQZfwzQikOzxkAMqem1b2-VpjmLphf4SyWOtLjZjQrd3neIQ0d-ADkv93YmKgWEnwLkGPJQNFs5dPwJvfcFz_4cqTMVWxFC8x-gDVUYOyOPksb8vuc2y20Eh31tVgps6b00F7f7E7MJ-DZd5aaqKmGNZb4CHUw0ZvkFFl1">
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="p-margin-desktop space-y-md">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-end gap-md">
+<div class="space-y-xs">
+<h1 class="font-headline-xl text-headline-xl text-primary tracking-tight">Bảng điều khiển &amp; Phân tích Tác động</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Theo dõi dữ liệu rác thải thời gian thực và đánh giá sự đóng góp của bạn vào mục tiêu phát thải ròng bằng không.</p>
+</div>
+<div class="flex gap-sm">
+<button class="flex items-center gap-2 bg-white text-secondary px-6 py-3 rounded-lg border border-outline-variant font-label-md text-label-md hover:scale-[1.02] active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[18px]">share</span>
+                            Chia sẻ tác động
+                        </button>
+<button class="flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-label-md text-label-md hover:scale-[1.02] active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+                            Xuất báo cáo PDF
+                        </button>
+</div>
+</div>
+<!-- KPI Overview Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-md">
+<!-- Card 1 -->
+<div class="glass-panel p-md rounded-xl border-l-4 border-primary">
+<div class="flex justify-between items-start mb-sm">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Tổng rác thải đã lưu</span>
+<div class="bg-primary-container/20 text-on-primary-container px-2 py-1 rounded text-xs font-bold">+12.5%</div>
+</div>
+<div class="flex items-baseline gap-2">
+<h3 class="font-headline-lg text-headline-lg text-on-surface">4,820</h3>
+<span class="font-body-md text-body-md text-on-surface-variant">kg</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2 italic">Tăng từ 3,500kg tháng trước</p>
+</div>
+<!-- Card 2 -->
+<div class="glass-panel p-md rounded-xl border-l-4 border-primary-container">
+<div class="flex justify-between items-start mb-sm">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Giảm phát thải CO2</span>
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<div class="flex items-baseline gap-2">
+<h3 class="font-headline-lg text-headline-lg text-on-surface">15.2</h3>
+<span class="font-body-md text-body-md text-on-surface-variant">tấn</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Tương đương 240 cây xanh</p>
+</div>
+<!-- Card 3 -->
+<div class="glass-panel p-md rounded-xl border-l-4 border-secondary">
+<div class="flex justify-between items-start mb-sm">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Sản phẩm đã tạo</span>
+<span class="material-symbols-outlined text-secondary">inventory_2</span>
+</div>
+<div class="flex items-baseline gap-2">
+<h3 class="font-headline-lg text-headline-lg text-on-surface">1,024</h3>
+<span class="font-body-md text-body-md text-on-surface-variant">mục</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Từ vật liệu tái chế 100%</p>
+</div>
+<!-- Card 4 -->
+<div class="glass-panel p-md rounded-xl border-l-4 border-tertiary">
+<div class="flex justify-between items-start mb-sm">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Điểm tin cậy cộng đồng</span>
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div class="flex items-baseline gap-2">
+<h3 class="font-headline-lg text-headline-lg text-on-surface">98/100</h3>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full mt-4">
+<div class="bg-tertiary w-[98%] h-full rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-md items-stretch">
+<!-- Left: Analytics -->
+<div class="lg:col-span-8 flex flex-col gap-md">
+<!-- CO2 Reduction Trend Chart Area -->
+<div class="glass-panel p-md rounded-xl flex-1 flex flex-col">
+<div class="flex justify-between items-center mb-md">
+<h4 class="font-headline-md text-headline-md text-secondary">Xu hướng Giảm thiểu CO2</h4>
+<div class="flex gap-2">
+<span class="px-3 py-1 rounded bg-surface-container-high font-label-sm text-label-sm">Tháng này</span>
+<span class="px-3 py-1 rounded text-outline font-label-sm text-label-sm">Năm này</span>
+</div>
+</div>
+<div class="h-64 w-full relative chart-gradient border-b border-outline-variant flex items-end">
+<!-- Mock Chart Visualization -->
+<svg class="w-full h-full" viewBox="0 0 800 200">
+<path d="M0,150 Q100,120 200,140 T400,100 T600,60 T800,20" fill="none" stroke="#006c49" stroke-width="3"></path>
+<circle cx="200" cy="140" fill="#006c49" r="4"></circle>
+<circle cx="400" cy="100" fill="#006c49" r="4"></circle>
+<circle cx="600" cy="60" fill="#006c49" r="4"></circle>
+<circle cx="800" cy="20" fill="#006c49" r="6"></circle>
+</svg>
+<div class="absolute inset-0 grid grid-cols-5 pointer-events-none">
+<div class="border-r border-outline-variant/20 h-full"></div>
+<div class="border-r border-outline-variant/20 h-full"></div>
+<div class="border-r border-outline-variant/20 h-full"></div>
+<div class="border-r border-outline-variant/20 h-full"></div>
+<div></div>
+</div>
+</div>
+<div class="flex justify-between mt-4 font-label-sm text-label-sm text-outline">
+<span class="">Th01</span><span class="">Th02</span><span class="">Th03</span><span class="">Th04</span><span class="">Th05</span>
+</div>
+</div>
+<!-- Diverted Waste Bar Chart -->
+<div class="glass-panel p-md rounded-xl flex-1">
+<h4 class="font-headline-md text-headline-md text-secondary mb-md">Khối lượng rác thải chuyển hướng</h4>
+<div class="flex items-end justify-between h-48 gap-4 px-4">
+<div class="flex flex-col items-center gap-2 w-full">
+<div class="w-full bg-primary-container/20 rounded-t-lg relative h-[40%] group">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-lg transition-all h-[100%]"></div>
+</div>
+<span class="font-label-sm text-label-sm text-outline">Thép</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full">
+<div class="w-full bg-primary-container/20 rounded-t-lg relative h-[75%] group">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-lg transition-all h-[100%]"></div>
+</div>
+<span class="font-label-sm text-label-sm text-outline">Vỏ sầu riêng</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full">
+<div class="w-full bg-primary-container/20 rounded-t-lg relative h-[55%] group">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-lg transition-all h-[100%]"></div>
+</div>
+<span class="font-label-sm text-label-sm text-outline">Tảo biển</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full">
+<div class="w-full bg-primary-container/20 rounded-t-lg relative h-[90%] group">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-lg transition-all h-[100%]"></div>
+</div>
+<span class="font-label-sm text-label-sm text-outline">Nấm</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full">
+<div class="w-full bg-primary-container/20 rounded-t-lg relative h-[30%] group">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-lg transition-all h-[100%]"></div>
+</div>
+<span class="font-label-sm text-label-sm text-outline">Khác</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: Contextual Data -->
+<div class="lg:col-span-4 flex flex-col gap-md">
+<!-- Donut Chart -->
+<div class="glass-panel p-md rounded-xl">
+<h4 class="font-headline-md text-headline-md text-secondary mb-md">Cơ cấu vật liệu</h4>
+<div class="flex justify-center relative my-6">
+<svg class="w-48 h-48" viewBox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="40" stroke="#f1f5f9" stroke-width="12"></circle>
+<circle cx="50" cy="50" fill="none" r="40" stroke="#006c49" stroke-dasharray="251.2" stroke-dashoffset="100" stroke-linecap="round" stroke-width="12"></circle>
+<circle cx="50" cy="50" fill="none" r="40" stroke="#10b981" stroke-dasharray="251.2" stroke-dashoffset="180" stroke-linecap="round" stroke-width="12"></circle>
+<circle cx="50" cy="50" fill="none" r="40" stroke="#ffb95f" stroke-dasharray="251.2" stroke-dashoffset="230" stroke-linecap="round" stroke-width="12"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-headline-md text-headline-md text-primary">84%</span>
+<span class="font-label-sm text-label-sm text-outline">Hữu cơ</span>
+</div>
+</div>
+<ul class="space-y-sm mt-4">
+<li class="flex items-center justify-between font-body-sm text-body-sm">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<span class="">Vỏ sầu riêng</span>
+</div>
+<span class="font-bold">45%</span>
+</li>
+<li class="flex items-center justify-between font-body-sm text-body-sm">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-primary-container"></div>
+<span class="">Nấm (Mycelium)</span>
+</div>
+<span class="font-bold">30%</span>
+</li>
+<li class="flex items-center justify-between font-body-sm text-body-sm">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-tertiary-fixed-dim"></div>
+<span class="">Tảo biển</span>
+</div>
+<span class="font-bold">25%</span>
+</li>
+</ul>
+</div>
+<!-- Collection Points List -->
+<div class="glass-panel p-md rounded-xl flex-1">
+<div class="flex justify-between items-center mb-md">
+<h4 class="font-headline-md text-headline-md text-secondary">Điểm thu gom</h4>
+<a class="text-primary font-label-md text-label-md hover:underline" href="#">Tất cả</a>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-lg border border-outline-variant/30">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<div class="flex-1">
+<p class="font-label-md text-label-md">Trung tâm Quận 1</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">1,240 kg • Hoạt động</p>
+</div>
+</div>
+<div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-lg border border-outline-variant/30">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<div class="flex-1">
+<p class="font-label-md text-label-md">Khu Công Nghệ Cao</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">890 kg • Bảo trì</p>
+</div>
+</div>
+<div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-lg border border-outline-variant/30">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<div class="flex-1">
+<p class="font-label-md text-label-md">Trạm Thủ Đức</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">560 kg • Hoạt động</p>
+</div>
+</div>
+</div>
+<!-- Map Placeholder -->
+<div class="mt-md h-32 rounded-xl overflow-hidden relative border border-outline-variant">
+<div class="absolute inset-0 bg-gray-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-outline text-4xl">map</span>
+</div>
+<img class="w-full h-full object-cover grayscale contrast-125 opacity-50" data-location="Ho Chi Minh City" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqlcvN0K9p-zdebIJPIjjUz5abBGRvTYujXoUsiB4KSzLNKft7a8eKKS2eLgeOlnS3VrvLDQ7SWEbx9fEUQq6c8nHUZVgRiVFCjA4pMngIShHqEqw8whXcaSMxQRjDUxnlhoUj7rit2RlgtljTu33o1UMUGMJm2Q6yS8eywLAo0jgZRd8jiRvfNzaenPvhlxoTS-PwvHk-0BEO-ueMGSm1e-Vj8D92d7Zei3vHwkP0tny9SjjY3FMp">
+<div class="absolute top-2 left-2 px-2 py-1 bg-white/90 rounded-md text-[10px] font-bold shadow-sm">BẢN ĐỒ THU GOM</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Impact Milestones -->
+<section class="glass-panel p-md rounded-xl">
+<h4 class="font-headline-md text-headline-md text-secondary mb-lg">Hành trình Tác động</h4>
+<div class="relative flex flex-col md:flex-row justify-between items-start gap-md px-base">
+<div class="absolute top-8 left-4 md:left-0 md:top-1/2 md:w-full h-full md:h-0.5 bg-outline-variant/30 z-0"></div>
+<div class="relative z-10 flex flex-col items-start md:items-center text-left md:text-center max-w-[200px]">
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mb-sm">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface">Đạt mốc 1 tấn</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">05/2024 • Đã hoàn thành</p>
+</div>
+<div class="relative z-10 flex flex-col items-start md:items-center text-left md:text-center max-w-[200px]">
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mb-sm">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface">Chứng nhận B-Corp</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">08/2024 • Đã xác minh</p>
+</div>
+<div class="relative z-10 flex flex-col items-start md:items-center text-left md:text-center max-w-[200px]">
+<div class="w-10 h-10 rounded-full bg-primary-container text-white flex items-center justify-center mb-sm">
+<span class="material-symbols-outlined text-[20px]">sync</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface">Mở rộng Điểm thu gom</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Đang triển khai 12 điểm mới</p>
+</div>
+<div class="relative z-10 flex flex-col items-start md:items-center text-left md:text-center max-w-[200px]">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-outline flex items-center justify-center mb-sm">
+<span class="material-symbols-outlined text-[20px]">flag</span>
+</div>
+<p class="font-label-md text-label-md text-outline">Net Zero 2025</p>
+<p class="font-body-sm text-body-sm text-outline">Mục tiêu dài hạn</p>
+</div>
+</div>
+</section>
+<!-- Footer Section -->
+<footer class="w-full py-8 border-t border-outline-variant flex flex-col md:flex-row justify-between items-center gap-md">
+<div class="flex flex-col items-center md:items-start">
+<span class="font-headline-md text-headline-md text-primary font-bold">GAIA</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">© 2024 GAIA Sustainable Systems. All rights reserved.</p>
+</div>
+<div class="flex gap-lg font-label-sm text-label-sm text-on-surface-variant">
+<a class="hover:text-secondary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-secondary transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-secondary transition-colors" href="#">Sustainability Report</a>
+<a class="hover:text-secondary transition-colors" href="#">Global Compliance</a>
+</div>
+</footer>
+</div>
+</main>
+</div>
+<!-- Micro-interaction Scripts -->
+<script>
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function() {
+                this.classList.add('scale-95');
+                setTimeout(() => {
+                    this.classList.remove('scale-95');
+                }, 150);
+            });
+        });
+
+        // Simple dashboard data update simulation
+        const kpis = document.querySelectorAll('.font-headline-lg');
+        setInterval(() => {
+            if (Math.random() > 0.8) {
+                const randomKPI = kpis[Math.floor(Math.random() * kpis.length)];
+                randomKPI.classList.add('text-primary-container', 'transition-colors');
+                setTimeout(() => randomKPI.classList.remove('text-primary-container'), 1000);
+            }
+        }, 5000);
+    </script>
+
+</body></html>

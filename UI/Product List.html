@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GAIA | Bộ sưu tập Signature</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "primary": "#0d631b",
+                  "glass-fill": "rgba(255, 255, 255, 0.7)",
+                  "surface-tint": "#1b6d24",
+                  "secondary-container": "#91f78e",
+                  "glass-stroke": "rgba(255, 255, 255, 0.3)",
+                  "tertiary-container": "#0072b6",
+                  "on-surface-variant": "#40493d",
+                  "secondary-fixed-dim": "#78dc77",
+                  "on-secondary-fixed-variant": "#005313",
+                  "surface-bright": "#fff8f6",
+                  "inverse-on-surface": "#ffede7",
+                  "on-primary-fixed-variant": "#005312",
+                  "inverse-primary": "#88d982",
+                  "on-secondary": "#ffffff",
+                  "on-secondary-fixed": "#002204",
+                  "secondary-fixed": "#94f990",
+                  "on-error": "#ffffff",
+                  "surface-accent": "#C8E6C9",
+                  "on-tertiary-fixed": "#001d34",
+                  "surface-container-low": "#fff1ec",
+                  "primary-container": "#2e7d32",
+                  "outline": "#707a6c",
+                  "error-container": "#ffdad6",
+                  "surface-container-highest": "#ffdbce",
+                  "on-tertiary-fixed-variant": "#004a78",
+                  "surface-container-high": "#ffe2d9",
+                  "outline-variant": "#bfcaba",
+                  "warning-orange": "#FF9800",
+                  "on-error-container": "#93000a",
+                  "background": "#fff8f6",
+                  "surface": "#fff8f6",
+                  "surface-dim": "#f8d2c4",
+                  "primary-fixed-dim": "#88d982",
+                  "on-primary-fixed": "#002204",
+                  "on-primary-container": "#cbffc2",
+                  "surface-container-lowest": "#ffffff",
+                  "surface-light": "#FFFFFF",
+                  "on-surface": "#2b160f",
+                  "inverse-surface": "#422b22",
+                  "on-tertiary-container": "#e9f2ff",
+                  "on-secondary-container": "#00731e",
+                  "on-tertiary": "#ffffff",
+                  "tertiary-fixed": "#cfe5ff",
+                  "tertiary": "#00598f",
+                  "on-primary": "#ffffff",
+                  "surface-variant": "#ffdbce",
+                  "surface-container": "#ffe9e2",
+                  "secondary": "#006e1c",
+                  "primary-fixed": "#a3f69c",
+                  "on-background": "#2b160f",
+                  "tertiary-fixed-dim": "#99cbff",
+                  "error": "#ba1a1a"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "container-padding-mobile": "20px",
+                  "section-margin": "80px",
+                  "container-padding-desktop": "64px",
+                  "card-gap": "16px",
+                  "gutter": "24px",
+                  "base": "8px"
+          },
+          "fontFamily": {
+                  "body-lg": ["Inter"],
+                  "body-md": ["Inter"],
+                  "display-hero-mobile": ["Inter"],
+                  "headline-lg": ["Inter"],
+                  "headline-md": ["Inter"],
+                  "headline-lg-mobile": ["Inter"],
+                  "mono-data": ["Inter"],
+                  "label-sm": ["Inter"],
+                  "display-hero": ["Inter"]
+          },
+          "fontSize": {
+                  "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                  "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                  "display-hero-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                  "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                  "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                  "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                  "mono-data": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+                  "label-sm": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                  "display-hero": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    .product-image-hover:hover img {
+      transform: scale(1.05);
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #0d631b;
+      border-radius: 10px;
+    }
+    body {
+      background-color: #fff8f6;
+    }
+  </style>
+</head>
+<body class="font-body-md text-on-surface selection:bg-primary/20">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-glass-fill dark:bg-surface-dim/80 backdrop-blur-md border-b border-glass-stroke shadow-sm h-20 flex justify-between items-center px-container-padding-mobile md:px-container-padding-desktop">
+<div class="font-display-hero text-headline-md font-extrabold text-primary dark:text-primary-fixed cursor-pointer transition-transform active:scale-95">GAIA</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-sm text-label-sm uppercase tracking-wider" href="#">Collections</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm uppercase tracking-wider" href="#">Our Story</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm uppercase tracking-wider" href="#">Impact</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm uppercase tracking-wider" href="#">Traceability</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined p-2 text-on-surface-variant hover:bg-surface-accent/10 rounded-full transition-all duration-300">shopping_bag</button>
+<button class="material-symbols-outlined p-2 text-on-surface-variant hover:bg-surface-accent/10 rounded-full transition-all duration-300">person</button>
+<button class="md:hidden material-symbols-outlined p-2 text-on-surface-variant">menu</button>
+</div>
+</header>
+<main class="pt-32 pb-section-margin px-container-padding-mobile md:px-container-padding-desktop max-w-[1440px] mx-auto">
+<!-- Hero Header -->
+<div class="mb-16 max-w-3xl">
+<h1 class="font-display-hero text-headline-lg-mobile md:text-headline-lg text-primary mb-6">
+        Bộ sưu tập GAIA Signature
+      </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+        Mỗi sản phẩm là một câu chuyện về sự hồi sinh, kết hợp giữa nghệ thuật thủ công truyền thống và giải pháp bền vững cho tương lai.
+      </p>
+</div>
+<!-- Filter Bar -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
+<div class="flex flex-wrap gap-3">
+<button class="px-6 py-2 rounded-full bg-primary text-white font-label-sm text-label-sm shadow-sm transition-all hover:brightness-110 active:scale-95">Tất cả</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-accent/20 transition-all active:scale-95">Văn phòng phẩm</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-accent/20 transition-all active:scale-95">Đồ gia dụng</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-accent/20 transition-all active:scale-95">Phụ kiện</button>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-sm">
+<span class="material-symbols-outlined text-[20px]">sort</span>
+<span>Sắp xếp: Mới nhất</span>
+</div>
+</div>
+<!-- Product Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-card-gap">
+<!-- Product 1: Sổ Tay GAIA Earth -->
+<div class="group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-outline-variant/30">
+<div class="relative aspect-square overflow-hidden product-image-hover">
+<img class="w-full h-full object-cover transition-transform duration-700 ease-out" src="https://lh3.googleusercontent.com/aida/AP1WRLuZFDqCn1evgBArvGKdXMN8vuBIL_R0eAccW21KY1mRt9nSsMR11gCXOT6sKGFEx5WhEhHFmhzylHrhk9TEWKvr5w0VbTQJ0HzqLQBAxVR5velUl3kmZdRMuQK8ENA15m8OxwECmtjfL0I32RUatql1tErTdKPPdYOnloFPRWLIGiN-v4XKOSCO20o3XqvCunRt-5D2xeily_toT0nc7i8vO6twrymU-qd2bhbltjI1HaP3pG87Hmbtl_s"/>
+<div class="absolute top-4 left-4 bg-primary/90 text-white px-3 py-1 rounded-full text-[12px] font-bold tracking-wider uppercase">Vỏ sầu riêng</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-on-surface">Sổ Tay GAIA Earth</h3>
+<span class="font-mono-data text-primary font-bold text-lg">450.000đ</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 flex-grow">
+            Làm từ 100% vỏ sầu riêng tái chế. Bề mặt giấy có vân tự nhiên độc bản, mang hơi thở của đất mẹ.
+          </p>
+<div class="flex gap-3">
+<button class="flex-1 py-3 px-4 border-2 border-primary text-primary font-label-sm rounded-lg hover:bg-primary/5 transition-colors active:scale-95">Chi tiết sản phẩm</button>
+<button class="flex-none w-14 h-12 flex items-center justify-center bg-primary text-white rounded-lg hover:brightness-110 transition-all active:scale-95 shadow-sm">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product 2: Bát Decor Nghệ Nhân -->
+<div class="group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-outline-variant/30">
+<div class="relative aspect-square overflow-hidden product-image-hover">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 ease-out" data-alt="A high-quality studio photograph of a handcrafted decorative bowl made from organic plant fibers and agricultural waste. The bowl has a beautiful rough, earthy texture with visible natural fibers. It is placed on a minimalist light wood surface against a soft, sunlit neutral background. The lighting is soft and natural, emphasizing the organic details and the sustainable, eco-friendly luxury aesthetic of the brand." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAvHS22-P69teZzPWfbET-Ruf5dqZPsN1ILeufTyXTGHSAQnaD9Eeao4bieh43o2EsEyyBavCpU73NWu3ow3IaQNApwbrN-pTOXU20SrK7wAvw-ssbxRY6FuESaQW9uaEqtYcvjZC2JP43pHrKu0UdWpPAN5XPJGwDLHEdG9-l0n9GWG2dCVzzGkEPCShSEMX2NTmRGxdGYxDGIevTwt0298w28mbcz8cXfo7KCdE8ItGQgKgim3o_t')"></div>
+<div class="absolute top-4 left-4 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[12px] font-bold tracking-wider uppercase">Thủ công</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-on-surface">Bát Decor Nghệ Nhân</h3>
+<span class="font-mono-data text-primary font-bold text-lg">320.000đ</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 flex-grow">
+            Sản phẩm đúc thủ công từ sợi tự nhiên và phế phẩm nông nghiệp. Chống thấm và chịu nhiệt tốt, lý tưởng cho không gian sống tối giản.
+          </p>
+<div class="flex gap-3">
+<button class="flex-1 py-3 px-4 border-2 border-primary text-primary font-label-sm rounded-lg hover:bg-primary/5 transition-colors active:scale-95">Chi tiết sản phẩm</button>
+<button class="flex-none w-14 h-12 flex items-center justify-center bg-primary text-white rounded-lg hover:brightness-110 transition-all active:scale-95 shadow-sm">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product 3: Tấm Lót Ly Circular -->
+<div class="group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-outline-variant/30">
+<div class="relative aspect-square overflow-hidden product-image-hover">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 ease-out" data-alt="Close-up shot of hand-woven drink coasters made from locally collected plant fibers. The weaving pattern is intricate and precise, showing the natural variation in earth tones from light tan to deep forest green. The coasters are stacked elegantly on a textured stone surface, conveying a sense of grounded, sustainable home decor. Soft afternoon light creates gentle shadows, highlighting the tactile quality of the fibers." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAo6yg3fK3BpEQXiR7gcrlec3pCr3tVsn6XYiHaArAklZik5btan7xNL_Z1jF8Ho9-huOKhrtxeisKhhd7wb3XWsljhs3_CJG6bIUGbuNzn2bWNEgY3b4DUHfpllIuaYAcuqVmAf3NC_NIxbghuQLQw-MLn4S7L-9uidhUT-p-Oekux2C5CK6GMaNaIwvOUdqml5-ewd9H64sl_IcoDXEuP1pxyKQrf6LMRkvx6Icdu0aBRdxQqQWUk')"></div>
+<div class="absolute top-4 left-4 bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full text-[12px] font-bold tracking-wider uppercase">Sợi thực vật</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-on-surface">Tấm Lót Ly Circular</h3>
+<span class="font-mono-data text-primary font-bold text-lg">120.000đ</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 flex-grow">
+            Đan thủ công từ sợi thực vật thu gom tại địa phương. Sản phẩm hoàn toàn có thể phân hủy tự nhiên sau khi sử dụng.
+          </p>
+<div class="flex gap-3">
+<button class="flex-1 py-3 px-4 border-2 border-primary text-primary font-label-sm rounded-lg hover:bg-primary/5 transition-colors active:scale-95">Chi tiết sản phẩm</button>
+<button class="flex-none w-14 h-12 flex items-center justify-center bg-primary text-white rounded-lg hover:brightness-110 transition-all active:scale-95 shadow-sm">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Impact Quote Section -->
+<div class="mt-24 glass-card rounded-2xl p-10 md:p-16 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full -mr-20 -mt-20 blur-3xl"></div>
+<div class="relative z-10 max-w-2xl">
+<span class="material-symbols-outlined text-primary text-4xl mb-6">eco</span>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-6">Cam kết của chúng tôi</h2>
+<p class="font-body-lg text-body-lg text-on-surface italic leading-relaxed">
+          "Chúng tôi không chỉ bán sản phẩm, chúng tôi đang tái định nghĩa giá trị của rác thải. GAIA là hành trình tìm về bản nguyên của vật chất, nơi sự sáng tạo biến những điều bình dị nhất thành nghệ thuật bền vững."
+        </p>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container dark:bg-inverse-surface w-full py-section-margin px-container-padding-mobile md:px-container-padding-desktop">
+<div class="flex flex-col md:flex-row justify-between items-start gap-12 mb-16">
+<div class="max-w-xs">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed mb-4">GAIA</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Kiến tạo tương lai từ những di sản bị lãng quên.</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-10">
+<div class="flex flex-col gap-4">
+<h4 class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-widest">Khám phá</h4>
+<a class="text-on-surface-variant hover:text-primary transition-all hover:translate-x-1" href="#">Bộ sưu tập</a>
+<a class="text-on-surface-variant hover:text-primary transition-all hover:translate-x-1" href="#">Truy xuất nguồn gốc</a>
+<a class="text-on-surface-variant hover:text-primary transition-all hover:translate-x-1" href="#">Dự án cộng đồng</a>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-widest">Hỗ trợ</h4>
+<a class="text-on-surface-variant hover:text-primary transition-all hover:translate-x-1" href="#">Giao hàng &amp; Đổi trả</a>
+<a class="text-on-surface-variant hover:text-primary transition-all hover:translate-x-1" href="#">Chăm sóc khách hàng</a>
+<a class="text-on-surface-variant hover:text-primary transition-all hover:translate-x-1" href="#">Câu hỏi thường gặp</a>
+</div>
+<div class="flex flex-col gap-4 col-span-2 md:col-span-1">
+<h4 class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-widest">Bản tin</h4>
+<div class="flex gap-2">
+<input class="bg-surface-accent/20 border-none rounded-lg px-4 py-2 w-full focus:ring-2 focus:ring-primary outline-none" placeholder="Email của bạn" type="email"/>
+<button class="bg-primary text-white px-4 rounded-lg material-symbols-outlined">send</button>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-8 border-t border-surface-container-high dark:border-surface-container-low flex flex-col md:flex-row justify-between items-center gap-6">
+<p class="text-on-surface-variant text-sm">© 2024 GAIA Sustainable Artifacts. All rights reserved.</p>
+<div class="flex gap-8">
+<a class="text-on-surface-variant hover:text-primary text-sm transition-colors" href="#">Sustainability Report</a>
+<a class="text-on-surface-variant hover:text-primary text-sm transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary text-sm transition-colors" href="#">Terms of Service</a>
+</div>
+</div>
+</footer>
+<!-- FAB for Mobile Quick View -->
+<button class="fixed bottom-6 right-6 md:hidden w-14 h-14 bg-primary text-white rounded-full shadow-lg flex items-center justify-center transition-transform active:scale-90 z-40">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+<script>
+    // Micro-interactions and header scroll effect
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        header.classList.add('shadow-md');
+        header.classList.replace('bg-glass-fill', 'bg-white/95');
+      } else {
+        header.classList.remove('shadow-md');
+        header.classList.replace('bg-white/95', 'bg-glass-fill');
+      }
+    });
+
+    // Simple interaction for buttons
+    document.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        let ripple = document.createElement('span');
+        ripple.classList.add('ripple');
+        this.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+      });
+    });
+  </script>
+</body></html>
