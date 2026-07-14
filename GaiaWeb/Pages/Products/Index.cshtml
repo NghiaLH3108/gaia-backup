@@ -9,10 +9,10 @@
 <header id="main-header" class="fixed top-0 w-full z-50 bg-glass-fill backdrop-blur-md border-b border-glass-stroke shadow-sm h-20 flex justify-between items-center px-container-padding-mobile md:px-container-padding-desktop transition-all duration-300">
     <a asp-page="/Index" class="font-display-hero text-headline-md font-extrabold text-primary cursor-pointer transition-transform active:scale-95 no-underline">GAIA</a>
     <nav class="hidden md:flex items-center gap-8">
-        <a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-sm text-label-sm uppercase tracking-wider" href="#">Collections</a>
-        <a asp-page="/Index" class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm uppercase tracking-wider">Our Story</a>
-        <a href="#impact-section" class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm uppercase tracking-wider">Impact</a>
-        <a href="#" class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm uppercase tracking-wider">Traceability</a>
+        <a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-sm text-label-sm uppercase tracking-wider" href="#">Bộ sưu tập</a>
+        <a asp-page="/Index" class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm uppercase tracking-wider">Câu chuyện</a>
+        <a href="#impact-section" class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm uppercase tracking-wider">Tác động</a>
+        <a href="#" class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm uppercase tracking-wider">Truy xuất</a>
     </nav>
     <div class="flex items-center gap-4">
         <button class="material-symbols-outlined p-2 text-on-surface-variant hover:bg-surface-accent/10 rounded-full transition-all duration-300">shopping_bag</button>
@@ -69,7 +69,7 @@
             @for (int i = 0; i < Model.Products.Count; i++)
             {
                 var product = Model.Products[i];
-                var imgSrc = placeholderImages[i % placeholderImages.Length];
+                var imgSrc = product.ProductId == 1 ? "/images/uploads/dely.png" : "/images/uploads/chaucay.png";
                 var badgeCls = badgeColors[i % badgeColors.Length];
                 <div class="product-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-outline-variant/30"
                      data-status="@product.CurrentStatus">

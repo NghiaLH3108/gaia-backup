@@ -18,9 +18,10 @@ namespace GaiaWeb.Pages.Story
 
         public Product? ProductInfo { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string token)
+        public async Task<IActionResult> OnGetAsync(string? token, string? qrtoken)
         {
-            if (string.IsNullOrEmpty(token) || !Guid.TryParse(token, out Guid qrToken))
+            var activeToken = token ?? qrtoken;
+            if (string.IsNullOrEmpty(activeToken) || !Guid.TryParse(activeToken, out Guid qrToken))
             {
                 return NotFound(); // Token is missing or invalid format
             }

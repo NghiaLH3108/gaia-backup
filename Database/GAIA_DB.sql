@@ -1,4 +1,4 @@
-﻿-- =============================================
+-- =============================================
 -- GAIA_DB - SQL Server Script
 -- =============================================
 
@@ -134,11 +134,11 @@ ALTER TABLE Product
         CONSTRAINT CHK_Product_Status CHECK (CurrentStatus IN (N'Available', N'Sold', N'Reserved'));
 
 ALTER TABLE ProductTimeline
-    ADD CONSTRAINT FK_Timeline_Product FOREIGN KEY (ProductId)  REFERENCES Product(ProductId),
+    ADD CONSTRAINT FK_Timeline_Product FOREIGN KEY (ProductId)  REFERENCES Product(ProductId) ON DELETE CASCADE,
         CONSTRAINT CHK_Timeline_Step   CHECK (StepOrder IN (1, 2, 3));
 
 ALTER TABLE Story
-    ADD CONSTRAINT FK_Story_Product    FOREIGN KEY (ProductId)  REFERENCES Product(ProductId),
+    ADD CONSTRAINT FK_Story_Product    FOREIGN KEY (ProductId)  REFERENCES Product(ProductId) ON DELETE CASCADE,
         CONSTRAINT CHK_Story_Order     CHECK (DisplayOrder BETWEEN 1 AND 5);
 
 -- =============================================

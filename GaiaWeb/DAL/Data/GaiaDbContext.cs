@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using GaiaWeb.DAL.Models;
 using Microsoft.EntityFrameworkCore;
@@ -135,7 +135,7 @@ public partial class GaiaDbContext : DbContext
 
             entity.HasOne(d => d.Product).WithMany(p => p.ProductTimelines)
                 .HasForeignKey(d => d.ProductId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Timeline_Product");
         });
 
@@ -151,7 +151,7 @@ public partial class GaiaDbContext : DbContext
 
             entity.HasOne(d => d.Product).WithMany(p => p.Stories)
                 .HasForeignKey(d => d.ProductId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Story_Product");
         });
 
